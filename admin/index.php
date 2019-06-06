@@ -32,7 +32,7 @@ $product_sizes = mysqli_query($conn, $sql);
 
                 <div class="row">
                     <b class="clearfix">Product Price:</b>
-                    <input type="number" class="form-control clearfix" name="product_price">
+                    <input type="number" class="form-control clearfix" name="price">
                 </div>
 
                 <div class="row">
