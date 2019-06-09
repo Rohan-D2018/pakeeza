@@ -16,7 +16,19 @@
 
     <!-- Core Style CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/unitgallery.css">
+    
+
+    <!-- <script src="js/jquery/jquery-2.2.4.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="js/ug-theme-compact.js"></script>
+    <!-- <script type="text/javascript"  src="js/datatable.js"></script> -->
+    <script  type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <link href="css/bootstrap-toggle.min.css" rel="stylesheet">
 
 </head>
 
@@ -45,6 +57,7 @@
           <li class="nav-item  <?php if ($page == 'order'){ echo "active"; } ?>">
             <a class="nav-link" href="orders.php">Orders</a>
           </li>
+         
           <!-- <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
             <div class="dropdown-menu" aria-labelledby="dropdown03">

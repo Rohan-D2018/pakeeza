@@ -2,3 +2,19 @@
   .clearfix{
     margin-top: 2%;
   }
+
+
+ input[type="checkbox"]{
+  width: 25px; /*Desired width*/
+  height: 25px; /*Desired height*/
+}
+
+
+
+
+.table-striped > tbody > tr 
+{
+    width: 100%;
+    float: left;
+}
+

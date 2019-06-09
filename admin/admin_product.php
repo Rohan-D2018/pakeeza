@@ -1,8 +1,13 @@
 <?php
 require 'config.php';
 function add_products()
-{   
-	require 'config.php';
+{    
+    require 'config.php';
+    
+    // if(isset($_FILES['files'])){
+    //     echo "Files";
+    //     print_r($_FILES["files"]);
+    // }
 
 	// if(isset($_POST['submit']))
 	// {
@@ -20,8 +25,8 @@ function add_products()
             $product_desp = "";
         }
 
-        if(isset($_POST["price"])){
-            $product_price = $_POST["price"];
+        if(isset($_POST["product_price"])){
+            $product_price = $_POST["product_price"];
         }
         else{
             $product_price = 1;
@@ -63,10 +68,17 @@ function add_products()
         }
         
         if(isset($_POST["size_list"])){
-            $product_list = $_POST["size_list"];
+            $size_list = $_POST["size_list"];
         }
         else{
-            $product_list = "";
+            $size_list = "";
+        }
+
+        if(isset($_POST["quantity_list"])){
+            $quantity_list = $_POST["quantity_list"];
+        }
+        else{
+            $quantity_list = "NA";
         }
         
         if(isset($_POST["picture_list"])){
@@ -75,24 +87,36 @@ function add_products()
         else{
             $picture_list = "";
         }
+
+
+        if(isset($_POST["gender"])){
+            $gender = $_POST["gender"];
+        }
+        else{
+            $gender = "";
+        }
         
 
-        echo $product_name, $product_desp, $product_price, $product_type, $product_material, $product_discount, $product_code, $product_color, $product_list, $picture_list;
-        
-        // $product_name = "shoes";
-		// $product_desp = "very good shoes";
-		// $product_price = 543;
-		// $product_type = "footware";
-		// $product_material = "lether";
-		// $product_discount = 20;
-		// $product_code = "AXD231";
-		// $product_color = "red";
-		// $size_list  = ["L","M","XL"];
-		// $picture_list = ["../images/collection/123hdgsa_1209_21_12:12:12:42","../images/collection/123hdgsa_1209_21_12:12:12:44","../images/collection/123hdgsa_1209_21_12:12:12:45"];
-		
-		//insert records in product table
+        // echo $product_name, $product_desp, $product_price, $product_type, $product_material, $product_discount, $product_code, $product_color;
+        // print_r($size_list);
+        // print_r($quantity_list);
 
-		$sql ="INSERT INTO tbl_products (product_name,product_type,price,product_code,material,discount,product_description) VALUES ('$product_name','$product_type','$product_price','$product_code','$product_material','$product_discount','$product_desp')";
+        // Removing the empty elements from array of quantity list
+        foreach($quantity_list as $key => $value)          
+        if(empty($value)){
+            unset($quantity_list[$key]); 
+        }
+
+       
+
+        // Making the array indexes starts from 0
+        $quantity_list = array_values($quantity_list);    
+        print_r($quantity_list);
+
+
+		// insert records in product table
+
+		$sql ="INSERT INTO tbl_products (product_name,product_type,price,product_code,material,discount,product_description,gender) VALUES ('$product_name','$product_type','$product_price','$product_code','$product_material','$product_discount','$product_desp',' $gender')";
         
         echo $sql;
         $result = mysqli_query($conn,$sql);
@@ -106,17 +130,55 @@ function add_products()
         $row = mysqli_fetch_array($result);
         $product_id = $row['product_id'];
 
-        // echo($product_id);
+        // insert images into tbl_pictures
+
+        // File upload configuration
+        $targetDir = "uploads/";
+        $allowTypes = array('jpg','png','jpeg','gif');
+
+        foreach($_FILES['files']['tmp_name'] as $key => $tmp_name ){
+            // File upload path
+            $file_name = basename($_FILES['files']['name'][$key]);
+            
+            $targetFilePath = $targetDir . $file_name;
+
+            // Check whether file type is valid
+            $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
+            if(in_array($fileType, $allowTypes)){
+                if(is_dir($targetDir)==false){
+                    mkdir($targetDir, 0700);		// Create directory if it does not exist
+                }
+                
+                if(!file_exists($targetFilePath)){
+                    if(move_uploaded_file($_FILES["files"]["tmp_name"][$key], $targetFilePath)){
+                        $sql = "INSERT INTO tbl_pictures (product_id, picture_url) VALUES ('$product_id', '$file_name')";
+                        $result = mysqli_query($conn, $sql);
+                    }
+                }else{									//rename the file if another one exist
+                    $path_parts = pathinfo($file_name);
+                    $new_file_name = $path_parts["filename"].time().".".$path_parts["extension"];
+                    $new_dir = $targetDir.$new_file_name;
+                    
+                    if(move_uploaded_file($_FILES["files"]["tmp_name"][$key], $new_dir)){
+                        $sql = "INSERT INTO tbl_pictures (product_id, picture_url) VALUES ('$product_id', '$new_file_name')";
+                        $result = mysqli_query($conn, $sql);
+                    }			
+                }
+            }
+        }
+       
 
         // insert color into product_color_mapping
 
-        $sql ="SELECT DISTINCT(color_id) from tbl_product_color LIMIT 1";
+        $sql ="SELECT DISTINCT(color_id) from tbl_product_color WHERE color_name = '$product_color' LIMIT 1";
         $result = mysqli_query($conn,$sql);
         $row = mysqli_fetch_array($result);
         $color_id = $row['color_id'];
 
 		$sql ="INSERT INTO tbl_product_color_mapping (color_id,product_id) VALUES ('$color_id','$product_id')";
         $result = mysqli_query($conn,$sql);
+
+
 
 
         // insert size array into product size mapping
@@ -126,37 +188,22 @@ function add_products()
            
             $sizes = $_POST['size_list'];
             // $sizes= $size_list;
-           
+            $quantity_counter = 0;
             foreach ($sizes as $size)
             {
+                $product_quantity = $quantity_list[$quantity_counter];
+
             	$sql = "SELECT DISTINCT(size_id) from tbl_product_size WHERE size = '$size'";
             	$result = mysqli_query($conn,$sql);
 		        $row = mysqli_fetch_array($result);
 		        $size_id = $row['size_id'];
-		       
-                $sql ="INSERT INTO tbl_product_size_mapping (size_id,product_id) VALUES ($size_id,$product_id)";
+		          
+                $sql ="INSERT INTO tbl_product_size_mapping (size_id,product_id,product_quantity) VALUES ($size_id,$product_id,$product_quantity)";
                 $result = mysqli_query($conn,$sql);
+
+                $quantity_counter += 1;
             }
         }
-
-
-        // insert images link array into tbl_pictures
-
-        if(!empty($_POST['picture_list'])) 
-        {
-           
-            $pictures = $_POST['picture_list'];
-            // $pictures = $picture_list;
-           
-            foreach ($pictures as $picture)
-            { 
-            	echo $picture;
-                $sql ="INSERT INTO tbl_pictures (product_id,picture_url) VALUES ($product_id,'$picture')";
-                $result = mysqli_query($conn,$sql);
-            }
-        }
-
-	// }
 }
 
 
