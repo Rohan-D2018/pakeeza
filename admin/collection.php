@@ -16,7 +16,7 @@ require 'config.php';
               
                 <div class="row clearfix" style="margin-left: 3%">
                     <!-- <img src="http://www.stleos.uq.edu.au/wp-content/uploads/2016/08/image-placeholder-350x350.png"> -->
-                    <img src="" id="profile-img-tag" width="350px" height="250px" />
+                    <img src="http://via.placeholder.com/640x360" id="profile-img-tag" width="350px" height="250px" />
                     <input type="file" name= "file" id="profile-img" style="margin-top: 3%">
                     <input type="button" id="removeImage1" value="x" class="btn-rmv1 btn btn-danger" style="margin-top: 3%;margin-left: 5%"/>
                     <!-- <img src="" id="profile-img-tag" width="350px" height="350px" /> -->
