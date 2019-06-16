@@ -80,7 +80,7 @@ require 'config.php';
                         <td width="20%" style="text-align: left;">'.$row['collection_name'].'</td>
                         <td width="40%" style="text-align: left;">'.$row['collection_description'].'</td>
                         <td width="15%" style="text-align: right;"><button type="button" name="edit"  id="'.$row['collection_id'].'" class="btn btn-primary edit_data"><i class="fa fa-pencil"></td>
-                        <td width="15%" style="text-align: left;"><a href="javascript:delete_id('.$row['collection_id'].')"><button type="button" class="btn btn-danger fa fa-trash"></button></a></td>
+                        <td width="15%" style="text-align: right;"><a href="javascript:delete_id('.$row['collection_id'].')"><button type="button" class="btn btn-danger fa fa-trash"></button></a></td>
                     </tr>';
                  
                 }
