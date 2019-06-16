@@ -1,8 +1,8 @@
 <?php
-require 'admin/config.php';
+    require 'admin/config.php';
 
-$sql ="SELECT * FROM tbl_collections ORDER BY collection_name";
-$collections = mysqli_query($conn, $sql);
+    $sql ="SELECT * FROM tbl_collections ORDER BY collection_name";
+    $collections = mysqli_query($conn, $sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -88,7 +88,7 @@ $collections = mysqli_query($conn, $sql);
                                     <!-- <li><a href="index.html">Noor</a></li>
                                     <li><a href="shop.php">Gulshan</a></li>
                                     <li><a href="shop.php">Aks</a></li> -->
-                                    <li><a href="single-product-details.html">Product Details</a></li>
+                                    <li><a href="product_details.php/?id=42">Product Details</a></li>
                                     <li><a href="checkout.html">Checkout</a></li>
                                     <!-- <li><a href="blog.html">Blog</a></li>
                                     <li><a href="single-blog.html">Single Blog</a></li>
@@ -107,16 +107,16 @@ $collections = mysqli_query($conn, $sql);
             <!-- Header Meta Data -->
             <div class="header-meta d-flex clearfix justify-content-end">
                 <!-- Search Area -->
-                <div class="search-area">
+                <!-- <div class="search-area">
                     <form action="#" method="post">
                         <input type="search" name="search" id="headerSearch" placeholder="Type for search">
                         <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                     </form>
-                </div>
+                </div> -->
                 <!-- Favourite Area -->
-                <div class="favourite-area">
+                <!-- <div class="favourite-area">
                     <a href="#"><img src="img/core-img/heart.svg" alt=""></a>
-                </div>
+                </div> -->
                 <!-- User Login Info -->
                 <div class="user-login-info">
                     <a href="#"><img src="img/core-img/user.svg" alt=""></a>
