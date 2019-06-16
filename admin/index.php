@@ -18,7 +18,7 @@ include('header.php');
                     <!-- <img id="default" src="http://www.stleos.uq.edu.au/wp-content/uploads/2016/08/image-placeholder-350x350.png" data-image="http://www.stleos.uq.edu.au/wp-content/uploads/2016/08/image-placeholder-350x350.png"> -->
                 </div>
                 <div class="row clearfix" style="margin-left: 3%;margin-right: 1%;">
-                    <img class="img-fluid" id="default" src="http://via.placeholder.com/640x360">
+                    <img class="img-fluid" id="default" src="https://via.placeholder.com/400x550">
                     <input type="file" name= "files[]" id="profile-img" style="margin-top: 3%" multiple>
                     <input type="button" id="removeImage1" value="x" class="btn-rmv1 btn btn-success" style="margin-top: 3%;margin-left:5%"/>
                     <!-- <img src="" id="profile-img-tag" width="350px" height="350px" /> -->
@@ -47,7 +47,7 @@ include('header.php');
 
                 <div class="row">    
                     <b class="clearfix">Product Discount:</b>
-                    <input type="number" class="form-control clearfix" name="discount" step=".01">
+                    <input type="number" class="form-control clearfix" name="discount" step=".01" value="0">
                 </div>    
                 
 
@@ -161,7 +161,10 @@ include('header.php');
 
         $('#default').remove();
 
-        $("#gallery").unitegallery();
+        $("#gallery").unitegallery({
+            gallery_width:1000,							//gallery width		
+            gallery_height:1364,							//gallery height
+        });
     }
 
     $("#profile-img").change(function(){

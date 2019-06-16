@@ -29,7 +29,7 @@ function add_products()
             $product_price = $_POST["product_price"];
         }
         else{
-            $product_price = 1;
+            $product_price = 0;
         }
 
         if(isset($_POST["product_type"])){
@@ -45,12 +45,12 @@ function add_products()
         else{
             $product_material = "";
         }
-        
+            
         if(isset($_POST["discount"])){
             $product_discount = $_POST["discount"];
         }
         else{
-            $product_discount = 1;
+            $product_discount = 0;
         }
         
         if(isset($_POST["product_code"])){
@@ -209,6 +209,6 @@ function add_products()
 
 add_products();
 
-header("Location: index.php");
+// header("Location: index.php");
 
 ?>
