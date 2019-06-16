@@ -1,7 +1,7 @@
 <?php
+$page = 'size';
 include('header.php');
 require 'config.php';
-$page = 'size';
 ?>
 
 <div class="container-fluid">

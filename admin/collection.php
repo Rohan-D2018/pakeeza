@@ -4,45 +4,28 @@ include('header.php');
 require 'config.php';
 ?>
 
-<div class="container-fluid">
+<div class="container">
     <div class="row" style="margin-top: 1%;">
     </div>
-    <form action="admin_collection.php" method="POST">
+    <form action="admin_collection.php" method="POST" enctype="multipart/form-data">
         <div class="row text-center">
-            <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
-                
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-              
-                <div class="row clearfix" style="margin-left: 3%">
-                    <!-- <img src="http://www.stleos.uq.edu.au/wp-content/uploads/2016/08/image-placeholder-350x350.png"> -->
-                    <img src="http://via.placeholder.com/640x360" id="profile-img-tag" width="350px" height="250px" />
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="clearfix" style="margin-left: 3%">
+                    <img class="img-fluid" src="http://via.placeholder.com/920x470" id="profile-img-tag"/>
                     <input type="file" name= "file" id="profile-img" style="margin-top: 3%">
                     <input type="button" id="removeImage1" value="x" class="btn-rmv1 btn btn-danger" style="margin-top: 3%;margin-left: 5%"/>
-                    <!-- <img src="" id="profile-img-tag" width="350px" height="350px" /> -->
                 </div>
             </div>
-            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
-               
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-               
-                <div class="row">
-                    <b class="clearfix">Collection Name:</b>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <b class="clearfix float-left">Collection Name:</b>
                     <input type="text" class="form-control clearfix" name="collection_name" required>
-                </div>
 
-                <div class="row">
-                    <b class="clearfix">Collection Description:</b>
+                    <b class="clearfix float-left">Collection Description:</b>
                     <input type="textbox" class="form-control clearfix" name="collection_description" required>
-                </div>
 
-                <div class="row clearfix">
+                <div class="clearfix float-left">
                     <input type="submit" value="Add Collection" class="btn btn-success" style="margin-bottom: 10px;">
                 </div>
-            </div>
-            <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
-                
             </div>
         </div>
     </form>    

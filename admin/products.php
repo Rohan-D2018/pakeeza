@@ -1,6 +1,6 @@
 <?php
-include('header.php');
 $page = 'product';
+include('header.php');
 ?>
 
 <div class="container-fluid">

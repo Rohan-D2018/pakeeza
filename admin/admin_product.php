@@ -118,7 +118,7 @@ function add_products()
             
             $targetFilePath = $targetDir . $file_name;
             // Check whether file type is valid
-            $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
+            $fileType = strtolower(pathinfo($targetFilePath,PATHINFO_EXTENSION));
             if(in_array($fileType, $allowTypes)){
                 if(is_dir($targetDir)==false){
                     mkdir($targetDir, 0700);        // Create directory if it does not exist
