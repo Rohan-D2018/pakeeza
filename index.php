@@ -1,7 +1,6 @@
 <?php
     include('header.php');
 
-    require 'admin/config.php';
     // $sql = "SELECT collection_id,collection_name,collection_description FROM tbl_collections WHERE delete_status = 0";
     
     // $result = mysqli_query($conn, $sql);

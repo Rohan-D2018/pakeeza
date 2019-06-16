@@ -1,3 +1,9 @@
+<?php
+require 'admin/config.php';
+
+$sql ="SELECT * FROM tbl_collections ORDER BY collection_name";
+$collections = mysqli_query($conn, $sql);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,7 +33,7 @@
             <!-- Classy Menu -->
             <nav class="classy-navbar" id="essenceNav">
                 <!-- Logo -->
-                <a class="nav-brand" href="index.html"><img src="img/logo.png" alt=""></a>
+                <a class="nav-brand" href="index.php"><img src="img/logo.png" alt=""></a>
                 <!-- Navbar Toggler -->
                 <div class="classy-navbar-toggler">
                     <span class="navbarToggler"><span></span><span></span><span></span></span>
@@ -74,9 +80,14 @@
                             </li>
                             <li><a href="#">Collections</a>
                                 <ul class="dropdown">
-                                    <li><a href="index.html">Noor</a></li>
+                                    <?php
+                                        while($row = mysqli_fetch_array($collections)){
+                                            echo "<li><a href='#'>".$row['collection_name']."</a></li>";  
+                                        }
+                                    ?>
+                                    <!-- <li><a href="index.html">Noor</a></li>
                                     <li><a href="shop.php">Gulshan</a></li>
-                                    <li><a href="shop.php">Aks</a></li>
+                                    <li><a href="shop.php">Aks</a></li> -->
                                     <li><a href="single-product-details.html">Product Details</a></li>
                                     <li><a href="checkout.html">Checkout</a></li>
                                     <!-- <li><a href="blog.html">Blog</a></li>
@@ -86,7 +97,7 @@
                                 </ul>
                             </li>
                             <!-- <li><a href="blog.html">Blog</a></li> -->
-                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="contact.php">Contact</a></li>
                         </ul>
                     </div>
                     <!-- Nav End -->

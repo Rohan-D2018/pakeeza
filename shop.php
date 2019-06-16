@@ -2,16 +2,11 @@
 
 include('header.php');
 
-require 'admin/config.php';
-
-
 $sql ="SELECT * FROM tbl_products";
 $products = mysqli_query($conn, $sql);
 
-$sql ="SELECT * FROM tbl_collections";
+$sql ="SELECT * FROM tbl_collections ORDER BY collection_name";
 $collections = mysqli_query($conn, $sql);
-
-
 ?>
     <!-- ##### Right Side Cart Area ##### -->
     <div class="cart-bg-overlay"></div>
