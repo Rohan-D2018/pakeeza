@@ -1,189 +1,152 @@
 <?php
-$page = 'product';
-require 'config.php';
-include('header.php');
+	require 'config.php';  
+	session_start();
 
+	if (!isset($_SESSION['username']))
+    {
+    //   header('Location: products.php');
+    } 
 
-//     print_r($row);
-// }
+	if (isset($_POST['bttLogin'])) {
+		$username = $_POST['admin_username'];
+		$password = $_POST['admin_password'];
+	
+		$query = "SELECT admin_access_role,admin_id,admin_username,admin_password
+				  FROM tbl_admin_panel
+				  WHERE admin_username='$username' AND admin_password = '$password'
+				  ORDER BY admin_access_role ASC";
+				  
+		$results = mysqli_query($conn, $query);
+	
+		if(mysqli_num_rows($results)>=1)
+		{ 
+			// $logged_in_user = mysqli_fetch_array($results);
+			echo "Inside";
+			$access_roles = array();
+			$user_name = array();
+			while ($row = mysqli_fetch_array($results))
+			{
+			  array_push($access_roles, $row['admin_access_role']);
+			  array_push($user_name, $row['admin_username']);
+			}  
+			// print_r($access_roles);
+			
+			if (in_array("admin", $access_roles, TRUE) )
+			{
+			  echo "Found admin user";
+			  $_SESSION['username'] = $user_name[0]; 
+			  $_SESSION['access_role'] = $access_roles;  
+			  header('location: products.php');  
+			} 
+	
+			elseif (in_array("system_user", $access_roles, TRUE))
+			{
+			  echo "Found system_user";
+			  $_SESSION['username'] = $user_name[0]; 
+			  $_SESSION['access_role'] = $access_roles;         
+				  header('Location: products.php');  
+			} 
+	
+		}  
+		else
+		{	
+			echo "Exception";
+		   
+		   $_SESSION['error'] = "Invalid Username or Password";
+		   // echo '<script>window.location = "index.php"</script>';
+		}
+	}
+	 
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Pakeeza</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100 ">
+				<form action="#" method="post">
+					<span class="login100-form-title">
+						Welcome
+					</span>
+					<span class="login100-form-avatar">
+						<img src="images/pakeezalogo.jpeg" alt="AVATAR">
+					</span>
 
-<div class="container-fluid">
-    <div class="row" style="margin-top: 1%;">
-    </div>
-    <form action="admin_product.php" method="POST" enctype="multipart/form-data">
-        <div class="row text-center">
-            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <div id="gallery"  style="display:none;">
-                    <!-- <img id="default" src="http://www.stleos.uq.edu.au/wp-content/uploads/2016/08/image-placeholder-350x350.png" data-image="http://www.stleos.uq.edu.au/wp-content/uploads/2016/08/image-placeholder-350x350.png"> -->
-                </div>
-                <div class="row clearfix" style="margin-left: 3%;margin-right: 1%;">
-                    <img class="img-fluid" id="default" src="https://via.placeholder.com/400x550">
-                    <input type="file" name= "files[]" id="profile-img" style="margin-top: 3%" multiple>
-                    <input type="button" id="removeImage1" value="x" class="btn-rmv1 btn btn-success" style="margin-top: 3%;margin-left:5%"/>
-                    <!-- <img src="" id="profile-img-tag" width="350px" height="350px" /> -->
-                </div>
-                <div class="row clearfix" style="margin-left: 3%">
-                    <a href="show_products.php"><button type ="button" value="Show Products" id="show_products" value="Show Products" name="show_products" class="btn btn-primary" style="float:right">View Products</button></a>
-                </div>    
-            </div>
-       
-            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-            <!-- <form action="admin_product.php" method="POST"> -->
-                <div class="row">
-                    <b class="clearfix">Product Name:</b>
-                    <input type="text" class="form-control clearfix" name="product_name">
-                </div>
+					<div class="wrap-input100 validate-input m-t-25 m-b-35" data-validate = "Enter username">
+						<input class="input100" type="text" name="admin_username">
+						<span class="focus-input100" data-placeholder="Username"></span>
+					</div>
 
-                <div class="row">
-                    <b class="clearfix">Product Description:</b>
-                    <input type="textbox" class="form-control clearfix" name="product_description">
-                </div>
+					<div class="wrap-input100 validate-input m-b-50" data-validate="Enter password">
+						<span class="btn-show-pass">
+							<i class="fa fa-eye"></i>
+						</span>
+						<input class="input100" type="password" name="admin_password">
+						<span class="focus-input100" data-placeholder="Password"></span>
+					</div>
 
-                <div class="row">
-                    <b class="clearfix">Product Price:</b>
-                    <input type="number" class="form-control clearfix" name="product_price" step=".01">
-                </div>
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn" type="submit" value="Submit" id="submit" name="bttLogin">
+							Login
+						</button>
+					</div>
+				</form>
+				<div class="text-center" style="margin-top: 15px;">
+        			<?php
+			          	//Add user status message
+			          	include('functions.php');
+			          	display_message();
+        			?> 
+      			</div>
+			</div>
+		</div>
+	</div>
+	
 
-                <div class="row">    
-                    <b class="clearfix">Product Discount:</b>
-                    <input type="number" class="form-control clearfix" name="discount" step=".01" value="0">
-                </div>    
-                
+<!--===============================================================================================-->
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/daterangepicker/moment.min.js"></script>
+	<script src="vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
 
-                <div class="row">
-                    <b class="clearfix">Product Type:</b>
-                    <input type="text" class="form-control clearfix" name="product_type">
-                </div>
-
-                <div class="row">
-                    <b class="clearfix">Product Material:</b>
-                    <input type="text" class="form-control clearfix" name="material">
-                </div>
-
-               <div class="row">
-                    <b class="clearfix">Product Color:</b>
-                    <select class="browser-default custom-select" id="color_name" name="color_name">
-                      <option selected>Select color</option>
-                      <?php
-                         $sql = "SELECT DISTINCT(color_name) FROM tbl_product_color";
-                      
-                          $result = mysqli_query($conn, $sql);
-                          while($row = mysqli_fetch_array($result))
-                         {
-                          echo '<option value="' . $row["color_name"] . '">' . $row["color_name"] . '</option>'; 
-                         }
-                          if (!$result)
-                           {
-                              die ('SQL Error: ' . mysqli_error($conn));
-                           }
-
-                      ?>
-                    </select>
-                </div>
-
-                <div class="row clearfix">
-                    <input type="submit" value="Add Product" class="btn btn-success" style="margin-bottom: 10px;">
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <div class="row" style="margin-left: 3%; margin-right: 3%">
-                    <b class="clearfix">Product Code:</b>
-                    <input type="text" class="form-control clearfix" name="product_code">
-                </div>
-
-                <div class="row" style="margin-left: 3%; margin-right: 3%">
-                    <b class="clearfix">Gender:</b>
-                    <select class="browser-default custom-select" id="gender" name="gender">
-                        <option selected value="male">Male</option> 
-                        <option value="female">Female</option> 
-                        <option value="kids">Kids</option> 
-                         
-                    </select>
-                </div>
-
-                <div class="row"  style="margin-left: 3%; margin-right: 3%; margin-top: 2%">  
-                    <table class="table" id="sizes" style="border: none;">
-                        <thead class="thead-dark" style=" padding-top:2px;padding-bottom:5px;">
-                            <tr>                   
-                                <th width="50%" style="text-align: left;">Size</th>   
-                                <th width="50%" style="text-align: left;">Quantity</th>   
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php 
-                                $sql = "SELECT size,size_id FROM tbl_product_size";
-                    
-                                $result = mysqli_query($conn, $sql);
-                                // print_r($result);
-                                while($row = mysqli_fetch_array($result))
-                                {     
-                                    // echo $row['group_name']; 
-                                    echo '<tr>
-                                            <td><input type="checkbox" name="size_list[]" id="'.$row['size'].'" value="'.$row['size'].'" style="float:left"><label style="font-weight: normal; float: left;margin-left:10px;">'.$row['size'].'</label></td>
-                                            <td><input type="number" class="form-control clearfix" name="quantity_list[]"></td>
-                                          </tr>';   
-                                }
-
-                                if (!$result)
-                                {
-                                    die ('SQL Error: ' . mysqli_error($conn));
-                                }
-                            ?>   
-                        </tbody>
-                    </table>              
-                </div>
-            </div>   
-        </div>
-    </form>     
-</div>
-
-
-<script type="text/javascript">
-    function readURL(input) {
-        // document.getElementById(removeImage1).style.display = 'block';
-        // if (input.files && input.files[0]) {
-        //     var reader = new FileReader();
-            
-        //     reader.onload = function (e) {
-        //         $('#profile-img-tag').attr('src', e.target.result);
-        //     }
-        //     reader.readAsDataURL(input.files[0]);
-        // }
-
-        var total_file = document.getElementById("profile-img").files.length;
-        // alert(total_file);
-        for(var i = 0;i < total_file; i++)
-        {
-            $('#gallery').append("<img src='"+URL.createObjectURL(event.target.files[i])+"' data-image='"+URL.createObjectURL(event.target.files[i])+"'>");
-        }
-
-        $('#default').remove();
-
-        $("#gallery").unitegallery({
-            gallery_width:1000,							//gallery width		
-            gallery_height:1364,							//gallery height
-        });
-    }
-
-    $("#profile-img").change(function(){
-        readURL(this);
-    });
-
-    // document.getElementById(removeImage1).style.display = 'block';
-    $("#removeImage1").click(function(e) {
-        e.preventDefault();
-        $("#profile-img").val("");
-        $("#profile-img-tag").attr("src", "");
-        // $('.preview1').removeClass('it');
-        // $('.btn-rmv1').removeClass('rmv');
-    });
-
-
-</script>
-
-
-<?php
-include('footer.php');
-?>
+</body>
+</html>

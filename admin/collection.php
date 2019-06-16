@@ -80,7 +80,7 @@ require 'config.php';
                         <td width="20%" style="text-align: left;">'.$row['collection_name'].'</td>
                         <td width="40%" style="text-align: left;">'.$row['collection_description'].'</td>
                         <td width="15%" style="text-align: right;"><button type="button" name="edit"  id="'.$row['collection_id'].'" class="btn btn-primary edit_data"><i class="fa fa-pencil"></td>
-                        <td width="15%" style="text-align: right;"><a href="javascript:delete_id('.$row['collection_id'].')"><button type="button" class="btn btn-danger fa fa-trash"></button></a></td>
+                        <td width="15%" style="text-align: left;"><a href="javascript:delete_id('.$row['collection_id'].')"><button type="button" class="btn btn-danger fa fa-trash"></button></a></td>
                     </tr>';
                  
                 }
@@ -103,7 +103,7 @@ require 'config.php';
         
         <!-- Modal body -->
             <div class="modal-body">
-                <form method="post">
+                <form method="post" action="update_data.php">
                     <div class="row">
                         <div class="col-md-3 col-sm-3">
                             <div class="form-group">
@@ -143,27 +143,7 @@ require 'config.php';
     </div>
 </div>
 
-<?php
-
-if(isset($_POST["btn_edit_collections"]))
-{
-    $collection_id = $_POST['collection_id2'];
-    $collection_name = $_POST['collection_name2'];
-   
-    $collection_description =  $_POST['collection_description2'];
-   
-   
-        
-    $sql ="UPDATE tbl_collections SET collection_name = '$collection_id',collection_description = '$collection_description' WHERE collection_id = '$collection_id'";
-    $result = mysqli_query($conn,$sql);
-
-    // $_SESSION['success'] = "Data Updated succesfully ";
-    
-    // header('Location:../alert.php');
-    // exit();
-
-}
-?>
+<!-- =========================edit data modal ends here========================= -->
 
 
 

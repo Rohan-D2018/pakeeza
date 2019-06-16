@@ -1,3 +1,15 @@
+<?php
+require 'config.php';
+
+session_start();
+
+if (!isset($_SESSION['username']))
+    {
+      header('Location:index.php');
+      exit();
+    } 
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +27,7 @@
     <link rel="icon" href="img/core-img/favicon.ico">
 
     <!-- Core Style CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">  
     <link rel="stylesheet" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/custom.css">
     <link rel="stylesheet" href="css/unitgallery.css">
@@ -23,6 +35,7 @@
 
     <!-- <script src="js/jquery/jquery-2.2.4.min.js"></script> -->
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
     <script src="js/ug-theme-compact.js"></script>
     <!-- <script type="text/javascript"  src="js/datatable.js"></script> -->
     <script  type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
@@ -43,7 +56,7 @@
       <div class="collapse navbar-collapse" id="navbarsExample03">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item  <?php if ($page == 'product'){ echo "active"; } ?>">
-            <a class="nav-link" href="index.php">Product <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="products.php">Product <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item  <?php if ($page == 'collection'){ echo "active"; } ?>">
             <a class="nav-link" href="collection.php">Collection</a>
@@ -57,6 +70,16 @@
           <li class="nav-item  <?php if ($page == 'order'){ echo "active"; } ?>">
             <a class="nav-link" href="orders.php">Orders</a>
           </li>
+
+          <!-- Only for admin user -->
+          <?php
+            if ((in_array("admin", $_SESSION['access_role'], TRUE)))
+            {
+              echo'<li class="nav-item '; if ($page == "manage_user"){ echo "active"; } echo'">
+              <a class="nav-link" href="manage_users.php">Manage Users</a>
+              </li>';
+            }
+          ?>
          
           <!-- <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
@@ -66,6 +89,11 @@
               <a class="dropdown-item" href="#">Something else here</a>
             </div>
           </li> -->
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="logout.php?action=logout"><span class="fa fa-sign-out"></span><?php echo ($_SESSION['username'])?></a>
+          </li>
         </ul>
         <!-- <form class="form-inline my-2 my-md-0">
           <input class="form-control" type="text" placeholder="Search">

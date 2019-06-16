@@ -21,12 +21,7 @@ function add_collection()
         $collection_description = "";
     }
 
-    // if(isset($_POST["collection_name"])){
-    //     $collection_name = $_POST["collection_name"];
-    // }
-    // else{
-    //     $collection_name = "";
-    // }
+    
 		
 
 	$collection_pic_url = "../images/collection/123hdgsa_1209_21_12:12:12:42";

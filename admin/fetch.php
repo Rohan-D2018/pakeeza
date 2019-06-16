@@ -4,7 +4,7 @@ include('config.php');
 
 if(isset($_POST["product_id"]))
 {
-	$sql ="SELECT product_id,product_name,product_type,price,product_code,discount FROM tbl_products WHERE product_id = '".$_POST["product_id"]."'";
+	$sql ="SELECT product_id,product_name,product_type,price,product_code,discount,material,gender,product_description FROM tbl_products WHERE product_id = '".$_POST["product_id"]."'";
 	$result = mysqli_query($conn,$sql);
 	$row = mysqli_fetch_array($result);
 	echo json_encode($row);

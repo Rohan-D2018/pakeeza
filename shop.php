@@ -302,7 +302,7 @@ $collections = mysqli_query($conn, $sql);
 
                                         <!-- Product Description -->
                                         <div class="product-description">
-                                            <a href="single-product-details.html">
+                                            <a href="<?php echo 'product_details.php?id='.$row["product_id"]; ?>">
                                                 <h6><?php echo $row["product_name"] ?></h6>
                                             </a>
                                             <p class="product-price"><!-- <span class="old-price"></span> --><?php echo "$" . $row["price"]; ?></p>

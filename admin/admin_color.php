@@ -12,12 +12,14 @@ function add_color()
         $product_color = "";
     }
 
-	
-		// $product_color = "Black";
-	$color_picture_url = "../images/collection/123hdgsa_1209_21_12:12:12:42";
-		
+    if(isset($_POST["product_color_hex"])){
+        $product_color_hex = $_POST["product_color_hex"];
+    }
+    else{
+        $product_color_hex = "";
+    }	
 
-		$sql ="INSERT INTO tbl_product_color (color_name,color_picture_url) VALUES ('$product_color','$color_picture_url')";
+		$sql ="INSERT INTO tbl_product_color (color_name,product_color_hex) VALUES ('$product_color','$product_color_hex')";
         $result = mysqli_query($conn,$sql);
 
 	// }

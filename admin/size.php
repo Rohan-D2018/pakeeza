@@ -28,7 +28,7 @@ require 'config.php';
                     <thead class="thead-dark" style="background-color: #e8eaf6; padding-top:2px;padding-bottom:5px;">
                         <tr>                   
                             <th width="30%" style="text-align: left;">Size</th>
-                            <th width="15%" style="text-align: right;"></th>
+                            
                             <th width="15%" style="text-align: left;"></th>
                         </tr>
                     </thead>
@@ -49,8 +49,7 @@ require 'config.php';
                             // if equal to current
                                 echo '<tr>
                                     <td width="30%" style="text-align: left;">'.$row['size'].'</td>
-                                    
-                                    <td width="15%" style="text-align: right;"><button type="button" name="edit"  id="'.$row['size_id'].'" class="btn btn-primary edit_data"><i class="fa fa-pencil"></td>
+                                
                                     <td width="15%" style="text-align: right;"><a href="javascript:delete_id('.$row['size_id'].')"><button type="button" class="btn btn-danger fa fa-trash"></button></a></td>
                                 </tr>';
                             }

@@ -39,10 +39,14 @@
                 <!-- Select Box -->
                 <div class="select-box d-flex mt-50 mb-30">
                     <select name="select" id="productSize" class="mr-5">
-                        <option value="value">Size: XL</option>
-                        <option value="value">Size: X</option>
-                        <option value="value">Size: M</option>
-                        <option value="value">Size: S</option>
+                       <?php
+                        $sql          = "SELECT * FROM tbl_product_size_mapping WHERE product_id=".$product_id;
+                        $product_info = mysqli_query($conn, $sql);
+
+                        while($row=mysqli_fetch_assoc($product_info)){
+                            echo '<option value="value">Size: '.$row['size_id'].'</option>';
+                        }
+                       ?>
                     </select>
                     <select name="select" id="productColor">
                         <option value="value">Color: Black</option>
