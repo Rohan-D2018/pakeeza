@@ -1,7 +1,6 @@
 <?php
-require 'config.php';
-
 session_start();
+require 'config.php';
 
 if (!isset($_SESSION['username']))
     {
@@ -9,7 +8,6 @@ if (!isset($_SESSION['username']))
       exit();
     } 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 

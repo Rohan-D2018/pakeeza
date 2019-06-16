@@ -1,11 +1,6 @@
 <?php
-	require 'config.php';  
 	session_start();
-
-	if (!isset($_SESSION['username']))
-    {
-    //   header('Location: products.php');
-    } 
+	require 'config.php';  
 
 	if (isset($_POST['bttLogin'])) {
 		$username = $_POST['admin_username'];
@@ -19,9 +14,7 @@
 		$results = mysqli_query($conn, $query);
 	
 		if(mysqli_num_rows($results)>=1)
-		{ 
-			// $logged_in_user = mysqli_fetch_array($results);
-			echo "Inside";
+		{
 			$access_roles = array();
 			$user_name = array();
 			while ($row = mysqli_fetch_array($results))
@@ -29,29 +22,24 @@
 			  array_push($access_roles, $row['admin_access_role']);
 			  array_push($user_name, $row['admin_username']);
 			}  
-			// print_r($access_roles);
-			
+
 			if (in_array("admin", $access_roles, TRUE) )
 			{
-			  echo "Found admin user";
 			  $_SESSION['username'] = $user_name[0]; 
-			  $_SESSION['access_role'] = $access_roles;  
-			  header('location: products.php');  
+			  $_SESSION['access_role'] = $access_roles;
+			  header('Location: products.php');  
 			} 
 	
 			elseif (in_array("system_user", $access_roles, TRUE))
 			{
-			  echo "Found system_user";
 			  $_SESSION['username'] = $user_name[0]; 
 			  $_SESSION['access_role'] = $access_roles;         
-				  header('Location: products.php');  
+			  header('Location: products.php');  
 			} 
 	
 		}  
 		else
-		{	
-			echo "Exception";
-		   
+		{
 		   $_SESSION['error'] = "Invalid Username or Password";
 		   // echo '<script>window.location = "index.php"</script>';
 		}
@@ -92,7 +80,7 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 ">
-				<form action="#" method="post">
+				<form action="index.php" method="post">
 					<span class="login100-form-title">
 						Welcome
 					</span>

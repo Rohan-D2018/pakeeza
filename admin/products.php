@@ -1,9 +1,6 @@
 <?php
-$page = 'product';
-
 include('header.php');
-//     print_r($row);
-// }
+$page = 'product';
 ?>
 
 <div class="container-fluid">
