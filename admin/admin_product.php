@@ -22,6 +22,12 @@ function add_products()
         else{
             $product_price = 1;
         }
+         if(isset($_POST["collection_name"])){
+            $collection_name = $_POST["collection_name"];
+        }
+        else{
+            $collection_name = "";
+        }
         if(isset($_POST["product_type"])){
             $product_type = $_POST["product_type"];
         }
@@ -82,6 +88,13 @@ function add_products()
         else{
             $gender = "";
         }
+
+        if(isset($_POST["product_keywords"])){
+            $product_keywords = $_POST["product_keywords"];
+        }
+        else{
+            $product_keywords = "";
+        }
         
         // echo $product_name, $product_desp, $product_price, $product_type, $product_material, $product_discount, $product_code, $product_color;
         // print_r($size_list);
@@ -96,7 +109,7 @@ function add_products()
         $quantity_list = array_values($quantity_list);    
         print_r($quantity_list);
         // insert records in product table
-        $sql ="INSERT INTO tbl_products (product_name,product_type,price,product_code,material,discount,product_description,gender) VALUES ('$product_name','$product_type','$product_price','$product_code','$product_material','$product_discount','$product_desp',' $gender')";
+        $sql ="INSERT INTO tbl_products (product_name,product_type,price,product_code,material,discount,product_description,gender,product_keywords) VALUES ('$product_name','$product_type','$product_price','$product_code','$product_material','$product_discount','$product_desp','$gender','$product_keywords')";
         
         echo $sql;
         $result = mysqli_query($conn,$sql);
@@ -142,6 +155,16 @@ function add_products()
             }
         }
        
+        // insert collection into product table
+        $sql ="SELECT DISTINCT(collection_id) from tbl_collections WHERE collection_name = '$collection_name' LIMIT 1";
+        $result = mysqli_query($conn,$sql);
+        $row = mysqli_fetch_array($result);
+        $collection_id = $row['collection_id'];
+        $sql ="UPDATE tbl_product SET collection_id = '$collection_id' WHERE product_id ='$product_id'";
+        $result = mysqli_query($conn,$sql);
+
+
+
         // insert color into product_color_mapping
         $sql ="SELECT DISTINCT(color_id) from tbl_product_color WHERE color_name = '$product_color' LIMIT 1";
         $result = mysqli_query($conn,$sql);
@@ -149,6 +172,7 @@ function add_products()
         $color_id = $row['color_id'];
         $sql ="INSERT INTO tbl_product_color_mapping (color_id,product_id) VALUES ('$color_id','$product_id')";
         $result = mysqli_query($conn,$sql);
+
 
         // insert size array into product size mapping
         if(!empty($_POST['size_list'])) 

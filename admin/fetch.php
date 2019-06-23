@@ -4,7 +4,13 @@ include('config.php');
 
 if(isset($_POST["product_id"]))
 {
-	$sql ="SELECT product_id,product_name,product_type,price,product_code,discount,material,gender,product_description FROM tbl_products WHERE product_id = '".$_POST["product_id"]."'";
+	$sql ="SELECT tbl_products.product_id,tbl_products.product_name,tbl_products.product_type,tbl_products.price,tbl_products.product_code,tbl_products.discount,tbl_products.product_description,tbl_products.material,tbl_products.gender,tbl_products.product_keywords, tbl_collections.collection_name, tbl_product_color.color_name
+		FROM tbl_products 
+		INNER JOIN tbl_collections ON tbl_products.collection_id = tbl_collections.collection_id
+		INNER JOIN tbl_product_color_mapping ON tbl_products.product_id = tbl_product_color_mapping.product_id
+		INNER JOIN tbl_product_color ON tbl_product_color_mapping.color_id = tbl_product_color.color_id
+		WHERE tbl_products.product_id = '".$_POST["product_id"]."'";
+
 	$result = mysqli_query($conn,$sql);
 	$row = mysqli_fetch_array($result);
 	echo json_encode($row);

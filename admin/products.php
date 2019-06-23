@@ -33,6 +33,27 @@ include('header.php');
                 <div class="row">
                     <b class="clearfix">Product Description:</b>
                     <input type="textbox" class="form-control clearfix" name="product_description">
+
+                </div>
+
+                <div class="row">
+                    <b class="clearfix">Product Collection:</b>
+                    <select class="browser-default custom-select" id="collection_name" name="collection_name">
+                      <option selected>Select Collection</option>
+                      <?php
+                         $sql = "SELECT DISTINCT(collection_name) FROM tbl_collections";
+                      
+                          $result = mysqli_query($conn, $sql);
+                          while($row = mysqli_fetch_array($result))
+                         {
+                          echo '<option value="' . $row["collection_name"] . '">' . $row["collection_name"] . '</option>'; 
+                         }
+                          if (!$result)
+                           {
+                              die ('SQL Error: ' . mysqli_error($conn));
+                           }
+                      ?>
+                    </select>
                 </div>
 
                 <div class="row">
@@ -93,8 +114,12 @@ include('header.php');
                         <option selected value="male">Male</option> 
                         <option value="female">Female</option> 
                         <option value="kids">Kids</option> 
-                         
                     </select>
+                </div>
+
+                <div class="row" style="margin-left: 3%; margin-right: 3%">
+                    <b class="clearfix">Keywords:</b>
+                    <input type="text" class="form-control clearfix" name="product_keywords">
                 </div>
 
                 <div class="row"  style="margin-left: 3%; margin-right: 3%; margin-top: 2%">  
