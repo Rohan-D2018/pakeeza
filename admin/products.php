@@ -32,8 +32,8 @@ include('header.php');
 
                 <div class="row">
                     <b class="clearfix">Product Description:</b>
-                    <input type="textbox" class="form-control clearfix" name="product_description">
-
+                    <textarea class="form-control clearfix" cols=10 rows=5 name="product_description">
+                    </textarea>
                 </div>
 
                 <div class="row">

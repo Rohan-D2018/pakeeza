@@ -62,7 +62,7 @@ include('header.php');
 
                                 <td width="3%" style="text-align: left;"><button type="button" id="'.$row['product_id'].'" class="show_data btn btn-secondary fa fa-plus-square" style="color:white"></button></td>
 
-                                <td width="3%" style="text-align: right;"><button type="button" name="edit"  id="'.$row['product_id'].'" class="btn btn-primary edit_data"><i class="fa fa-pencil"></td>
+                                <td width="3%" style="text-align: left;"><a href="edit_product.php?id='.$row['product_id'].'"><button type="button" name="edit" class="btn btn-primary edit_data"><i class="fa fa-pencil"></i></button></a></td>
                                 <td width="3%" style="text-align: left;"><a href="javascript:delete_id('.$row['product_id'].')"><button type="button" class="btn btn-danger fa fa-trash"></button></a></td>
                             </tr>';
                         }
@@ -83,7 +83,7 @@ include('header.php');
 
                                 <td width="3%" style="text-align: left;"><button type="button" class="btn btn-warning fa fa-plus-square"></button></td>
 
-                                <td width="3%" style="text-align: right;"><button type="button" name="edit"  id="'.$row['product_id'].'" class="btn btn-primary edit_data"><i class="fa fa-pencil"></td>
+                                <td width="3%" style="text-align: left;"><a href="edit_product.php?id='.$row['product_id'].'"><button type="button" name="edit" class="btn btn-primary edit_data"><i class="fa fa-pencil"></i></button></a></td>
                                 <td width="3%" style="text-align: left;"><a href="javascript:delete_id('.$row['product_id'].')"><button type="button" class="btn btn-danger fa fa-trash" disabled></button></a></td>
                         </tr>';
                         }

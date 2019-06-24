@@ -44,7 +44,44 @@ if(isset($_POST["btn_edit_products"]))
     $sql_4 ="UPDATE tbl_product_color_mapping SET color_id = '$color_id' WHERE product_id = '$product_id'";
     $result_4 = mysqli_query($conn,$sql_4);
 
-    header('Location:show_products.php');
+    if($_FILES['files']['error'][0] != 4){
+        $sql_5 ="DELETE FROM tbl_pictures WHERE product_id = '$product_id'";
+        $result_5 = mysqli_query($conn,$sql_5);
+
+        $targetDir = "uploads/";
+        $allowTypes = array('jpg','png','jpeg','gif');
+        foreach($_FILES['files']['tmp_name'] as $key => $tmp_name ){
+            // File upload path
+            $file_name = basename($_FILES['files']['name'][$key]);
+            
+            $targetFilePath = $targetDir . $file_name;
+            // Check whether file type is valid
+            $fileType = strtolower(pathinfo($targetFilePath,PATHINFO_EXTENSION));
+            if(in_array($fileType, $allowTypes)){
+                if(is_dir($targetDir)==false){
+                    mkdir($targetDir, 0700);        // Create directory if it does not exist
+                }
+                
+                if(!file_exists($targetFilePath)){
+                    if(move_uploaded_file($_FILES["files"]["tmp_name"][$key], $targetFilePath)){
+                        $sql = "INSERT INTO tbl_pictures (product_id, picture_url) VALUES ('$product_id', '$file_name')";
+                        $result = mysqli_query($conn, $sql);
+                    }
+                }else{                                  //rename the file if another one exist
+                    $path_parts = pathinfo($file_name);
+                    $new_file_name = $path_parts["filename"].time().".".$path_parts["extension"];
+                    $new_dir = $targetDir.$new_file_name;
+                    
+                    if(move_uploaded_file($_FILES["files"]["tmp_name"][$key], $new_dir)){
+                        $sql = "INSERT INTO tbl_pictures (product_id, picture_url) VALUES ('$product_id', '$new_file_name')";
+                        $result = mysqli_query($conn, $sql);
+                    }           
+                }
+            }
+        }
+    }
+
+    header('Location: edit_product.php?id='.$product_id);
     exit();
 
    
