@@ -2,10 +2,10 @@
 
 include('header.php');
 
-$sql ="SELECT * FROM tbl_products";
+$sql ="SELECT * FROM tbl_products WHERE delete_status=0";
 $products = mysqli_query($conn, $sql);
 
-$sql ="SELECT * FROM tbl_collections ORDER BY collection_name";
+$sql ="SELECT * FROM tbl_collections ORDER BY collection_name WHERE delete_status=0";
 $collections = mysqli_query($conn, $sql);
 ?>
     <!-- ##### Right Side Cart Area ##### -->

@@ -41,7 +41,7 @@ include('header.php');
                     <select class="browser-default custom-select" id="collection_name" name="collection_name">
                       <option selected>Select Collection</option>
                       <?php
-                         $sql = "SELECT DISTINCT(collection_name) FROM tbl_collections";
+                         $sql = "SELECT DISTINCT(collection_name) FROM tbl_collections WHERE delete_status=0";
                       
                           $result = mysqli_query($conn, $sql);
                           while($row = mysqli_fetch_array($result))

@@ -24,6 +24,12 @@ function add_products()
         }
          if(isset($_POST["collection_name"])){
             $collection_name = $_POST["collection_name"];
+
+            $sql = "SELECT collection_id FROM tbl_collections WHERE collection_name='".$collection_name."'";
+            $result = mysqli_query($conn, $sql);
+            while ($row = mysqli_fetch_array($result)){
+                $collection_id = $row['collection_id'];
+            }
         }
         else{
             $collection_name = "";
@@ -109,7 +115,7 @@ function add_products()
         $quantity_list = array_values($quantity_list);    
         print_r($quantity_list);
         // insert records in product table
-        $sql ="INSERT INTO tbl_products (product_name,product_type,price,product_code,material,discount,product_description,gender,product_keywords) VALUES ('$product_name','$product_type','$product_price','$product_code','$product_material','$product_discount','$product_desp','$gender','$product_keywords')";
+        $sql ="INSERT INTO tbl_products (product_name,product_type,price,product_code,material,discount,product_description,gender,product_keywords,collection_id) VALUES ('$product_name','$product_type','$product_price','$product_code','$product_material','$product_discount','$product_desp','$gender','$product_keywords','$collection_id')";
         
         echo $sql;
         $result = mysqli_query($conn,$sql);

@@ -1,7 +1,7 @@
 <?php
     require 'admin/config.php';
 
-    $sql ="SELECT * FROM tbl_collections ORDER BY collection_name";
+    $sql ="SELECT * FROM tbl_collections WHERE delete_status=0 ORDER BY collection_name";
     $collections = mysqli_query($conn, $sql);
 ?>
 <!DOCTYPE html>
