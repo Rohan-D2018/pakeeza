@@ -5,7 +5,7 @@ include('header.php');
 $sql ="SELECT * FROM tbl_products WHERE delete_status=0";
 $products = mysqli_query($conn, $sql);
 
-$sql ="SELECT * FROM tbl_collections ORDER BY collection_name WHERE delete_status=0";
+$sql ="SELECT * FROM tbl_collections WHERE delete_status=0 ORDER BY collection_name";
 $collections = mysqli_query($conn, $sql);
 ?>
     <!-- ##### Right Side Cart Area ##### -->

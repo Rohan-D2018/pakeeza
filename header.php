@@ -1,8 +1,27 @@
 <?php
-    require 'admin/config.php';
+session_start();
 
-    $sql ="SELECT * FROM tbl_collections WHERE delete_status=0 ORDER BY collection_name";
-    $collections = mysqli_query($conn, $sql);
+require 'admin/config.php';
+
+// if (!isset($_SESSION['username']))
+//     {
+//       header('Location:index.php');
+//       exit();
+//     }
+// else
+//     {
+        $sql ="SELECT * FROM tbl_collections ORDER BY collection_name";
+        $collections = mysqli_query($conn, $sql);
+
+        $sql ="SELECT * FROM tbl_products where delete_status=0 and product_id in (SELECT product_id FROM tbl_cart where user_id='".$_SESSION['username']."' and cart_product_status=0)";
+        $products_cart = mysqli_query($conn, $sql);
+
+        $sql ="SELECT sum(price) as sum from tbl_products where delete_status=0 and product_id in (SELECT product_id FROM tbl_cart where user_id='".$_SESSION['username']."' and cart_product_status=0)";
+        $details_sum = mysqli_query($conn, $sql);
+
+        $sql ="SELECT count(cart_id) as count from tbl_cart where cart_product_status=0 and user_id='".$_SESSION['username']."'";
+        $details_count = mysqli_query($conn, $sql);
+    // }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -82,7 +101,7 @@
                                 <ul class="dropdown">
                                     <?php
                                         while($row = mysqli_fetch_array($collections)){
-                                            echo "<li><a href='#'>".$row['collection_name']."</a></li>";  
+                                            echo "<li><a href='collections.php?id=".$row["collection_id"]."'>".$row['collection_name']."</a></li>";  
                                         }
                                     ?>
                                     <!-- <li><a href="index.html">Noor</a></li>
@@ -123,7 +142,8 @@
                 </div>
                 <!-- Cart Area -->
                 <div class="cart-area">
-                    <a href="#" id="essenceCartBtn"><img src="img/core-img/bag.svg" alt=""> <span>3</span></a>
+	    	    <?php $row = mysqli_fetch_array($details_count); ?>
+                    <a href="#" id="essenceCartBtn"><img src="img/core-img/bag.svg" alt=""> <span><?php echo $row["count"]?></span></a>
                 </div>
             </div>
 
@@ -138,13 +158,14 @@
 
         <!-- Cart Button -->
         <div class="cart-button">
-            <a href="#" id="rightSideCart"><img src="img/core-img/bag.svg" alt=""> <span>3</span></a>
+            <a href="#" id="rightSideCart"><img src="img/core-img/bag.svg" alt=""> <span><?php echo $row["count"]?></span></a>
         </div>
 
         <div class="cart-content d-flex">
 
             <!-- Cart List Area -->
             <div class="cart-list">
+		<?php while($row = $products_cart->fetch_assoc()){ ?>
                 <!-- Single Cart Item -->
                 <div class="single-cart-item">
                     <a href="#" class="product-image">
@@ -152,57 +173,32 @@
                         <!-- Cart Item Desc -->
                         <div class="cart-item-desc">
                           <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
-                            <span class="badge">Mango</span>
-                            <h6>Button Through Strap Mini Dress</h6>
-                            <p class="size">Size: S</p>
-                            <p class="color">Color: Red</p>
-                            <p class="price">$45.00</p>
+                            <!--<span class="badge">Mango</span>-->
+                            <h6><?php echo $row["product_name"] ?></h6>
+                            <p class="size">Size:  <?php echo 's' ?></p>
+                            <p class="color">Color:  <?php echo 'red' ?></p>
+			    <?php $sql = "select count(cart_id) as count from tbl_cart where product_id=".$row["product_id"];
+			    	  $product_count = mysqli_query($conn, $sql);
+				  $row_prod_count = mysqli_fetch_array($product_count); ?>
+                            <p class="color">Count:  <?php echo $row_prod_count["count"] ?></p>
+                            <p class="price">Price:  ₹<?php echo $row["price"] ?></p>
                         </div>
                     </a>
                 </div>
-
-                <!-- Single Cart Item -->
-                <div class="single-cart-item">
-                    <a href="#" class="product-image">
-                        <img src="img/product-img/product-2.jpg" class="cart-thumb" alt="">
-                        <!-- Cart Item Desc -->
-                        <div class="cart-item-desc">
-                          <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
-                            <span class="badge">Mango</span>
-                            <h6>Button Through Strap Mini Dress</h6>
-                            <p class="size">Size: S</p>
-                            <p class="color">Color: Red</p>
-                            <p class="price">$45.00</p>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Single Cart Item -->
-                <div class="single-cart-item">
-                    <a href="#" class="product-image">
-                        <img src="img/product-img/product-3.jpg" class="cart-thumb" alt="">
-                        <!-- Cart Item Desc -->
-                        <div class="cart-item-desc">
-                          <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
-                            <span class="badge">Mango</span>
-                            <h6>Button Through Strap Mini Dress</h6>
-                            <p class="size">Size: S</p>
-                            <p class="color">Color: Red</p>
-                            <p class="price">$45.00</p>
-                        </div>
-                    </a>
-                </div>
+		<?php } ?>
             </div>
 
             <!-- Cart Summary -->
             <div class="cart-amount-summary">
-
+		
                 <h2>Summary</h2>
+		<?php $row = mysqli_fetch_array($details_sum); ?>
                 <ul class="summary-table">
-                    <li><span>subtotal:</span> <span>$274.00</span></li>
-                    <li><span>delivery:</span> <span>Free</span></li>
-                    <li><span>discount:</span> <span>-15%</span></li>
-                    <li><span>total:</span> <span>$232.00</span></li>
+                    <li><span>Subtotal:</span> <span>₹<?php echo $row["sum"]?></span></li>
+                    <li><span>Delivery:</span> <span>₹150</span></li>
+                    <li><span>CGST:</span> <span>9%</span></li>
+                    <li><span>SGST:</span> <span>9%</span></li>
+                    <li><span>Total:</span> <span>₹<?php echo $row["sum"]*1.18+150 ?></span></li>
                 </ul>
                 <div class="checkout-btn mt-100">
                     <a href="checkout.html" class="btn essence-btn">check out</a>
