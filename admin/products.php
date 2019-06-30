@@ -1,4 +1,4 @@
-<?php
+<?php 
 $page = 'product';
 include('header.php');
 ?>
@@ -27,13 +27,12 @@ include('header.php');
             <!-- <form action="admin_product.php" method="POST"> -->
                 <div class="row">
                     <b class="clearfix">Product Name:</b>
-                    <input type="text" class="form-control clearfix" name="product_name">
+                    <input type="text" class="form-control clearfix" name="product_name" required>
                 </div>
 
                 <div class="row">
                     <b class="clearfix">Product Description:</b>
-                    <textarea class="form-control clearfix" cols=10 rows=5 name="product_description">
-                    </textarea>
+                    <textarea class="form-control clearfix" cols=10 rows=5 name="product_description" required></textarea>
                 </div>
 
                 <div class="row">
@@ -58,28 +57,28 @@ include('header.php');
 
                 <div class="row">
                     <b class="clearfix">Product Price:</b>
-                    <input type="number" class="form-control clearfix" name="product_price" step=".01">
+                    <input type="number" class="form-control clearfix" name="product_price" step=".01" required>
                 </div>
 
                 <div class="row">    
                     <b class="clearfix">Product Discount:</b>
-                    <input type="number" class="form-control clearfix" name="discount" step=".01" value="0">
+                    <input type="number" class="form-control clearfix" name="discount" step=".01" value="0" required>
                 </div>    
                 
 
                 <div class="row">
                     <b class="clearfix">Product Type:</b>
-                    <input type="text" class="form-control clearfix" name="product_type">
+                    <input type="text" class="form-control clearfix" name="product_type" required>
                 </div>
 
                 <div class="row">
                     <b class="clearfix">Product Material:</b>
-                    <input type="text" class="form-control clearfix" name="material">
+                    <input type="text" class="form-control clearfix" name="material" required>
                 </div>
 
                <div class="row">
                     <b class="clearfix">Product Color:</b>
-                    <select class="browser-default custom-select" id="color_name" name="color_name">
+                    <select class="browser-default custom-select" id="color_name" name="color_name" required>
                       <option selected>Select color</option>
                       <?php
                          $sql = "SELECT DISTINCT(color_name) FROM tbl_product_color";
@@ -105,12 +104,12 @@ include('header.php');
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                 <div class="row" style="margin-left: 3%; margin-right: 3%">
                     <b class="clearfix">Product Code:</b>
-                    <input type="text" class="form-control clearfix" name="product_code">
+                    <input type="text" class="form-control clearfix" name="product_code" required>
                 </div>
 
                 <div class="row" style="margin-left: 3%; margin-right: 3%">
                     <b class="clearfix">Gender:</b>
-                    <select class="browser-default custom-select" id="gender" name="gender">
+                    <select class="browser-default custom-select" id="gender" name="gender" required>
                         <option selected value="male">Male</option> 
                         <option value="female">Female</option> 
                         <option value="kids">Kids</option> 
@@ -119,7 +118,7 @@ include('header.php');
 
                 <div class="row" style="margin-left: 3%; margin-right: 3%">
                     <b class="clearfix">Keywords:</b>
-                    <input type="text" class="form-control clearfix" name="product_keywords">
+                    <input type="text" class="form-control clearfix" name="product_keywords" required>
                 </div>
 
                 <div class="row"  style="margin-left: 3%; margin-right: 3%; margin-top: 2%">  

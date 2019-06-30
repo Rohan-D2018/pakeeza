@@ -114,6 +114,8 @@ function add_products()
         // Making the array indexes starts from 0
         $quantity_list = array_values($quantity_list);    
         print_r($quantity_list);
+
+        
         // insert records in product table
         $sql ="INSERT INTO tbl_products (product_name,product_type,price,product_code,material,discount,product_description,gender,product_keywords,collection_id) VALUES ('$product_name','$product_type','$product_price','$product_code','$product_material','$product_discount','$product_desp','$gender','$product_keywords','$collection_id')";
         

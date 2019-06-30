@@ -135,7 +135,7 @@ $collections = mysqli_query($conn, $sql);
                                             <li><a href="#">Sweaters &amp; Knits</a></li> -->
                                             <?php
                                                 while($row = mysqli_fetch_array($collections)){
-                                                    echo "<li><a href='#'>".$row['collection_name']."</a></li>";  
+                                                    echo "<li><a href='collections.php?id=".$row['collection_id']."'>".$row['collection_name']."</a></li>";  
                                                 }
                                             ?>
                                         </ul>

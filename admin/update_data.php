@@ -17,6 +17,35 @@ if(isset($_POST["btn_edit_products"]))
     $product_color =  $_POST['product_color2'];
     $product_keywords =  $_POST['product_keywords2'];
 
+
+    if(isset($_POST["size_list"])){
+        $size_list = $_POST["size_list"];
+    }
+    else{
+        $size_list = "";
+    }
+    if(isset($_POST["quantity_list"])){
+        $quantity_list = $_POST["quantity_list"];
+    }
+    else{
+        $quantity_list = "NA";
+    }
+
+    foreach($quantity_list as $key => $value)          
+        if(empty($value))
+        {
+            unset($quantity_list[$key]); 
+        }
+       
+    // Making the array indexes starts from 0
+    $quantity_list = array_values($quantity_list);    
+    // print_r($quantity_list);
+
+
+
+
+
+
     $sql ="UPDATE tbl_products SET product_name = '$product_name', product_type = '$product_type', price='$product_price' , product_description = '$product_description',material = '$product_material',gender = '$product_gender',product_code = '$product_code', discount = '$product_discount',product_keywords = '$product_keywords'  WHERE product_id = '$product_id'";
     $result = mysqli_query($conn,$sql);
 
@@ -78,6 +107,33 @@ if(isset($_POST["btn_edit_products"]))
                     }           
                 }
             }
+        }
+    }
+
+
+    // insert size array into product size mapping
+    if(!empty($_POST['size_list'])) 
+    {
+
+        
+        $sql_2 ="DELETE FROM tbl_product_size_mapping  WHERE product_id = '$product_id'";
+        $result_2 = mysqli_query($conn,$sql_2);
+
+
+        $sizes = $_POST['size_list'];
+        // $sizes= $size_list;
+        $quantity_counter = 0;
+        foreach ($sizes as $size)
+        {
+            $product_quantity = $quantity_list[$quantity_counter];
+            $sql = "SELECT DISTINCT(size_id) from tbl_product_size WHERE size = '$size'";
+            $result = mysqli_query($conn,$sql);
+            $row = mysqli_fetch_array($result);
+            $size_id = $row['size_id'];
+              
+            $sql ="INSERT INTO tbl_product_size_mapping (size_id,product_id,product_quantity) VALUES ($size_id,$product_id,$product_quantity)";
+            $result = mysqli_query($conn,$sql);
+            $quantity_counter += 1;
         }
     }
 

@@ -43,18 +43,16 @@ if(isset($_GET['id'])){
 
                 <div class="form-group">
                     <label for="product_name">Product Name</label>
-                    <input type='text' class='form-control ' name='product_name2' id='product_name2'>
+                    <input type='text' class='form-control ' name='product_name2' id='product_name2' required>
                 </div> 
 
-                
-
                 <div class="form-group">
-                    <label for="product_price"> Price</label>
-                    <input type="number" class="form-control" name="product_price2" id="product_price2" step=".01">
+                    <label for="product_price"> Price</label> 
+                    <input type="number" class="form-control" name="product_price2" id="product_price2" step=".01" required>
                 </div>
 
                 <label for="product_name">Select Collection</label>
-                <select class="browser-default custom-select form-group" id="product_collection2" name="product_collection2">
+                <select class="browser-default custom-select form-group" id="product_collection2" name="product_collection2" required>
                     <!-- <option selected>Select Collection</option> -->
                     <?php
                         $sql = "SELECT DISTINCT(collection_name) FROM tbl_collections";
@@ -72,7 +70,7 @@ if(isset($_GET['id'])){
                 </select>
 
                 <label for="product_name">Color</label>
-                <select class="browser-default custom-select form-group" id="product_color2" name="product_color2">
+                <select class="browser-default custom-select form-group" id="product_color2" name="product_color2" required>
                     <!-- <option selected>Select Collection</option> -->
                     <?php
                         $sql = "SELECT DISTINCT(color_name) FROM tbl_product_color";
@@ -91,30 +89,31 @@ if(isset($_GET['id'])){
 
                 <div class="form-group">
                     <label for="product_description">Description</label>
-                    <textarea class='form-control' name='product_description2' id='product_description2'></textarea>
+                    <!-- <textarea class='form-control' name='product_description2' id='product_description2' required></textarea> -->
+                    <textarea class="form-control" cols=10 rows=5 id='product_description2' name="product_description2" required></textarea>
                 </div> 
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+
                 <div class="form-group">
                     <label for="product_material">Material</label>
-                    <input type="text" class="form-control" name="product_material2" id="product_material2">
+                    <input type="text" class="form-control" name="product_material2" id="product_material2" required>
                 </div>
 
                 <div class="form-group">
                     <label for="product_discount">Discount</label>
-                    <input type="number" class="form-control" name="product_discount2" id="product_discount2" step=".01">
+                    <input type="number" class="form-control" name="product_discount2" id="product_discount2" step=".01" required>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                
+                <div class="form-group">
+                    <label for="product_type">Type</label>
+                    <input type='text' class='form-control ' name='product_type2' id='product_type2' required>
                 </div>
 
                 <div class="form-group">
                     <label for="product_code">Code</label>
-                    <input type="text" class="form-control" name="product_code2" id="product_code2">
+                    <input type="text" class="form-control" name="product_code2" id="product_code2" required>
                 </div>
-
-                <div class="form-group">
-                    <label for="product_type">Type</label>
-                    <input type='text' class='form-control ' name='product_type2' id='product_type2'>
-                </div>
-
                 <label for="Gender">Gender</label>
                 <select class="browser-default custom-select form-group" id="product_gender2" name="product_gender2">
                     <option value="male">Male</option> 
@@ -124,7 +123,38 @@ if(isset($_GET['id'])){
 
                 <div class="form-group">
                     <label for="Keywords">Keywords</label>
-                    <textarea class='form-control' name='product_keywords2' id='product_keywords2'></textarea>
+                    <textarea class='form-control' cols=10 rows=5 name='product_keywords2' id='product_keywords2' required></textarea>
+                </div>
+
+                <div class="row"  style="margin-left: 3%; margin-right: 3%; margin-top: 2%">  
+                    <table class="table" id="sizes" style="border: none;">
+                        <thead class="thead-dark" style=" padding-top:2px;padding-bottom:5px;">
+                            <tr>                   
+                                <th width="50%" style="text-align: left;">Size</th>   
+                                <th width="50%" style="text-align: left;">Quantity</th>   
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php 
+                                $sql = "SELECT size,size_id FROM tbl_product_size";
+                    
+                                $result = mysqli_query($conn, $sql);
+                                // print_r($result);
+                                while($row = mysqli_fetch_array($result))
+                                {     
+                                    // echo $row['group_name']; 
+                                    echo '<tr>
+                                                <td><input type="checkbox" name="size_list[]" id="'.$row['size'].'" value="'.$row['size'].'" style="float:left"><label style="font-weight: normal; float: left;margin-left:10px;">'.$row['size'].'</label></td>
+                                                <td><input type="number"  id="quantity_'.$row['size'].'" class="form-control clearfix" name="quantity_list[]"></td>
+                                          </tr>';   
+                                }
+                                if (!$result)
+                                {
+                                    die ('SQL Error: ' . mysqli_error($conn));
+                                }
+                            ?>   
+                        </tbody>
+                    </table>              
                 </div>
 
                 <button type="submit" value="submit" id="btn_edit_products" name="btn_edit_products" class="btn btn-primary" style="float: right;">Update</button>
@@ -136,6 +166,34 @@ if(isset($_GET['id'])){
 <?php
 include('footer.php');
 ?>
+
+<script type="text/javascript">
+    
+   $(document).ready(function(){
+    var product_id = '<?php echo $product_id; ?>';
+    $.ajax({
+        url:'fetch_size_quantity.php',
+        method:'POST',
+        data: {'product_id': product_id},
+        dataType:"json",
+        success: function(data){
+
+            console.log(data);
+            console.log(data[0]['size']);
+            console.log(data.length);
+            for (index = 0; index < data.length; index++) {
+                console.log(data[index]);
+                document.getElementById(data[index]['size']).checked = true;
+                $('#quantity_'+data[index]['size']).val(data[index]['product_quantity']);    
+            }
+        },
+
+    });
+});
+</script>
+
+
+
 
 <script type="text/javascript">
     function readURL(input) {
