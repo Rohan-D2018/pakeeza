@@ -27,7 +27,15 @@
 
         <!-- Single Product Description -->
         <div class="single_product_desc clearfix">
-            <span>mango</span>
+            <?php
+                $sql = "SELECT c.collection_name
+                        FROM tbl_collections c
+                        INNER JOIN tbl_products p ON (p.collection_id=c.collection_id)
+                        WHERE p.product_id=".$product_id;
+                $collection_name = mysqli_query($conn, $sql);
+                $row=mysqli_fetch_assoc($collection_name)
+            ?>
+            <span><?php echo $row['collection_name']; ?></span>
             <a href="cart.html">
                 <h2><?php echo $product_info['product_name']; ?></h2>
             </a>
@@ -40,19 +48,31 @@
                 <div class="select-box d-flex mt-50 mb-30">
                     <select name="select" id="productSize" class="mr-5">
                        <?php
-                        $sql          = "SELECT * FROM tbl_product_size_mapping WHERE product_id=".$product_id;
+                        $sql          = "SELECT ps.size
+                                        FROM tbl_product_size ps
+                                        INNER JOIN tbl_product_size_mapping psm ON (psm.size_id=ps.size_id)
+                                        INNER JOIN tbl_products p ON (p.product_id=psm.product_id)
+                                        WHERE p.product_id=".$product_id;
                         $product_info = mysqli_query($conn, $sql);
 
                         while($row=mysqli_fetch_assoc($product_info)){
-                            echo '<option value="value">Size: '.$row['size_id'].'</option>';
+                            echo '<option value="value">Size: '.$row['size'].'</option>';
                         }
                        ?>
                     </select>
                     <select name="select" id="productColor">
-                        <option value="value">Color: Black</option>
-                        <option value="value">Color: White</option>
-                        <option value="value">Color: Red</option>
-                        <option value="value">Color: Purple</option>
+                        <?php
+                        $sql          = "SELECT pc.color_name
+                                        FROM tbl_product_color pc
+                                        INNER JOIN tbl_product_color_mapping pcm ON (pcm.color_id=pc.color_id)
+                                        INNER JOIN tbl_products p ON (p.product_id=pcm.product_id)
+                                        WHERE p.product_id=".$product_id;
+                        $product_info = mysqli_query($conn, $sql);
+
+                        while($row=mysqli_fetch_assoc($product_info)){
+                            echo '<option value="value">Color: '.$row['color_name'].'</option>';
+                        }
+                       ?>
                     </select>
                 </div>
                 <!-- Cart & Favourite Box -->

@@ -305,7 +305,7 @@ $collections = mysqli_query($conn, $sql);
                                             <a href="<?php echo 'product_details.php?id='.$row["product_id"]; ?>">
                                                 <h6><?php echo $row["product_name"] ?></h6>
                                             </a>
-                                            <p class="product-price"><!-- <span class="old-price"></span> --><?php echo "$" . $row["price"]; ?></p>
+                                            <p class="product-price"><!-- <span class="old-price"></span> --><?php echo "₹" . $row["price"]; ?></p>
 
                                             <!-- Hover Content -->
                                             <div class="hover-content">
