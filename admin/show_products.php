@@ -321,7 +321,7 @@ include('header.php');
 <script>
     $(document).ready(function() {
     $('#products').DataTable({
-    "lengthMenu": [ 7,10, 25, 50, 75, 100 ], 
+    "lengthMenu": [50, 75, 100 ], 
     "paging":   true,
     } );
     var topRow = $('#products_wrapper').children().first();

@@ -162,4 +162,32 @@ if(isset($_POST["btn_edit_collections"]))
 }
 
 
+if(isset($_POST["btn_edit_size"]))
+{
+    $size_id = $_POST['size_id2'];
+    $size_name = $_POST['product_size2'];
+   
+       
+    $sql ="UPDATE tbl_product_size SET size = '$size_name' WHERE size_id = '$size_id'";
+    $result = mysqli_query($conn,$sql);
+    
+    header('Location:size.php');
+    exit();
+
+}
+
+if(isset($_POST["btn_edit_color"]))
+{
+    $color_id = $_POST['color_id2'];
+    $color_name = $_POST['product_color2'];
+    $color_hex_code = $_POST['product_color_hex2'];
+       
+    $sql ="UPDATE tbl_product_color SET color_name = '$color_name',product_color_hex = '$color_hex_code' WHERE color_id = '$color_id'";
+    $result = mysqli_query($conn,$sql);
+    
+    header('Location:color.php');
+    exit();
+
+}
+
 ?>

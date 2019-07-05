@@ -43,7 +43,7 @@
             <p class="product-desc"><?php echo $product_info['product_description']; ?></p>
 
             <!-- Form -->
-            <form class="cart-form clearfix" method="post">
+            <form class="cart-form clearfix" method="post" action="add_to_cart.php">
                 <!-- Select Box -->
                 <div class="select-box d-flex mt-50 mb-30">
                     <select name="select" id="productSize" class="mr-5">
@@ -78,11 +78,9 @@
                 <!-- Cart & Favourite Box -->
                 <div class="cart-fav-box d-flex align-items-center">
                     <!-- Cart -->
-                    <button type="submit" name="addtocart" value="5" class="btn essence-btn">Add to cart</button>
-                    <!-- Favourite -->
-                    <div class="product-favourite ml-4">
-                        <a href="#" class="favme fa fa-heart"></a>
-                    </div>
+                    <!-- <button type="submit" name="addtocart" value="5" class="btn essence-btn">Add to cart</button> -->
+                    <input type="hidden" id="product_id" name="product_id" value="<?php echo $product_id?>">
+                    <input type="submit" value="Add to Cart" class="btn essence-btn">
                 </div>
             </form>
         </div>

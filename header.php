@@ -2,26 +2,23 @@
 session_start();
 
 require 'admin/config.php';
+if (!isset($_SESSION['username'])){
+    $login = FALSE;
+}
+else{
+    $login = TRUE;
+}
+$sql ="SELECT * FROM tbl_collections ORDER BY collection_name";
+$collections = mysqli_query($conn, $sql);
 
-// if (!isset($_SESSION['username']))
-//     {
-//       header('Location:index.php');
-//       exit();
-//     }
-// else
-//     {
-        $sql ="SELECT * FROM tbl_collections ORDER BY collection_name";
-        $collections = mysqli_query($conn, $sql);
+$sql ="SELECT * FROM tbl_products where delete_status=0 and product_id in (SELECT product_id FROM tbl_cart where user_id='".$_SESSION['user_id']."' and cart_product_status=0)";
+$products_cart = mysqli_query($conn, $sql);
 
-        $sql ="SELECT * FROM tbl_products where delete_status=0 and product_id in (SELECT product_id FROM tbl_cart where user_id='".$_SESSION['username']."' and cart_product_status=0)";
-        $products_cart = mysqli_query($conn, $sql);
+$sql ="SELECT sum(price) as sum from tbl_products where delete_status=0 and product_id in (SELECT product_id FROM tbl_cart where user_id='".$_SESSION['user_id']."' and cart_product_status=0)";
+$details_sum = mysqli_query($conn, $sql);
 
-        $sql ="SELECT sum(price) as sum from tbl_products where delete_status=0 and product_id in (SELECT product_id FROM tbl_cart where user_id='".$_SESSION['username']."' and cart_product_status=0)";
-        $details_sum = mysqli_query($conn, $sql);
-
-        $sql ="SELECT count(cart_id) as count from tbl_cart where cart_product_status=0 and user_id='".$_SESSION['username']."'";
-        $details_count = mysqli_query($conn, $sql);
-    // }
+$sql ="SELECT count(cart_id) as count from tbl_cart where cart_product_status=0 and user_id='".$_SESSION['user_id']."'";
+$details_count = mysqli_query($conn, $sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -117,6 +114,11 @@ require 'admin/config.php';
                             </li>
                             <!-- <li><a href="blog.html">Blog</a></li> -->
                             <li><a href="contact.php">Contact</a></li>
+                            <?php if($login){ ?>
+                                <li style="float: right">
+                                    <a href="#"><b>Welcome, <?php echo $_SESSION['fullname']; ?></b></a>
+                                </li>
+                            <?php }?>
                         </ul>
                     </div>
                     <!-- Nav End -->
@@ -137,9 +139,14 @@ require 'admin/config.php';
                     <a href="#"><img src="img/core-img/heart.svg" alt=""></a>
                 </div> -->
                 <!-- User Login Info -->
-                <div class="user-login-info">
-                    <a href="#"><img src="img/core-img/user.svg" alt=""></a>
-                </div>
+                <?php if(!$login){ ?>
+                    <div class="user-login-info">
+                        <a href="login/login.php">Login</a>
+                    </div>
+                    <div class="user-login-info">
+                        <a href="login/register.php">Sign Up</a>
+                    </div>
+                <?php }?>
                 <!-- Cart Area -->
                 <div class="cart-area">
 	    	    <?php $row = mysqli_fetch_array($details_count); ?>
@@ -165,7 +172,11 @@ require 'admin/config.php';
 
             <!-- Cart List Area -->
             <div class="cart-list">
-		<?php while($row = $products_cart->fetch_assoc()){ ?>
+		<?php while($row = $products_cart->fetch_assoc()){ 
+            // $sql = "SELECT * FROM tbl_products WHERE product_id=".$row['product_id'];
+            // $product_info = mysqli_query($conn, $sql);
+            // $product_info = $product_info->fetch_assoc(); 
+        ?>
                 <!-- Single Cart Item -->
                 <div class="single-cart-item">
                     <a href="#" class="product-image">
@@ -177,9 +188,10 @@ require 'admin/config.php';
                             <h6><?php echo $row["product_name"] ?></h6>
                             <p class="size">Size:  <?php echo 's' ?></p>
                             <p class="color">Color:  <?php echo 'red' ?></p>
-			    <?php $sql = "select count(cart_id) as count from tbl_cart where product_id=".$row["product_id"];
-			    	  $product_count = mysqli_query($conn, $sql);
-				  $row_prod_count = mysqli_fetch_array($product_count); ?>
+                            <?php $sql = "select count(cart_id) as count from tbl_cart where product_id=".$row["product_id"];
+                                $product_count = mysqli_query($conn, $sql);
+                                $row_prod_count = mysqli_fetch_array($product_count); 
+                            ?>
                             <p class="color">Count:  <?php echo $row_prod_count["count"] ?></p>
                             <p class="price">Price:  ₹<?php echo $row["price"] ?></p>
                         </div>
@@ -190,9 +202,8 @@ require 'admin/config.php';
 
             <!-- Cart Summary -->
             <div class="cart-amount-summary">
-		
                 <h2>Summary</h2>
-		<?php $row = mysqli_fetch_array($details_sum); ?>
+		        <?php $row = mysqli_fetch_array($details_sum); ?>
                 <ul class="summary-table">
                     <li><span>Subtotal:</span> <span>₹<?php echo $row["sum"]?></span></li>
                     <li><span>Delivery:</span> <span>₹150</span></li>

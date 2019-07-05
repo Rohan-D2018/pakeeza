@@ -24,5 +24,24 @@ if(isset($_POST["collection_id"]))
 	$row = mysqli_fetch_array($result);
 	echo json_encode($row);
 }
+
+
+if(isset($_POST["size_id"]))
+{
+	$sql ="SELECT size_id,size FROM tbl_product_size WHERE size_id = '".$_POST["size_id"]."'";
+	$result = mysqli_query($conn,$sql);
+	$row = mysqli_fetch_array($result);
+	echo json_encode($row);
+}
+
+
+
+if(isset($_POST["color_id"]))
+{
+	$sql ="SELECT color_id,color_name,product_color_hex FROM tbl_product_color WHERE color_id = '".$_POST["color_id"]."'";
+	$result = mysqli_query($conn,$sql);
+	$row = mysqli_fetch_array($result);
+	echo json_encode($row);
+}
 ?>
 

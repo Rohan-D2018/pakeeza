@@ -28,7 +28,7 @@ require 'config.php';
                     <thead class="thead-dark" style="background-color: #e8eaf6; padding-top:2px;padding-bottom:5px;">
                         <tr>                   
                             <th width="30%" style="text-align: left;">Size</th>
-                            
+                             <th width="15%" style="text-align: left;"></th>
                             <th width="15%" style="text-align: left;"></th>
                         </tr>
                     </thead>
@@ -50,6 +50,7 @@ require 'config.php';
                                 echo '<tr>
                                     <td width="30%" style="text-align: left;">'.$row['size'].'</td>
                                 
+                                    <td width="15%" style="text-align: right;"><button type="button" name="edit"  id="'.$row['size_id'].'" class="btn btn-primary edit_data"><i class="fa fa-pencil"></td>
                                     <td width="15%" style="text-align: right;"><a href="javascript:delete_id('.$row['size_id'].')"><button type="button" class="btn btn-danger fa fa-trash"></button></a></td>
                                 </tr>';
                             }
@@ -60,6 +61,57 @@ require 'config.php';
         </div>
     </form>    
 </div>
+
+
+<!-- ====================================Data modal to edit the data============================================= -->
+
+<div class="modal fade" id="add_data_Modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+      
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Edit Size </h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+        
+        <!-- Modal body -->
+            <div class="modal-body">
+                <form method="post" action="update_data.php">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-3">
+                            <div class="form-group">
+                              <label for="colection_name">Collection Id</label>
+                             <input type='text' class='form-control ' name='size_id2' id='size_id2' readonly="true">
+                            </div>  
+                        </div>
+
+                        <div class="col-md-3 col-sm-3">
+                            <div class="form-group">
+                              <label for="product_size">Size</label>
+                             <input type='text' class='form-control ' name='product_size2' id='product_size2'>
+                            </div>  
+                        </div>
+                    
+                      
+                        <div  style="float: right;">
+                            <button type="submit" value="submit" id="btn_edit_size" name="btn_edit_size" class="btn btn-primary">Update</button>
+                        </div>
+                    </div>     
+                </form>
+            </div>
+        
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <!-- <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button> -->
+            </div> 
+        </div>
+    </div>
+</div>
+
+<!-- =========================edit data modal ends here========================= -->
+
+
 
 <script>
     function delete_id(id)
@@ -74,7 +126,7 @@ require 'config.php';
 <script>
     $(document).ready(function() {
     $('#sizes').DataTable({
-    "lengthMenu": [ 7,10, 25, 50, 75, 100 ], 
+    "lengthMenu": [50, 75, 100 ], 
     "paging":   true,
     } );
     var topRow = $('#sizes_wrapper').children().first();
@@ -89,6 +141,28 @@ require 'config.php';
 
 </script>
 
+<script type="text/javascript">
+$(document).on('click','.edit_data',function(){
+
+    var size_id = $(this).attr("id");
+
+     $.ajax({
+            url:'fetch.php',
+            method:'POST',
+            data: {'size_id':size_id},
+            dataType:"json",
+            success: function(data){
+                console.log(data);
+                $('#size_id2').val(data.size_id);
+                $('#product_size2').val(data.size);
+                $('#btn_edit_size').val("Update");
+                $('#add_data_Modal').modal('show');
+          },
+
+      });
+
+  });
+</script>
 <?php
 include('footer.php');
 ?>

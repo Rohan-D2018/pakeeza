@@ -174,7 +174,7 @@ require 'config.php';
 <script>
     $(document).ready(function() {
     $('#collections').DataTable({
-    "lengthMenu": [ 7,10, 25, 50, 75, 100 ], 
+    "lengthMenu": [50, 75, 100 ], 
     "paging":   true,
     } );
     var topRow = $('#collections_wrapper').children().first();

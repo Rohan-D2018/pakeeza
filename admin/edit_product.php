@@ -34,6 +34,8 @@ if(isset($_GET['id'])){
                 ?>
                 </div>
                 <input type="file" name= "files[]" id="profile-img" style="margin-top: 3%" multiple>
+
+                 <button type="button" value="button" onclick="location.href='show_products.php';" class="btn btn-danger" style="float: right;">Back</button>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                 <div class="form-group">

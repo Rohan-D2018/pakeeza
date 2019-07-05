@@ -31,6 +31,7 @@ require 'config.php';
                             <th width="30%" style="text-align: left;">Color Name</th>
                             <th width="30%" style="text-align: left;">Color Hex code</th>
                             <th width="15%" style="text-align: left;"></th>
+                            <th width="15%" style="text-align: left;"></th>
                         </tr>
                     </thead>
                     <tbody >
@@ -51,6 +52,7 @@ require 'config.php';
                                 echo '<tr>
                                     <td width="30%" style="text-align: left;">'.$row['color_name'].'</td>
                                     <td width="30%" style="text-align: left;">'.$row['product_color_hex'].'</td>
+                                    <td width="15%" style="text-align: right;"><button type="button" name="edit"  id="'.$row['color_id'].'" class="btn btn-primary edit_data"><i class="fa fa-pencil"></td>
                                     <td width="15%" style="text-align: right;"><a href="javascript:delete_id('.$row['color_id'].')"><button type="button" class="btn btn-danger fa fa-trash"></button></a></td>
                                 </tr>';
                             }
@@ -61,6 +63,61 @@ require 'config.php';
         </div>
     </form>    
 </div>
+
+<!-- ====================================Data modal to edit the data============================================= -->
+
+<div class="modal fade" id="add_data_Modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+      
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Edit Size </h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+        
+        <!-- Modal body -->
+            <div class="modal-body">
+                <form method="post" action="update_data.php">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-3">
+                            <div class="form-group">
+                              <label for="color_id">Color Id</label>
+                             <input type='text' class='form-control ' name='color_id2' id='color_id2' readonly="true">
+                            </div>  
+                        </div>
+
+                        <div class="col-md-3 col-sm-3">
+                            <div class="form-group">
+                              <label for="product_color2">Color</label>
+                             <input type='text' class='form-control ' name='product_color2' id='product_color2'>
+                            </div>  
+                        </div>
+
+                        <div class="col-md-3 col-sm-3">
+                            <div class="form-group">
+                              <label for="product_color_hex">Color Hex Code</label>
+                             <input type='text' class='form-control ' name='product_color_hex2' id='product_color_hex2'>
+                            </div>  
+                        </div>
+                    
+                      
+                        <div  style="float: right;">
+                            <button type="submit" value="submit" id="btn_edit_color" name="btn_edit_color" class="btn btn-primary">Update</button>
+                        </div>
+                    </div>     
+                </form>
+            </div>
+        
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <!-- <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button> -->
+            </div> 
+        </div>
+    </div>
+</div>
+
+<!-- =========================edit data modal ends here========================= -->
 
 <script>
     function delete_id(id)
@@ -75,7 +132,7 @@ require 'config.php';
 <script>
     $(document).ready(function() {
     $('#colors').DataTable({
-    "lengthMenu": [ 7,10, 25, 50, 75, 100 ], 
+    "lengthMenu": [50, 75, 100 ], 
     "paging":   true,
     } );
     var topRow = $('#colors_wrapper').children().first();
@@ -90,6 +147,29 @@ require 'config.php';
 
 </script>
 
+<script type="text/javascript">
+$(document).on('click','.edit_data',function(){
+
+    var color_id = $(this).attr("id");
+
+     $.ajax({
+            url:'fetch.php',
+            method:'POST',
+            data: {'color_id':color_id},
+            dataType:"json",
+            success: function(data){
+                console.log(data);
+                $('#color_id2').val(data.color_id);
+                $('#product_color2').val(data.color_name);
+                $('#product_color_hex2').val(data.product_color_hex);
+                $('#btn_edit_color').val("Update");
+                $('#add_data_Modal').modal('show');
+          },
+
+      });
+
+  });
+</script>
 <?php
 include('footer.php');
 ?>
