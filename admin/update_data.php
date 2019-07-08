@@ -41,11 +41,6 @@ if(isset($_POST["btn_edit_products"]))
     $quantity_list = array_values($quantity_list);    
     // print_r($quantity_list);
 
-
-
-
-
-
     $sql ="UPDATE tbl_products SET product_name = '$product_name', product_type = '$product_type', price='$product_price' , product_description = '$product_description',material = '$product_material',gender = '$product_gender',product_code = '$product_code', discount = '$product_discount',product_keywords = '$product_keywords'  WHERE product_id = '$product_id'";
     $result = mysqli_query($conn,$sql);
 
@@ -107,6 +102,14 @@ if(isset($_POST["btn_edit_products"]))
                     }           
                 }
             }
+        }
+    }
+    else if($_POST['image-gallery']){
+        $sql_5 ="DELETE FROM tbl_pictures WHERE product_id = '$product_id'";
+        $result = mysqli_query($conn, $sql_5);
+        foreach($_POST['image-gallery'] as $value){
+            $sql = "INSERT INTO tbl_pictures (product_id, picture_url) VALUES ('$product_id', '$value')";
+            $result = mysqli_query($conn, $sql);
         }
     }
 

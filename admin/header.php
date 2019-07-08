@@ -33,9 +33,9 @@ if (!isset($_SESSION['username']))
 
     <!-- <script src="js/jquery/jquery-2.2.4.min.js"></script> -->
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
     <script src="js/ug-theme-compact.js"></script>
-    <!-- <script type="text/javascript"  src="js/datatable.js"></script> -->
     <script  type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">

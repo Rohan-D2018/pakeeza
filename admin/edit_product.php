@@ -25,11 +25,14 @@ if(isset($_GET['id'])){
     <form method="post" action="update_data.php" enctype="multipart/form-data">
         <div class="row">
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" id="gallery-wrapper">
-                <div id="gallery"  style="display:none;">
+                <div id="draggable" class="row">
                 <?php 
                     while($row = mysqli_fetch_array($product_images)){ 
                         $filename = $row['picture_url'];
-                        echo "<img src='uploads/".$filename."' data-image='uploads/".$filename."'>";
+                        echo "<div class='col-lg-5 col-md-5 col-sm-5 col-xs-5'>";
+                        echo "<img id='image-gallery' name='image-gallery' class='img-fluid' src='uploads/".$filename."' data-image='uploads/".$filename."'>";
+                        echo '<input type="hidden" name="image-gallery[]" value="'.$filename.'"/>';
+                        echo "</div>";
                     }
                 ?>
                 </div>
@@ -257,4 +260,18 @@ $(document).ready(function(){
 
       });
 });
+</script>
+
+<script>
+$(function() {
+    $("#draggable").sortable();
+    $("#draggable").disableSelection();
+});
+
+$(document).ready(function(){
+    $("img").each(function() {
+        console.log($(this).attr("src"));
+    });
+});
+
 </script>
