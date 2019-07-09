@@ -9,7 +9,7 @@ include('header.php');
     <form action="admin_product.php" method="POST" enctype="multipart/form-data">
         <div class="row text-center">
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <div id="gallery"  style="display:none;">
+                <div id="gallery" class="row">
                     <!-- <img id="default" src="http://www.stleos.uq.edu.au/wp-content/uploads/2016/08/image-placeholder-350x350.png" data-image="http://www.stleos.uq.edu.au/wp-content/uploads/2016/08/image-placeholder-350x350.png"> -->
                 </div>
                 <div class="row clearfix" style="margin-left: 3%;margin-right: 1%;">
@@ -159,26 +159,17 @@ include('header.php');
 
 <script type="text/javascript">
     function readURL(input) {
-        // document.getElementById(removeImage1).style.display = 'block';
-        // if (input.files && input.files[0]) {
-        //     var reader = new FileReader();
-            
-        //     reader.onload = function (e) {
-        //         $('#profile-img-tag').attr('src', e.target.result);
-        //     }
-        //     reader.readAsDataURL(input.files[0]);
-        // }
         var total_file = document.getElementById("profile-img").files.length;
         // alert(total_file);
         for(var i = 0;i < total_file; i++)
         {
-            $('#gallery').append("<img src='"+URL.createObjectURL(event.target.files[i])+"' data-image='"+URL.createObjectURL(event.target.files[i])+"'>");
+            $('#gallery').append("<div class='col-lg-5 col-md-5 col-sm-5 col-xs-5'><img src='"+URL.createObjectURL(event.target.files[i])+"' class='img-fluid'></div>");
         }
         $('#default').remove();
-        $("#gallery").unitegallery({
-            gallery_width:1000,							//gallery width		
-            gallery_height:1364,
-        });
+        // $("#gallery").unitegallery({
+        //     gallery_width:1000,							//gallery width		
+        //     gallery_height:1364,
+        // });
     }
     $("#profile-img").change(function(){
         readURL(this);
@@ -190,6 +181,11 @@ include('header.php');
         $("#profile-img-tag").attr("src", "");
         // $('.preview1').removeClass('it');
         // $('.btn-rmv1').removeClass('rmv');
+    });
+
+    $(function() {
+        $("#gallery").sortable();
+        $("#gallery").disableSelection();
     });
 </script>
 
