@@ -173,17 +173,17 @@ $details_count = mysqli_query($conn, $sql);
             <!-- Cart List Area -->
             <div class="cart-list">
 		<?php while($row = $products_cart->fetch_assoc()){ 
-            // $sql = "SELECT * FROM tbl_products WHERE product_id=".$row['product_id'];
-            // $product_info = mysqli_query($conn, $sql);
-            // $product_info = $product_info->fetch_assoc(); 
+            $sql = "SELECT * FROM tbl_pictures WHERE product_id=".$row['product_id']." LIMIT 1";
+            $product_img = mysqli_query($conn, $sql);
+            $product_img = $product_img->fetch_assoc(); 
         ?>
                 <!-- Single Cart Item -->
                 <div class="single-cart-item">
                     <a href="#" class="product-image">
-                        <img src="img/product-img/product-1.jpg" class="cart-thumb" alt="">
+                        <img src="<?php echo 'admin/uploads/'.$product_img['picture_url']; ?>" class="cart-thumb" alt="">
                         <!-- Cart Item Desc -->
                         <div class="cart-item-desc">
-                          <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
+                            <span class="product-remove" id="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
                             <!--<span class="badge">Mango</span>-->
                             <h6><?php echo $row["product_name"] ?></h6>
                             <p class="size">Size:  <?php echo 's' ?></p>

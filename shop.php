@@ -37,61 +37,16 @@ $collections = mysqli_query($conn, $sql);
                             <div class="catagories-menu">
                                 <ul id="menu-content2" class="menu-content collapse show">
                                     <!-- Single Item -->
-                                    <li data-toggle="collapse" data-target="#clothing">
-                                        <a href="#">Collections</a>
-                                        <ul class="sub-menu collapse show" id="clothing">
-                                            <!-- <li><a href="#">All</a></li>
-                                            <li><a href="#">Bodysuits</a></li>
-                                            <li><a href="#">Dresses</a></li>
-                                            <li><a href="#">Hoodies &amp; Sweats</a></li>
-                                            <li><a href="#">Jackets &amp; Coats</a></li>
-                                            <li><a href="#">Jeans</a></li>
-                                            <li><a href="#">Pants &amp; Leggings</a></li>
-                                            <li><a href="#">Rompers &amp; Jumpsuits</a></li>
-                                            <li><a href="#">Shirts &amp; Blouses</a></li>
-                                            <li><a href="#">Shirts</a></li>
-                                            <li><a href="#">Sweaters &amp; Knits</a></li> -->
+                                    <li>
+                                        <a href="#" data-toggle="collapse" data-target="#clothing">Collections</a>
+                                        <ul class="sub-menu  show" id="clothing">
                                             <?php
                                                 while($row = mysqli_fetch_array($collections)){
-                                                    echo "<li><a href='collections.php?id=".$row['collection_id']."'>".$row['collection_name']."</a></li>";  
+                                                    echo "<li><a href='#' id='".$row['collection_id']."' class='collection_filter'>".$row['collection_name']."</a></li>";  
                                                 }
                                             ?>
                                         </ul>
                                     </li>
-                                    <!-- Single Item -->
-                                    <!-- <li data-toggle="collapse" data-target="#shoes" class="collapsed">
-                                        <a href="#">shoes</a>
-                                        <ul class="sub-menu collapse" id="shoes">
-                                            <li><a href="#">All</a></li>
-                                            <li><a href="#">Bodysuits</a></li>
-                                            <li><a href="#">Dresses</a></li>
-                                            <li><a href="#">Hoodies &amp; Sweats</a></li>
-                                            <li><a href="#">Jackets &amp; Coats</a></li>
-                                            <li><a href="#">Jeans</a></li>
-                                            <li><a href="#">Pants &amp; Leggings</a></li>
-                                            <li><a href="#">Rompers &amp; Jumpsuits</a></li>
-                                            <li><a href="#">Shirts &amp; Blouses</a></li>
-                                            <li><a href="#">Shirts</a></li>
-                                            <li><a href="#">Sweaters &amp; Knits</a></li>
-                                        </ul>
-                                    </li> -->
-                                    <!-- Single Item -->
-                                    <!-- <li data-toggle="collapse" data-target="#accessories" class="collapsed">
-                                        <a href="#">accessories</a>
-                                        <ul class="sub-menu collapse" id="accessories">
-                                            <li><a href="#">All</a></li>
-                                            <li><a href="#">Bodysuits</a></li>
-                                            <li><a href="#">Dresses</a></li>
-                                            <li><a href="#">Hoodies &amp; Sweats</a></li>
-                                            <li><a href="#">Jackets &amp; Coats</a></li>
-                                            <li><a href="#">Jeans</a></li>
-                                            <li><a href="#">Pants &amp; Leggings</a></li>
-                                            <li><a href="#">Rompers &amp; Jumpsuits</a></li>
-                                            <li><a href="#">Shirts &amp; Blouses</a></li>
-                                            <li><a href="#">Shirts</a></li>
-                                            <li><a href="#">Sweaters &amp; Knits</a></li>
-                                        </ul>
-                                    </li> -->
                                 </ul>
                             </div>
                         </div>
@@ -104,14 +59,9 @@ $collections = mysqli_query($conn, $sql);
                             <p class="widget-title2 mb-30">Price</p>
 
                             <div class="widget-desc">
-                                <div class="slider-range">
-                                    <div data-min="49" data-max="360" data-unit="$" class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-value-min="49" data-value-max="360" data-label-result="Range:">
-                                        <div class="ui-slider-range ui-widget-header ui-corner-all"></div>
-                                        <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
-                                        <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
-                                    </div>
-                                    <div class="range-price">Range: $49.00 - $360.00</div>
-                                </div>
+                                <div id="slider-range"></div>
+                                <label for="amount" style="margin-top: 10%">Price range:</label>
+                                <input type="text" id="amount" readonly style="border:0;">
                             </div>
                         </div>
 
@@ -121,7 +71,14 @@ $collections = mysqli_query($conn, $sql);
                             <p class="widget-title2 mb-30">Color</p>
                             <div class="widget-desc">
                                 <ul class="d-flex">
-                                    <li><a href="#" class="color1"></a></li>
+                                    <?php
+                                        $sql ="SELECT * FROM tbl_product_color";
+                                        $colors = mysqli_query($conn, $sql);
+                                        while($row = mysqli_fetch_array($colors)){
+                                            echo "<li><a class='color_filter' href='#' id='".$row['product_color_hex']."' style='background-color:".$row['product_color_hex'].";'></a></li>";  
+                                        }
+                                    ?>
+                                    <!-- <li><a href="#" class="color1"></a></li>
                                     <li><a href="#" class="color2"></a></li>
                                     <li><a href="#" class="color3"></a></li>
                                     <li><a href="#" class="color4"></a></li>
@@ -130,7 +87,7 @@ $collections = mysqli_query($conn, $sql);
                                     <li><a href="#" class="color7"></a></li>
                                     <li><a href="#" class="color8"></a></li>
                                     <li><a href="#" class="color9"></a></li>
-                                    <li><a href="#" class="color10"></a></li>
+                                    <li><a href="#" class="color10"></a></li> -->
                                 </ul>
                             </div>
                         </div>
@@ -158,7 +115,7 @@ $collections = mysqli_query($conn, $sql);
                                 <div class="product-topbar d-flex align-items-center justify-content-between">
                                     <!-- Total Products -->
                                     <div class="total-products">
-                                        <p><span><?php echo mysqli_num_rows($products); ?></span> products found</p>
+                                        <p><span id="product_count"><?php echo mysqli_num_rows($products); ?></span> products found</p>
                                     </div>
                                     <!-- Sorting -->
                                     <!-- <div class="product-sorting d-flex">
@@ -177,7 +134,7 @@ $collections = mysqli_query($conn, $sql);
                             </div>
                         </div>
 
-                        <div class="row">
+                        <div class="row" id="products">
                             <?php while($row = $products->fetch_assoc()){ ?>
                                 <!-- Single Product -->
                                 <div class="col-12 col-sm-6 col-lg-4">
@@ -258,3 +215,80 @@ $collections = mysqli_query($conn, $sql);
 <?php
     include('footer.php');
 ?>
+
+<script>
+    $(".collection_filter").click(function(){
+        var id = $(this).attr("id");
+        action = 'fetch_data';
+        $.ajax({
+            url:"fetch_data.php",
+            method:"POST",
+            data:{
+                action:action,
+                collection_id:id
+            },
+            success: function(data){
+                data = JSON.parse(data);
+                $("#products").html(data[0]);
+                $("#product_count").html(data[1]);
+            }
+        });
+    });
+
+    // $(".color_filter").click(function(){
+    //     var id = $(this).attr("id");
+    //     action = 'fetch_data';
+    //     $.ajax({
+    //         url:"fetch_data.php",
+    //         method:"POST",
+    //         data:{
+    //             action:action,
+    //             color_hex:id
+    //         },
+    //         success: function(data){
+    //             data = JSON.parse(data);
+    //             $("#products").html(data[0]);
+    //             $("#product_count").html(data[1]);
+    //         }
+    //     });
+    // });
+</script>
+
+<script>
+  $( function() {
+    $( "#slider-range" ).slider({
+      range: true,
+      min: 0,
+      max: 10000,
+      values: [ 0, 10000 ],
+      slide: function( event, ui ) {
+        $( "#amount" ).val( "Rs. " + ui.values[ 0 ] + " - Rs. " + ui.values[ 1 ] );
+      }
+    });
+    $( "#amount" ).val( "Rs. " + $( "#slider-range" ).slider( "values", 0 ) +
+      " - Rs. " + $( "#slider-range" ).slider( "values", 1 ) );
+  } );
+
+//   $("#slider-range").change(function() {
+//         alert($("#slider-range").slider('values',0,$(this).val()));
+//     });
+
+    $( "#slider-range" ).on( "slidechange", function( event, ui ) {
+        values = ui.values;
+
+        action = 'fetch_data';
+        $.ajax({
+            url:"fetch_data.php",
+            method:"POST",
+            data:{
+                action:action,
+                range:values
+            },
+            success: function(data){
+                data = JSON.parse(data);
+                $("#products").html(data[0]);
+                $("#product_count").html(data[1]);
+            }
+        });
+    } );
+  </script>
