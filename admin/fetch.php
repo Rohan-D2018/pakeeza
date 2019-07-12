@@ -43,5 +43,22 @@ if(isset($_POST["color_id"]))
 	$row = mysqli_fetch_array($result);
 	echo json_encode($row);
 }
+
+
+
+if(isset($_POST["order_id"]))
+{
+	$order_id = $_POST["order_id"];
+	$sql ="SELECT tbl_order_details.order_id, tbl_order_details.price, tbl_order_details.size,tbl_order_details.color, tbl_order_details.quantity, tbl_products.product_name,tbl_users_credentials.user_email
+            FROM tbl_order_details
+            INNER JOIN tbl_products ON tbl_order_details.product_id = tbl_products.product_id
+            INNER JOIN tbl_orders ON tbl_order_details.order_id = tbl_orders.order_id
+            INNER JOIN tbl_users_credentials ON tbl_orders.user_id = tbl_users_credentials.user_id
+		    WHERE tbl_orders.order_id = '".$order_id."'";
+
+	$result = mysqli_query($conn,$sql);
+	$row = mysqli_fetch_array($result);
+	echo json_encode($row);
+}
 ?>
 

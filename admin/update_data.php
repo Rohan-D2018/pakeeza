@@ -15,7 +15,17 @@ if(isset($_POST["btn_edit_products"]))
     $product_gender =  $_POST['product_gender2'];
     $product_code =  $_POST['product_code2'];
     $product_color =  $_POST['product_color2'];
-    $product_keywords =  $_POST['product_keywords2'];
+    // $product_keywords =  $_POST['product_keywords'];
+
+
+    $product_keywords = '';
+    foreach($_POST["product_keywords"] as $row)
+    {
+     $product_keywords .= $row . ', ';
+    }
+    $product_keywords = substr($product_keywords, 0, -2);
+    // echo "\nThe selected data\n";
+    echo ($product_keywords);
 
 
     if(isset($_POST["size_list"])){
@@ -40,6 +50,11 @@ if(isset($_POST["btn_edit_products"]))
     // Making the array indexes starts from 0
     $quantity_list = array_values($quantity_list);    
     // print_r($quantity_list);
+
+
+
+
+
 
     $sql ="UPDATE tbl_products SET product_name = '$product_name', product_type = '$product_type', price='$product_price' , product_description = '$product_description',material = '$product_material',gender = '$product_gender',product_code = '$product_code', discount = '$product_discount',product_keywords = '$product_keywords'  WHERE product_id = '$product_id'";
     $result = mysqli_query($conn,$sql);
@@ -102,14 +117,6 @@ if(isset($_POST["btn_edit_products"]))
                     }           
                 }
             }
-        }
-    }
-    else if($_POST['image-gallery']){
-        $sql_5 ="DELETE FROM tbl_pictures WHERE product_id = '$product_id'";
-        $result = mysqli_query($conn, $sql_5);
-        foreach($_POST['image-gallery'] as $value){
-            $sql = "INSERT INTO tbl_pictures (product_id, picture_url) VALUES ('$product_id', '$value')";
-            $result = mysqli_query($conn, $sql);
         }
     }
 
@@ -193,4 +200,22 @@ if(isset($_POST["btn_edit_color"]))
 
 }
 
+
+
+if(isset($_POST["btn_edit_orders"]))
+{
+    $order_id = $_POST['order_id2'];
+    
+    $product_price =  $_POST['product_price2'];
+    $product_quantity =  $_POST['product_quantity2'];
+    $product_color =  $_POST['product_color2'];
+    $product_size =  $_POST['product_size2'];
+   
+    $sql ="UPDATE tbl_order_details SET price = '$product_price', quantity = '$product_quantity', size='$product_size',color ='$product_color' WHERE order_id = '$order_id'";
+    $result = mysqli_query($conn,$sql);
+    
+    header('Location: edit_orders.php?id='.$order_id);
+    exit();
+
+}
 ?>
