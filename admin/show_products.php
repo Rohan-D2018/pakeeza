@@ -6,6 +6,16 @@ include('header.php');
 
 
 <div class="container-fluid">
+
+    <ul class="nav nav-tabs nav-justified">
+        <li class="nav-item">
+            <a class="nav-link active" href="show_products.php">Show Products</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="products.php">Add Product</a>
+        </li>
+    </ul>
+
 	<div class="row" style="margin-top: 1%;">
     </div>
     <h3 style="color: #00529b;">All Products </h3> 

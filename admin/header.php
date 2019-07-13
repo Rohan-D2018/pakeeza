@@ -33,9 +33,9 @@ if (!isset($_SESSION['username']))
 
     <!-- <script src="js/jquery/jquery-2.2.4.min.js"></script> -->
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
     <script src="js/ug-theme-compact.js"></script>
+    <!-- <script type="text/javascript"  src="js/datatable.js"></script> -->
     <script  type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
@@ -53,8 +53,11 @@ if (!isset($_SESSION['username']))
 
       <div class="collapse navbar-collapse" id="navbarsExample03">
         <ul class="navbar-nav mr-auto">
+          <li class="nav-item  <?php if ($page == 'dashboard'){ echo "active"; } ?>">
+            <a class="nav-link" href="dashboard.php">Dashboard</a>
+          </li>
           <li class="nav-item  <?php if ($page == 'product'){ echo "active"; } ?>">
-            <a class="nav-link" href="products.php">Product <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="show_products.php">Product <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item  <?php if ($page == 'collection'){ echo "active"; } ?>">
             <a class="nav-link" href="collection.php">Collection</a>

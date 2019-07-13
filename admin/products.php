@@ -4,6 +4,14 @@ include('header.php');
 ?>
 
 <div class="container-fluid">
+    <ul class="nav nav-tabs nav-justified">
+        <li class="nav-item">
+            <a class="nav-link" href="show_products.php">Show Products</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="products.php">Add Product</a>
+        </li>
+    </ul>
     <div class="row" style="margin-top: 1%;">
     </div>
     <form action="admin_product.php" method="POST" enctype="multipart/form-data">
