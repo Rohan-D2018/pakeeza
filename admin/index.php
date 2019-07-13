@@ -27,14 +27,14 @@
 			{
 			  $_SESSION['username'] = $user_name[0]; 
 			  $_SESSION['access_role'] = $access_roles;
-			  header('Location: products.php');  
+			  header('Location: dashboard.php');  
 			} 
 	
 			elseif (in_array("system_user", $access_roles, TRUE))
 			{
 			  $_SESSION['username'] = $user_name[0]; 
 			  $_SESSION['access_role'] = $access_roles;         
-			  header('Location: products.php');  
+			  header('Location: dashboard.php');  
 			} 
 	
 		}  
