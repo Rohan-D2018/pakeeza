@@ -360,9 +360,9 @@ img {
     position: relative;
     z-index: 1;
     -webkit-box-flex: 0;
-    -ms-flex: 0 0 90px;
-    flex: 0 0 90px;
-    width: 90px;
+    -ms-flex: 0 0 100px;
+    flex: 0 0 100px;
+    width: 100px;
     display: block;
     text-align: center;
     border-left: 1px solid #ebebeb;
@@ -373,9 +373,9 @@ img {
       .header_area .user-login-info a,
       .header_area .cart-area a {
         -webkit-box-flex: 0;
-        -ms-flex: 0 0 50px;
-        flex: 0 0 50px;
-        width: 50px;
+        -ms-flex: 0 0 70px;
+        flex: 0 0 70px;
+        width: 70px;
         line-height: 40px; } }
     .header_area .favourite-area a img,
     .header_area .user-login-info a img,
