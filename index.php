@@ -1,19 +1,11 @@
 <?php
     include('header.php');
 
-    // $sql = "SELECT collection_id,collection_name,collection_description FROM tbl_collections WHERE delete_status = 0";
-    
-    // $result = mysqli_query($conn, $sql);
-    
-    // if (!$result) 
-    // {
-    //     die ('SQL Error: ' . mysqli_error($conn));
-    // }
-    
-    // while ($row = mysqli_fetch_array($result))
-    // { 
-    //   print_r($row);  
-    // }
+    $sql = "SELECT * FROM tbl_collections WHERE delete_status=0";           
+    $collections = mysqli_query($conn, $sql);
+
+    $sql ="SELECT * FROM tbl_products WHERE delete_status=0";
+    $products = mysqli_query($conn, $sql);
 ?>
     <!-- ##### Welcome Area Start ##### -->
     <section class="welcome_area bg-img background-overlay" style="background-image: url(img/cover_photos/main2.jpeg);">
@@ -34,31 +26,26 @@
     <!-- ##### Top Catagory Area Start ##### -->
     <div class="top_catagory_area section-padding-80 clearfix">
         <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading text-center">
+                        <h2>Our Collections</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
             <div class="row justify-content-center">
                 <!-- Single Catagory -->
-                <div class="col-12 col-sm-6 col-md-4">
-                    <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img" style="background-image: url(img/cover_photos/cover_one.jpg);">
+                <?php while($row = mysqli_fetch_assoc($collections)){?>
+                <div class="col-12 col-sm-6 col-md-4" style="margin-top: 2%;">
+                    <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img" style="background-image: url(<?php echo 'admin/uploads/collections/'.$row['collection_picture_url']; ?>);">
                         <div class="catagory-content">
-                            <a href="#">Noor</a>
+                            <a href="<?php echo 'collections.php?id='.$row['collection_id']; ?>"><?php echo $row['collection_name']; ?></a>
                         </div>
                     </div>
                 </div>
-                <!-- Single Catagory -->
-                <div class="col-12 col-sm-6 col-md-4">
-                    <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img" style="background-image: url(img/cover_photos/cover_two.jpg);">
-                        <div class="catagory-content">
-                            <a href="#">Gulshan</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Single Catagory -->
-                <div class="col-12 col-sm-6 col-md-4">
-                    <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img" style="background-image: url(img/cover_photos/cover_three.jpg);">
-                        <div class="catagory-content">
-                            <a href="#">Aks</a>
-                        </div>
-                    </div>
-                </div>
+                <?php }?>
             </div>
         </div>
     </div>
@@ -90,7 +77,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-heading text-center">
-                        <h2>Popular Products</h2>
+                        <h2>New Arrivals</h2>
                     </div>
                 </div>
             </div>
@@ -100,26 +87,31 @@
             <div class="row">
                 <div class="col-12">
                     <div class="popular-products-slides owl-carousel">
-
+                    <?php while($row = $products->fetch_assoc()){ ?>
                         <!-- Single Product -->
                         <div class="single-product-wrapper">
-                            <!-- Product Image -->
-                            <div class="product-img">
-                                <img src="img/product-img/rose.jpg" alt="">
-                                <!-- Hover Thumb -->
-                                <img class="hover-img" src="img/product-img/dafodils.jpg" alt="">
-                                <!-- Favourite -->
-                                <div class="product-favourite">
-                                    <a href="#" class="favme fa fa-heart"></a>
-                                </div>
-                            </div>
+                            <?php
+                                $sql = "SELECT * FROM tbl_pictures WHERE product_id=".$row['product_id']." LIMIT 2";
+                            
+                                $images = mysqli_query($conn, $sql);
+                                $image_array = array();
+                                while($row_image = mysqli_fetch_array($images))
+                                {
+                                    array_push($image_array, $row_image['picture_url']);
+                                }
+                                echo '<div class="product-img">
+                                        <img src="admin/uploads/'.$image_array[0].'" alt="">
+                                        <!-- Hover Thumb -->
+                                        <img class="hover-img" src="admin/uploads/'.$image_array[1].'" alt="">
+                                    </div>';
+                            ?>
                             <!-- Product Description -->
                             <div class="product-description">
-                                <span>topshop</span>
-                                <a href="single-product-details.html">
-                                    <h6>Knot Front Mini Dress</h6>
+                                <!-- <span>topshop</span> -->
+                                <a href="<?php echo 'product_details.php?id='.$row["product_id"]; ?>">
+                                    <h6><?php echo $row["product_name"] ?></h6>
                                 </a>
-                                <p class="product-price">$80.00</p>
+                                <p class="product-price"><?php echo "₹" . $row["price"]; ?></p>
 
                                 <!-- Hover Content -->
                                 <div class="hover-content">
@@ -130,108 +122,7 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Single Product -->
-                        <div class="single-product-wrapper">
-                            <!-- Product Image -->
-                            <div class="product-img">
-                                <img src="img/product-img/dafodils.jpg" alt="">
-                                <!-- Hover Thumb -->
-                                <img class="hover-img" src="img/product-img/rose.jpg" alt="">
-                                <!-- Favourite -->
-                                <div class="product-favourite">
-                                    <a href="#" class="favme fa fa-heart"></a>
-                                </div>
-                            </div>
-                            <!-- Product Description -->
-                            <div class="product-description">
-                                <span>topshop</span>
-                                <a href="single-product-details.html">
-                                    <h6>Poplin Displaced Wrap Dress</h6>
-                                </a>
-                                <p class="product-price">$80.00</p>
-
-                                <!-- Hover Content -->
-                                <div class="hover-content">
-                                    <!-- Add to Cart -->
-                                    <div class="add-to-cart-btn">
-                                        <a href="#" class="btn essence-btn">Add to Cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Product -->
-                        <div class="single-product-wrapper">
-                            <!-- Product Image -->
-                            <div class="product-img">
-                                <img src="img/product-img/white.jpg" alt="">
-                                <!-- Hover Thumb -->
-                                <img class="hover-img" src="img/product-img/rose.jpg" alt="">
-
-                                <!-- Product Badge -->
-                                <div class="product-badge offer-badge">
-                                    <span>-30%</span>
-                                </div>
-
-                                <!-- Favourite -->
-                                <div class="product-favourite">
-                                    <a href="#" class="favme fa fa-heart"></a>
-                                </div>
-                            </div>
-                            <!-- Product Description -->
-                            <div class="product-description">
-                                <span>mango</span>
-                                <a href="single-product-details.html">
-                                    <h6>PETITE Crepe Wrap Mini Dress</h6>
-                                </a>
-                                <p class="product-price"><span class="old-price">$75.00</span> $55.00</p>
-
-                                <!-- Hover Content -->
-                                <div class="hover-content">
-                                    <!-- Add to Cart -->
-                                    <div class="add-to-cart-btn">
-                                        <a href="#" class="btn essence-btn">Add to Cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Product -->
-                        <div class="single-product-wrapper">
-                            <!-- Product Image -->
-                            <div class="product-img">
-                                <img src="img/product-img/rose.jpg" alt="">
-                                <!-- Hover Thumb -->
-                                <img class="hover-img" src="img/product-img/white.jpg" alt="">
-
-                                <!-- Product Badge -->
-                                <div class="product-badge new-badge">
-                                    <span>New</span>
-                                </div>
-
-                                <!-- Favourite -->
-                                <div class="product-favourite">
-                                    <a href="#" class="favme fa fa-heart"></a>
-                                </div>
-                            </div>
-                            <!-- Product Description -->
-                            <div class="product-description">
-                                <span>mango</span>
-                                <a href="single-product-details.html">
-                                    <h6>PETITE Belted Jumper Dress</h6>
-                                </a>
-                                <p class="product-price">$80.00</p>
-
-                                <!-- Hover Content -->
-                                <div class="hover-content">
-                                    <!-- Add to Cart -->
-                                    <div class="add-to-cart-btn">
-                                        <a href="#" class="btn essence-btn">Add to Cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

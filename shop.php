@@ -164,16 +164,6 @@ $collections = mysqli_query($conn, $sql);
                                                     </div> -->
                                                 </div>';
                                         ?>
-                                        <!-- <div class="product-img">
-                                            <img src="img/product-img/product-1.jpg" alt="">
-                                            <img class="hover-img" src="img/product-img/product-2.jpg" alt="">
-                                            <div class="product-badge offer-badge">
-                                                <span>-30%</span>
-                                            </div>
-                                            <div class="product-favourite">
-                                                <a href="#" class="favme fa fa-heart"></a>
-                                            </div>
-                                        </div> -->
 
                                         <!-- Product Description -->
                                         <div class="product-description">

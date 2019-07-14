@@ -182,14 +182,20 @@ include('footer.php');
         data: {'product_id': product_id},
         dataType:"json",
         success: function(data){
-
+            console.log("data size and quantity:")
             console.log(data);
             console.log(data[0]['size']);
             console.log(data.length);
             for (index = 0; index < data.length; index++) {
+                console.log("inside :")
                 console.log(data[index]);
                 document.getElementById(data[index]['size']).checked = true;
-                $('#quantity_'+data[index]['size']).val(data[index]['product_quantity']);    
+
+                var s = document.getElementById('quantity_'+data[index]['size']);
+                console.log("quatity")
+                console.log(s);
+                s.value =data[index]['product_quantity'];
+                // $('#quantity_'+data[index]['size']).val(data[index]['product_quantity']);    
             }
         },
 
@@ -243,7 +249,7 @@ $(document).ready(function(){
             data: {'product_id':product_id},
             dataType:"json",
             success: function(data){
-                console.log(data);
+                // console.log(data);
                 $('#product_id2').val(data.product_id);
                 $('#product_name2').val(data.product_name);
                 $('#product_collection2').val(data.collection_name);

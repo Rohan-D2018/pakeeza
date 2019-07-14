@@ -15,17 +15,17 @@ if(isset($_POST["btn_edit_products"]))
     $product_gender =  $_POST['product_gender2'];
     $product_code =  $_POST['product_code2'];
     $product_color =  $_POST['product_color2'];
-    // $product_keywords =  $_POST['product_keywords'];
+    $product_keywords =  $_POST['product_keywords2'];
 
 
-    $product_keywords = '';
-    foreach($_POST["product_keywords"] as $row)
-    {
-     $product_keywords .= $row . ', ';
-    }
-    $product_keywords = substr($product_keywords, 0, -2);
-    // echo "\nThe selected data\n";
-    echo ($product_keywords);
+    // $product_keywords = '';
+    // foreach($_POST["product_keywords"] as $row)
+    // {
+    //  $product_keywords .= $row . ', ';
+    // }
+    // $product_keywords = substr($product_keywords, 0, -2);
+    // // echo "\nThe selected data\n";
+    // echo ($product_keywords);
 
 
     if(isset($_POST["size_list"])){
