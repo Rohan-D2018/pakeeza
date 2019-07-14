@@ -225,23 +225,23 @@ $collections = mysqli_query($conn, $sql);
         });
     });
 
-    // $(".color_filter").click(function(){
-    //     var id = $(this).attr("id");
-    //     action = 'fetch_data';
-    //     $.ajax({
-    //         url:"fetch_data.php",
-    //         method:"POST",
-    //         data:{
-    //             action:action,
-    //             color_hex:id
-    //         },
-    //         success: function(data){
-    //             data = JSON.parse(data);
-    //             $("#products").html(data[0]);
-    //             $("#product_count").html(data[1]);
-    //         }
-    //     });
-    // });
+    $(".color_filter").click(function(){
+        var id = $(this).attr("id");
+        action = 'fetch_data';
+        $.ajax({
+            url:"fetch_data.php",
+            method:"POST",
+            data:{
+                action:action,
+                color_hex:id
+            },
+            success: function(data){
+                data = JSON.parse(data);
+                $("#products").html(data[0]);
+                $("#product_count").html(data[1]);
+            }
+        });
+    });
 </script>
 
 <script>
@@ -259,10 +259,6 @@ $collections = mysqli_query($conn, $sql);
       " - Rs. " + $( "#slider-range" ).slider( "values", 1 ) );
   } );
 
-//   $("#slider-range").change(function() {
-//         alert($("#slider-range").slider('values',0,$(this).val()));
-//     });
-
     $( "#slider-range" ).on( "slidechange", function( event, ui ) {
         values = ui.values;
 
@@ -275,6 +271,7 @@ $collections = mysqli_query($conn, $sql);
                 range:values
             },
             success: function(data){
+                alert(data);
                 data = JSON.parse(data);
                 $("#products").html(data[0]);
                 $("#product_count").html(data[1]);

@@ -13,7 +13,17 @@ if(isset($_POST["action"]))
         $sql = $sql . " WHERE price BETWEEN ".$_POST['range'][0]." AND ".$_POST['range'][1]." AND delete_status=0";
     }
     else if(isset($_POST['color_hex'])){
-        $sql = $sql . " WHERE price BETWEEN ".$_POST['range'][0]." AND ".$_POST['range'][1]." AND delete_status=0";
+        $color_hex = $_POST['color_hex'];
+        $sql = "SELECT color_id FROM tbl_product_color WHERE product_color_hex='".$color_hex."'";
+        $result = mysqli_query($conn,$sql);
+        $row = mysqli_fetch_array($result);
+        $color_id = $row['color_id'];
+        $sql = "SELECT tbl_products.*, tbl_product_color.product_color_hex
+        from tbl_products
+        INNER JOIN tbl_product_color_mapping ON tbl_product_color_mapping.product_id = tbl_products.product_id
+        INNER JOIN tbl_product_color ON tbl_product_color_mapping.color_id = tbl_product_color.color_id
+        WHERE tbl_product_color.color_id =".$color_id." AND tbl_products.delete_status=0";
+        // $sql = $sql . " WHERE price BETWEEN ".$_POST['range'][0]." AND ".$_POST['range'][1]." AND delete_status=0";
     }
     $result = mysqli_query($conn,$sql);
     $return_output = array();
