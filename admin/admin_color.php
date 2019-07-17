@@ -6,14 +6,14 @@ function add_color()
 	require 'config.php';
 
 	if(isset($_POST["product_color"])){
-        $product_color = $_POST["product_color"];
+        $product_color = mysqli_real_escape_string($conn, $_POST["product_color"]);
     }
     else{
         $product_color = "";
     }
 
     if(isset($_POST["product_color_hex"])){
-        $product_color_hex = $_POST["product_color_hex"];
+        $product_color_hex = mysqli_real_escape_string($conn, $_POST["product_color_hex"]);
     }
     else{
         $product_color_hex = "";

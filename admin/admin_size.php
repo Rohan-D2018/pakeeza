@@ -6,7 +6,7 @@ function add_size()
 	require 'config.php';
 	
 	if(isset($_POST["product_size"])){
-        $product_size = $_POST["product_size"];
+        $product_size = mysqli_real_escape_string($conn, $_POST["product_size"]);
     }
     else{
         $product_size = "";

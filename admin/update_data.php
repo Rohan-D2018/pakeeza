@@ -4,18 +4,18 @@ require 'config.php';
 
 if(isset($_POST["btn_edit_products"]))
 {
-    $product_id = $_POST['product_id2'];
-    $product_name = $_POST['product_name2'];
-    $collection_name = $_POST['product_collection2'];
-    $sub_branch_name = $_POST['sub_branch_name2'];
-    $product_type = $_POST['product_type2'];
-    $product_description =  $_POST['product_description2'];
-    $product_price =  $_POST['product_price2'];
-    $product_discount =  $_POST['product_discount2'];
-    $product_material =  $_POST['product_material2'];
-    $product_gender =  $_POST['product_gender2'];
-    $product_code =  $_POST['product_code2'];
-    $product_color =  $_POST['product_color2'];
+    $product_id = mysqli_real_escape_string($conn, $_POST['product_id2']);
+    $product_name = mysqli_real_escape_string($conn, $_POST['product_name2']);
+    $collection_name = mysqli_real_escape_string($conn, $_POST['product_collection2']);
+    $sub_branch_name = mysqli_real_escape_string($conn, $_POST['sub_branch_name2']);
+    $product_type = mysqli_real_escape_string($conn, $_POST['product_type2']);
+    $product_description =  mysqli_real_escape_string($conn, $_POST['product_description2']);
+    $product_price =  mysqli_real_escape_string($conn, $_POST['product_price2']);
+    $product_discount =  mysqli_real_escape_string($conn, $_POST['product_discount2']);
+    $product_material =  mysqli_real_escape_string($conn, $_POST['product_material2']);
+    $product_gender =  mysqli_real_escape_string($conn, $_POST['product_gender2']);
+    $product_code =  mysqli_real_escape_string($conn, $_POST['product_code2']);
+    $product_color =  mysqli_real_escape_string($conn, $_POST['product_color2']);
     // $product_keywords =  $_POST['product_keywords2'];
 
      $product_keywords = '';
@@ -166,10 +166,10 @@ if(isset($_POST["btn_edit_products"]))
 
 if(isset($_POST["btn_edit_collections"]))
 {
-    $collection_id = $_POST['collection_id2'];
-    $collection_name = $_POST['collection_name2'];
+    $collection_id = mysqli_real_escape_string($conn, $_POST['collection_id2']);
+    $collection_name = mysqli_real_escape_string($conn, $_POST['collection_name2']);
    
-    $collection_description =  $_POST['collection_description2'];
+    $collection_description =  mysqli_real_escape_string($conn, $_POST['collection_description2']);
    
     // File upload configuration
     $targetDir = "uploads/collections/";
@@ -218,8 +218,8 @@ if(isset($_POST["btn_edit_collections"]))
 
 if(isset($_POST["btn_edit_size"]))
 {
-    $size_id = $_POST['size_id2'];
-    $size_name = $_POST['product_size2'];
+    $size_id = mysqli_real_escape_string($conn, $_POST['size_id2']);
+    $size_name = mysqli_real_escape_string($conn, $_POST['product_size2']);
    
        
     $sql ="UPDATE tbl_product_size SET size = '$size_name' WHERE size_id = '$size_id'";
@@ -232,9 +232,9 @@ if(isset($_POST["btn_edit_size"]))
 
 if(isset($_POST["btn_edit_color"]))
 {
-    $color_id = $_POST['color_id2'];
-    $color_name = $_POST['product_color2'];
-    $color_hex_code = $_POST['product_color_hex2'];
+    $color_id = mysqli_real_escape_string($conn, $_POST['color_id2']);
+    $color_name = mysqli_real_escape_string($conn, $_POST['product_color2']);
+    $color_hex_code = mysqli_real_escape_string($conn, $_POST['product_color_hex2']);
        
     $sql ="UPDATE tbl_product_color SET color_name = '$color_name',product_color_hex = '$color_hex_code' WHERE color_id = '$color_id'";
     $result = mysqli_query($conn,$sql);
@@ -248,12 +248,12 @@ if(isset($_POST["btn_edit_color"]))
 
 if(isset($_POST["btn_edit_orders"]))
 {
-    $order_id = $_POST['order_id2'];
+    $order_id = mysqli_real_escape_string($conn, $_POST['order_id2']);
     
-    $product_price =  $_POST['product_price2'];
-    $product_quantity =  $_POST['product_quantity2'];
-    $product_color =  $_POST['product_color2'];
-    $product_size =  $_POST['product_size2'];
+    $product_price =  mysqli_real_escape_string($conn, $_POST['product_price2']);
+    $product_quantity =  mysqli_real_escape_string($conn, $_POST['product_quantity2']);
+    $product_color =  mysqli_real_escape_string($conn, $_POST['product_color2']);
+    $product_size =  mysqli_real_escape_string($conn, $_POST['product_size2']);
    
     $sql ="UPDATE tbl_order_details SET price = '$product_price', quantity = '$product_quantity', size='$product_size',color ='$product_color' WHERE order_id = '$order_id'";
     $result = mysqli_query($conn,$sql);
@@ -266,9 +266,9 @@ if(isset($_POST["btn_edit_orders"]))
 
 if(isset($_POST["btn_edit_keyword"]))
 {
-    $keyword_id = $_POST['keyword_id2'];
+    $keyword_id = mysqli_real_escape_string($conn, $_POST['keyword_id2']);
     
-    $keyword =  $_POST['keyword2'];
+    $keyword =  mysqli_real_escape_string($conn, $_POST['keyword2']);
   
    
     $sql ="UPDATE tbl_keywords SET keyword = '$keyword' WHERE keyword_id = '$keyword_id'";
@@ -283,10 +283,10 @@ if(isset($_POST["btn_edit_keyword"]))
 
 if(isset($_POST["btn_edit_sub_branch"]))
 {
-    $sub_branch_id = $_POST['sub_branch_id2'];
+    $sub_branch_id = mysqli_real_escape_string($conn, $_POST['sub_branch_id2']);
     
-    $sub_branch_name =  $_POST['sub_branch_name2'];
-    $sub_branch_description =  $_POST['sub_branch_description2'];
+    $sub_branch_name =  mysqli_real_escape_string($conn, $_POST['sub_branch_name2']);
+    $sub_branch_description =  mysqli_real_escape_string($conn, $_POST['sub_branch_description2']);
 
     // File upload configuration
     $targetDir = "uploads/sub_branch/";

@@ -11,7 +11,7 @@ function add_products()
             $product_name = "";
         }
         if(isset($_POST["product_description"])){
-            $product_desp = $_POST["product_description"];   
+            $product_desp = mysqli_real_escape_string($conn, $_POST["product_description"]);   
         }
         else{
             $product_desp = "";

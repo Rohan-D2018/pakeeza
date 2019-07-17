@@ -8,14 +8,14 @@ function add_banners()
 		// $collection_pic_url = $_POST["collection_picture_url"];
 
 	if(isset($_POST["banner_title"])){
-        $banner_title = $_POST["banner_title"];
+        $banner_title = mysqli_real_escape_string($conn, $_POST["banner_title"]);
     }
     else{
         $banner_title = "";
     }
 
     if(isset($_POST["banner_link"])){
-        $banner_link = $_POST["banner_link"];
+        $banner_link = mysqli_real_escape_string($conn, $_POST["banner_link"]);
     }
     else{
         $banner_link = "";

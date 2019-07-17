@@ -8,14 +8,14 @@ function add_branch()
 		// $collection_pic_url = $_POST["collection_picture_url"];
 
 	if(isset($_POST["sub_branch_name"])){
-        $sub_branch_name = $_POST["sub_branch_name"];
+        $sub_branch_name = mysqli_real_escape_string($conn, $_POST["sub_branch_name"]);
     }
     else{
         $sub_branch_name = "";
     }
 
     if(isset($_POST["sub_branch_description"])){
-        $sub_branch_description = $_POST["sub_branch_description"];
+        $sub_branch_description = mysqli_real_escape_string($conn, $_POST["sub_branch_description"]);
     }
     else{
         $sub_branch_description = "";
@@ -58,6 +58,7 @@ function add_branch()
             }
         }
     // }
+    echo $sql;
 }
 
 add_branch();

@@ -8,14 +8,14 @@ function add_collection()
 		// $collection_pic_url = $_POST["collection_picture_url"];
 
 	if(isset($_POST["collection_name"])){
-        $collection_name = $_POST["collection_name"];
+        $collection_name = mysqli_real_escape_string($conn, $_POST["collection_name"]);
     }
     else{
         $collection_name = "";
     }
 
     if(isset($_POST["collection_description"])){
-        $collection_description = $_POST["collection_description"];
+        $collection_description = mysqli_real_escape_string($conn, $_POST["collection_description"]);
     }
     else{
         $collection_description = "";

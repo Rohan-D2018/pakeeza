@@ -6,7 +6,7 @@ function add_keyword()
 	require 'config.php';
 
 	if(isset($_POST["keyword"])){
-        $keyword = $_POST["keyword"];
+        $keyword = mysqli_real_escape_string($conn, $_POST["keyword"]);
     }
     else{
         $keyword = "";
