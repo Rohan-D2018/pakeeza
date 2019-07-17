@@ -21,7 +21,8 @@ require 'config.php';
                     <input type="text" class="form-control clearfix" name="collection_name" required>
 
                     <b class="clearfix float-left">Collection Description:</b>
-                    <input type="textbox" class="form-control clearfix" name="collection_description" required>
+                    <textarea class="form-control clearfix" cols=10 rows=5 name="collection_description" required></textarea>
+                    <!-- <input type="textbox" class="form-control clearfix" name="collection_description" required> -->
 
                 <div class="clearfix float-left">
                     <input type="submit" value="Add Collection" class="btn btn-success" style="margin-bottom: 10px;">
@@ -62,7 +63,10 @@ require 'config.php';
                     echo '<tr>
                         <td width="20%" style="text-align: left;">'.$row['collection_name'].'</td>
                         <td width="40%" style="text-align: left;">'.$row['collection_description'].'</td>
-                        <td width="15%" style="text-align: right;"><button type="button" name="edit"  id="'.$row['collection_id'].'" class="btn btn-primary edit_data"><i class="fa fa-pencil"></td>
+
+                        <td width="15%" style="text-align: left;"><a href="edit_collections.php?id='.$row['collection_id'].'"><button type="button" name="edit" class="btn btn-primary edit_data"><i class="fa fa-pencil"></i></button></a></td>
+
+                        
                         <td width="15%" style="text-align: left;"><a href="javascript:delete_id('.$row['collection_id'].')"><button type="button" class="btn btn-danger fa fa-trash"></button></a></td>
                     </tr>';
                  
@@ -106,7 +110,7 @@ require 'config.php';
                         <div class="col-md-3 col-sm-3">
                             <div class="form-group">
                               <label for="collection_description">Collection Description</label>
-                              <input type='text' class='form-control ' name='collection_description2' id='collection_description2'>
+                              <input type='textbox' class='form-control ' name='collection_description2' id='collection_description2'>
                             </div>  
                         </div>
 

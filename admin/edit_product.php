@@ -21,6 +21,9 @@ if(isset($_GET['id'])){
 }
 ?>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />    
+
 <div class="container" style="margin-top: 2%">
     <form method="post" action="update_data.php" enctype="multipart/form-data">
         <div class="row">
@@ -56,7 +59,7 @@ if(isset($_GET['id'])){
                     <input type="number" class="form-control" name="product_price2" id="product_price2" step=".01" required>
                 </div>
 
-                <label for="product_name">Select Collection</label>
+                <label for="product_collection">Select Collection</label>
                 <select class="browser-default custom-select form-group" id="product_collection2" name="product_collection2" required>
                     <!-- <option selected>Select Collection</option> -->
                     <?php
@@ -66,6 +69,25 @@ if(isset($_GET['id'])){
                         while($row = mysqli_fetch_array($result))
                         {
                         echo '<option class="form-control" value="' . $row["collection_name"] . '">' . $row["collection_name"] . '</option>'; 
+                        }
+                        if (!$result)
+                        {
+                            die ('SQL Error: ' . mysqli_error($conn));
+                        }
+                    ?>
+                </select>
+
+
+                <label for="product_sub_branch">Select Sub-Branch</label>
+                <select class="browser-default custom-select form-group" id="sub_branch_name2" name="sub_branch_name2" required>
+                    <!-- <option selected>Select Collection</option> -->
+                    <?php
+                        $sql = "SELECT DISTINCT(sub_branch_name) FROM tbl_sub_branch";
+                    
+                        $result = mysqli_query($conn, $sql);
+                        while($row = mysqli_fetch_array($result))
+                        {
+                        echo '<option class="form-control" value="' . $row["sub_branch_name"] . '">' . $row["sub_branch_name"] . '</option>'; 
                         }
                         if (!$result)
                         {
@@ -127,8 +149,27 @@ if(isset($_GET['id'])){
                 </select>
 
                 <div class="form-group">
-                    <label for="Keywords">Keywords</label>
-                    <textarea class='form-control' cols=10 rows=5 name='product_keywords2' id='product_keywords2' required></textarea>
+                    <label for="Keywords">Previous Keywords</label>
+                    <textarea class='form-control' cols=10 rows=3 name='product_keywords2' id='product_keywords2' required readonly></textarea>
+                </div>
+
+                <div class="row" style="margin-left: 3%; margin-right: 3%">
+                    <b class="clearfix">Keywords:</b>
+                    <select class="browser-default custom-select" id="framework" name="product_keywords[]" multiple>
+                      <?php
+                         $sql = "SELECT DISTINCT(keyword) FROM tbl_keywords";
+                      
+                          $result = mysqli_query($conn, $sql);
+                          while($row = mysqli_fetch_array($result))
+                         {
+                          echo '<option value="' . $row["keyword"] . '">' . $row["keyword"] . '</option>'; 
+                         }
+                          if (!$result)
+                           {
+                              die ('SQL Error: ' . mysqli_error($conn));
+                           }
+                      ?>
+                    </select>
                 </div>
 
                 <div class="row"  style="margin-left: 3%; margin-right: 3%; margin-top: 2%">  
@@ -172,6 +213,23 @@ if(isset($_GET['id'])){
 include('footer.php');
 ?>
 
+
+
+<script>
+$(document).ready(function(){
+  $('#framework').multiselect({
+    nonSelectedText: 'Select Keywords',
+    enableFiltering: true,
+    enableCaseInsensitiveFiltering: true,
+    buttonWidth:'350px'
+  });
+});
+</script>
+
+
+
+
+
 <script type="text/javascript">
     
    $(document).ready(function(){
@@ -182,18 +240,18 @@ include('footer.php');
         data: {'product_id': product_id},
         dataType:"json",
         success: function(data){
-            console.log("data size and quantity:")
-            console.log(data);
-            console.log(data[0]['size']);
-            console.log(data.length);
+            // console.log("data size and quantity:")
+            // console.log(data);
+            // console.log(data[0]['size']);
+            // console.log(data.length);
             for (index = 0; index < data.length; index++) {
-                console.log("inside :")
-                console.log(data[index]);
+                // console.log("inside :")
+                // console.log(data[index]);
                 document.getElementById(data[index]['size']).checked = true;
 
                 var s = document.getElementById('quantity_'+data[index]['size']);
-                console.log("quatity")
-                console.log(s);
+                // console.log("quatity")
+                // console.log(s);
                 s.value =data[index]['product_quantity'];
                 // $('#quantity_'+data[index]['size']).val(data[index]['product_quantity']);    
             }
@@ -249,10 +307,11 @@ $(document).ready(function(){
             data: {'product_id':product_id},
             dataType:"json",
             success: function(data){
-                // console.log(data);
+                console.log(data);
                 $('#product_id2').val(data.product_id);
                 $('#product_name2').val(data.product_name);
                 $('#product_collection2').val(data.collection_name);
+                $('#sub_branch_name2').val(data.sub_branch_name);
                 $('#product_type2').val(data.product_type);
                 $('#product_code2').val(data.product_code);
                 $('#product_color2').val(data.color_name);

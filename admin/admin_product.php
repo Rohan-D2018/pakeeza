@@ -22,7 +22,7 @@ function add_products()
         else{
             $product_price = 1;
         }
-         if(isset($_POST["collection_name"])){
+        if(isset($_POST["collection_name"])){
             $collection_name = $_POST["collection_name"];
 
             $sql = "SELECT collection_id FROM tbl_collections WHERE collection_name='".$collection_name."'";
@@ -34,6 +34,22 @@ function add_products()
         else{
             $collection_name = "";
         }
+
+
+        if(isset($_POST["sub_branch_name"])){
+            $sub_branch_name = $_POST["sub_branch_name"];
+
+            $sql = "SELECT sub_branch_id FROM tbl_sub_branch WHERE sub_branch_name='".$sub_branch_name."'";
+            $result = mysqli_query($conn, $sql);
+            while ($row = mysqli_fetch_array($result)){
+                $sub_branch_id = $row['sub_branch_id'];
+            }
+        }
+        else{
+            $sub_branch_name = "";
+        }
+
+
         if(isset($_POST["product_type"])){
             $product_type = $_POST["product_type"];
         }
@@ -95,16 +111,27 @@ function add_products()
             $gender = "";
         }
 
-        if(isset($_POST["product_keywords"])){
-            $product_keywords = $_POST["product_keywords"];
+
+        // if(isset($_POST["product_keywords"])){
+        //     $product_keywords = $_POST["product_keywords"];
+        // }
+        // else{
+        //     $product_keywords = "NA";
+        // }
+
+
+       
+        $product_keywords = '';
+        foreach($_POST["product_keywords"] as $row)
+        {
+         $product_keywords .= $row . ', ';
         }
-        else{
-            $product_keywords = "";
-        }
-        
-        // echo $product_name, $product_desp, $product_price, $product_type, $product_material, $product_discount, $product_code, $product_color;
-        // print_r($size_list);
-        // print_r($quantity_list);
+        $product_keywords = substr($product_keywords, 0, -2);
+        // echo "\nThe selected data\n";
+        // echo ($product_keywords);
+
+
+     
         // Removing the empty elements from array of quantity list
         foreach($quantity_list as $key => $value)          
         if(empty($value)){
@@ -117,7 +144,7 @@ function add_products()
 
         
         // insert records in product table
-        $sql ="INSERT INTO tbl_products (product_name,product_type,price,product_code,material,discount,product_description,gender,product_keywords,collection_id) VALUES ('$product_name','$product_type','$product_price','$product_code','$product_material','$product_discount','$product_desp','$gender','$product_keywords','$collection_id')";
+        $sql ="INSERT INTO tbl_products (product_name,product_type,price,product_code,material,discount,product_description,gender,product_keywords,collection_id,sub_branch_id) VALUES ('$product_name','$product_type','$product_price','$product_code','$product_material','$product_discount','$product_desp','$gender','$product_keywords','$collection_id','$sub_branch_id')";
         
         echo $sql;
         $result = mysqli_query($conn,$sql);
@@ -202,6 +229,30 @@ function add_products()
                 $quantity_counter += 1;
             }
         }
+
+
+        // insert size array into product size mapping
+        // if(!empty($_POST['product_keywords'])) 
+        // {
+           
+        //     $product_keywords = $_POST['product_keywords'];
+        //     // $sizes= $size_list;
+           
+        //     foreach ($product_keywords as $keyword)
+        //     {
+                
+        //         $sql = "SELECT DISTINCT(keyword_id) from tbl_keywords WHERE keyword = '$keyword'";
+        //         $result = mysqli_query($conn,$sql);
+        //         $row = mysqli_fetch_array($result);
+        //         $keyword_id = $row['keyword_id'];
+                  
+        //         $sql ="INSERT INTO tbl_product_keyword_mapping (product_id,keyword_id) VALUES ($product_quantity,$keyword_id)";
+        //         $result = mysqli_query($conn,$sql);
+               
+        //     }
+        // }
+
+
 }
 add_products();
 header("Location: products.php");

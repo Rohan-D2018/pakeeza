@@ -1,7 +1,14 @@
 <?php 
 $page = 'product';
 include('header.php');
+require 'config.php';
 ?>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />    
+
 
 <div class="container-fluid">
     <ul class="nav nav-tabs nav-justified">
@@ -64,6 +71,27 @@ include('header.php');
                 </div>
 
                 <div class="row">
+                    <b class="clearfix">Product Sub-Branch:</b>
+                    <select class="browser-default custom-select" id="sub_branch_name" name="sub_branch_name">
+                      <option selected>Select Sub-branch</option>
+                      <?php
+                         $sql = "SELECT DISTINCT(sub_branch_name) FROM tbl_sub_branch";
+                      
+                          $result = mysqli_query($conn, $sql);
+                          while($row = mysqli_fetch_array($result))
+                         {
+                          echo '<option value="' . $row["sub_branch_name"] . '">' . $row["sub_branch_name"] . '</option>'; 
+                         }
+                          if (!$result)
+                           {
+                              die ('SQL Error: ' . mysqli_error($conn));
+                           }
+                      ?>
+                    </select>
+                </div>
+
+
+                <div class="row">
                     <b class="clearfix">Product Price:</b>
                     <input type="number" class="form-control clearfix" name="product_price" step=".01" required>
                 </div>
@@ -124,10 +152,30 @@ include('header.php');
                     </select>
                 </div>
 
-                <div class="row" style="margin-left: 3%; margin-right: 3%">
+               <!--  <div class="row" style="margin-left: 3%; margin-right: 3%">
                     <b class="clearfix">Keywords:</b>
                     <input type="text" class="form-control clearfix" name="product_keywords" required>
+                </div> -->
+
+                <div class="row" style="margin-left: 3%; margin-right: 3%">
+                    <b class="clearfix">Keywords:</b>
+                    <select class="browser-default custom-select" id="framework" name="product_keywords[]" multiple>
+                      <?php
+                         $sql = "SELECT DISTINCT(keyword) FROM tbl_keywords";
+                      
+                          $result = mysqli_query($conn, $sql);
+                          while($row = mysqli_fetch_array($result))
+                         {
+                          echo '<option value="' . $row["keyword"] . '">' . $row["keyword"] . '</option>'; 
+                         }
+                          if (!$result)
+                           {
+                              die ('SQL Error: ' . mysqli_error($conn));
+                           }
+                      ?>
+                    </select>
                 </div>
+
 
                 <div class="row"  style="margin-left: 3%; margin-right: 3%; margin-top: 2%">  
                     <table class="table" id="sizes" style="border: none;">
@@ -163,6 +211,20 @@ include('header.php');
         </div>
     </form>     
 </div>
+
+
+
+<script>
+$(document).ready(function(){
+  $('#framework').multiselect({
+    nonSelectedText: 'Select Keywords',
+    enableFiltering: true,
+    enableCaseInsensitiveFiltering: true,
+    buttonWidth:'400px'
+  });
+});
+</script>
+
 
 
 <script type="text/javascript">

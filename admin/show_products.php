@@ -23,11 +23,12 @@ include('header.php');
         <table class="table display" id="products" style="margin-top: 20px; width:100%">
             <thead class="thead-dark" style="background-color: #e8eaf6; padding-top:2px;padding-bottom:5px;">
                 <tr>                   
-                    <th width="15%" style="text-align: left;">Name</th>
+                    <th width="12%" style="text-align: left;">Name</th>
                     <th width="7%" style="text-align: left;">Collection</th>
+                    <th width="5%" style="text-align: left;">Branch</th>
                     <th width="25%" style="text-align: left;">Description</th>
                     <th width="7%" style="text-align: left;">Price</th>
-                    <th width="5%" style="text-align: left;">Discount</th>
+                    <th width="3%" style="text-align: left;">Discount</th>
                     <th width="6%" style="text-align: left;">Color</th>
                     <th width="7%" style="text-align: left;">Type</th>
                     <th width="5%" style="text-align: left;">Code</th>
@@ -40,12 +41,13 @@ include('header.php');
             </thead>
             <tbody >
                 <?php
-                    $sql = "SELECT tbl_products.product_id,tbl_products.product_name,tbl_products.product_type,tbl_products.price,tbl_products.product_code,tbl_products.discount,tbl_products.product_description,tbl_products.material,tbl_products.gender, tbl_collections.collection_name, tbl_product_color.color_name
-                            FROM tbl_products 
-                            INNER JOIN tbl_collections ON tbl_products.collection_id = tbl_collections.collection_id
-                            INNER JOIN tbl_product_color_mapping ON tbl_products.product_id = tbl_product_color_mapping.product_id
-                            INNER JOIN tbl_product_color ON tbl_product_color_mapping.color_id = tbl_product_color.color_id
-                            WHERE tbl_products.delete_status =0";
+                    $sql = "SELECT tbl_products.product_id,tbl_products.product_name,tbl_products.product_type,tbl_products.price,tbl_products.product_code,tbl_products.discount,tbl_products.product_description,tbl_products.material,tbl_products.gender, tbl_collections.collection_name, tbl_product_color.color_name,tbl_sub_branch.sub_branch_name
+                          FROM tbl_products 
+                          INNER JOIN tbl_collections ON tbl_products.collection_id = tbl_collections.collection_id
+                          LEFT JOIN tbl_sub_branch ON tbl_products.sub_branch_id = tbl_sub_branch.sub_branch_id
+                          INNER JOIN tbl_product_color_mapping ON tbl_products.product_id = tbl_product_color_mapping.product_id
+                          INNER JOIN tbl_product_color ON tbl_product_color_mapping.color_id = tbl_product_color.color_id
+                          WHERE tbl_products.delete_status =0";
                     
                     $result = mysqli_query($conn, $sql);
                     
@@ -59,11 +61,12 @@ include('header.php');
                         if ((in_array("admin", $_SESSION['access_role'], TRUE)))
                         {
                             echo '<tr>
-                                <td width="15%" style="text-align: left;">'.$row['product_name'].'</td>
+                                <td width="12%" style="text-align: left;">'.$row['product_name'].'</td>
                                 <td width="7%" style="text-align: left;">'.$row['collection_name'].'</td>
+                                 <td width="5%" style="text-align: left;">'.$row['sub_branch_name'].'</td>
                                 <td width="25%" style="text-align: left;">'.$row['product_description'].'</td>
                                 <td width="7%" style="text-align: left;">'.$row['price'].'</td>
-                                <td width="5%" style="text-align: left;">'.$row['discount'].'</td>
+                                <td width="3%" style="text-align: left;">'.$row['discount'].'</td>
                                 <td width="5%" style="text-align: left;">'.$row['color_name'].'</td>
                                 <td width="7%" style="text-align: left;">'.$row['product_type'].'</td>
                                 <td width="5%" style="text-align: left;">'.$row['product_code'].'</td>
@@ -79,11 +82,12 @@ include('header.php');
                         else
                         {
                              echo '<tr>
-                                <td width="15%" style="text-align: left;">'.$row['product_name'].'</td>
+                                <td width="12%" style="text-align: left;">'.$row['product_name'].'</td>
                                 <td width="7%" style="text-align: left;">'.$row['collection_name'].'</td>
+                                <td width="5%" style="text-align: left;">'.$row['sub_branch_name'].'</td>
                                 <td width="25%" style="text-align: left;">'.$row['product_description'].'</td>
                                 <td width="7%" style="text-align: left;">'.$row['price'].'</td>
-                                <td width="5%" style="text-align: left;">'.$row['discount'].'</td>
+                                <td width="3%" style="text-align: left;">'.$row['discount'].'</td>
                                 <td width="5%" style="text-align: left;">'.$row['color_name'].'</td>
                                 <td width="7%" style="text-align: left;">'.$row['product_type'].'</td>
                                 <td width="5%" style="text-align: left;">'.$row['product_code'].'</td>

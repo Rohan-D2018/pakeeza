@@ -62,6 +62,9 @@ if (!isset($_SESSION['username']))
           <li class="nav-item  <?php if ($page == 'collection'){ echo "active"; } ?>">
             <a class="nav-link" href="collection.php">Collection</a>
           </li>
+           <li class="nav-item  <?php if ($page == 'branch'){ echo "active"; } ?>">
+            <a class="nav-link" href="branch.php">Sub-Branch</a>
+          </li>
           <li class="nav-item  <?php if ($page == 'size'){ echo "active"; } ?>">
             <a class="nav-link" href="size.php">Size</a>
           </li>
@@ -70,6 +73,12 @@ if (!isset($_SESSION['username']))
           </li>
           <li class="nav-item  <?php if ($page == 'order'){ echo "active"; } ?>">
             <a class="nav-link" href="orders.php">Orders</a>
+          </li>
+          <li class="nav-item  <?php if ($page == 'keywords'){ echo "active"; } ?>">
+            <a class="nav-link" href="keywords.php">Keywords</a>
+          </li>
+           <li class="nav-item  <?php if ($page == 'banners'){ echo "active"; } ?>">
+            <a class="nav-link" href="banners.php">Banners</a>
           </li>
 
           <!-- Only for admin user -->

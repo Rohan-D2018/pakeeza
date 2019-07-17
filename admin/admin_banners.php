@@ -1,31 +1,31 @@
 <?php
 
 require 'config.php';
-function add_collection()
+function add_banners()
 {
 	require 'config.php';
 
 		// $collection_pic_url = $_POST["collection_picture_url"];
 
-	if(isset($_POST["collection_name"])){
-        $collection_name = $_POST["collection_name"];
+	if(isset($_POST["banner_title"])){
+        $banner_title = $_POST["banner_title"];
     }
     else{
-        $collection_name = "";
+        $banner_title = "";
     }
 
-    if(isset($_POST["collection_description"])){
-        $collection_description = $_POST["collection_description"];
+    if(isset($_POST["banner_link"])){
+        $banner_link = $_POST["banner_link"];
     }
     else{
-        $collection_description = "";
+        $banner_link = "";
     }
 
     print_r($_FILES['file']);
 
     // insert images into tbl_pictures
     // File upload configuration
-    $targetDir = "uploads/collections/";
+    $targetDir = "uploads/banners/";
     $allowTypes = array('jpg','png','jpeg','gif');
     // foreach($_FILES['file']['tmp_name'] as $key => $tmp_name ){
         
@@ -43,7 +43,7 @@ function add_collection()
             
             if(!file_exists($targetFilePath)){
                 if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){
-                    $sql ="INSERT INTO tbl_collections (collection_name,collection_description,collection_picture_url) VALUES ('$collection_name','$collection_description','$file_name')";
+                    $sql ="INSERT INTO tbl_banners (banner_title,banner_picture_url,banner_link) VALUES ('$banner_title','$file_name','$banner_link')";
                     $result = mysqli_query($conn,$sql);
                 }
             }else{                                  //rename the file if another one exist
@@ -52,7 +52,7 @@ function add_collection()
                 $new_dir = $targetDir.$new_file_name;
                 
                 if(move_uploaded_file($_FILES["file"]["tmp_name"], $new_dir)){
-                    $sql ="INSERT INTO tbl_collections (collection_name,collection_description,collection_picture_url) VALUES ('$collection_name','$collection_description','$new_file_name')";
+                    $sql ="INSERT INTO tbl_banners (banner_title,banner_picture_url,banner_link) VALUES ('$banner_title','$new_file_name','$banner_link')";
                     $result = mysqli_query($conn,$sql);
                 }           
             }
@@ -60,7 +60,7 @@ function add_collection()
     // }
 }
 
-add_collection();
-header("Location: collection.php");
+add_banners();
+header("Location: banners.php");
 
 ?>
