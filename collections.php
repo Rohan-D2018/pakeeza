@@ -41,7 +41,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="popular-products-slides owl-carousel">
+                    <div class="popular-products-slides">
                         <?php while($row = $products->fetch_assoc()){?>
                             <!-- Single Product -->
                             <div class="">

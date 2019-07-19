@@ -35,11 +35,11 @@ $collections = mysqli_query($conn, $sql);
 
                             <!--  Catagories  -->
                             <div class="catagories-menu">
-                                <ul id="menu-content2" class="menu-content collapse show">
+                                <ul id="menu-content2" class="menu-content">
                                     <!-- Single Item -->
                                     <li>
-                                        <a href="#" data-toggle="collapse" data-target="#clothing">Collections</a>
-                                        <ul class="sub-menu  show" id="clothing">
+                                        <a href="#" class="collapsed" data-toggle="collapse" data-target="#clothing" aria-expanded="false"  aria-controls="clothing">Collections <i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                                        <ul class="sub-menu collapse" id="clothing">
                                             <?php
                                                 while($row = mysqli_fetch_array($collections)){
                                                     echo "<li><a href='#' id='".$row['collection_id']."' class='collection_filter'>".$row['collection_name']."</a></li>";  
@@ -56,13 +56,19 @@ $collections = mysqli_query($conn, $sql);
                             <!-- Widget Title -->
                             <h6 class="widget-title mb-30">Filter by</h6>
                             <!-- Widget Title 2 -->
-                            <p class="widget-title2 mb-30">Price</p>
-
-                            <div class="widget-desc">
-                                <div id="slider-range"></div>
-                                <label for="amount" style="margin-top: 10%">Price range:</label>
-                                <input type="text" id="amount" readonly style="border:0;">
-                            </div>
+                            <ul id="menu-content2" class="menu-content">
+                                <!-- Single Item -->
+                                <li>
+                                    <a class="widget-title2 mb-30 collapsed" href="#" data-toggle="collapse" data-target="#pricing">Price <i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                                    <ul class="sub-menu collapse" id="pricing">
+                                        <div class="widget-desc">
+                                            <div id="slider-range"></div>
+                                            <label for="amount" style="margin-top: 10%">Price range:</label>
+                                            <input type="text" id="amount" readonly style="border:0;">
+                                        </div>
+                                    </ul>
+                                </li>
+                            </ul>
                         </div>
 
                         <!-- ##### Single Widget ##### -->
@@ -271,7 +277,6 @@ $collections = mysqli_query($conn, $sql);
                 range:values
             },
             success: function(data){
-                alert(data);
                 data = JSON.parse(data);
                 $("#products").html(data[0]);
                 $("#product_count").html(data[1]);

@@ -128,6 +128,13 @@ if(isset($_POST["btn_edit_products"]))
                 }
             }
         }
+    }else if($_POST['image-gallery']){
+        $sql_5 ="DELETE FROM tbl_pictures WHERE product_id = '$product_id'";
+        $result = mysqli_query($conn, $sql_5);
+        foreach($_POST['image-gallery'] as $value){
+            $sql = "INSERT INTO tbl_pictures (product_id, picture_url) VALUES ('$product_id', '$value')";
+            $result = mysqli_query($conn, $sql);
+        }
     }
 
 

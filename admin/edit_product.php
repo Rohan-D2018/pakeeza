@@ -27,8 +27,10 @@ if(isset($_GET['id'])){
 <div class="container" style="margin-top: 2%">
     <form method="post" action="update_data.php" enctype="multipart/form-data">
         <div class="row">
-            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" id="gallery-wrapper">
-                <div id="draggable" class="row">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <div id="gallery" class="row">
+                <!-- </div> -->
+                <!-- <div id="pre-imgs" class="row clearfix" style="margin-left: 3%;margin-right: 1%;"> -->
                 <?php 
                     while($row = mysqli_fetch_array($product_images)){ 
                         $filename = $row['picture_url'];
@@ -267,22 +269,24 @@ $(document).ready(function(){
 <script type="text/javascript">
     function readURL(input) {
         var total_file = document.getElementById("profile-img").files.length;
-
-        $("#gallery-wrapper").prepend("<div id='gallery'></div>");
+        
+        $("#pre-imgs").remove();
+        $("#gallery img").remove();
+        // $("#gallery-wrapper").prepend("<div id='gallery'></div>");
 
         // alert(total_file);
         for(var i = 0;i < total_file; i++)
         {
-            $('#gallery').append("<img src='"+URL.createObjectURL(event.target.files[i])+"' data-image='"+URL.createObjectURL(event.target.files[i])+"'>");
+            $('#gallery').append("<div class='col-lg-5 col-md-5 col-sm-5 col-xs-5'><img src='"+URL.createObjectURL(event.target.files[i])+"' class='img-fluid'></div>");
         }
-        $("#gallery").unitegallery({
-            gallery_width:1000,							//gallery width		
-            gallery_height:1364,
-        });
+        // $("#gallery").unitegallery({
+        //     gallery_width:1000,							//gallery width		
+        //     gallery_height:1364,
+        // });
     }
 
     $("#profile-img").change(function(){
-        $("#gallery").remove();
+        // $("#gallery").remove();
         readURL(this);
     });
     
@@ -294,10 +298,10 @@ $(document).ready(function(){
 
 <script>
 $(document).ready(function(){
-    $("#gallery").unitegallery({
-        gallery_width:1000,							//gallery width		
-        gallery_height:1364,
-    });
+    // $("#gallery").unitegallery({
+    //     gallery_width:1000,							//gallery width		
+    //     gallery_height:1364,
+    // });
 
     var product_id = <?php echo $product_id; ?>;
     
@@ -329,8 +333,13 @@ $(document).ready(function(){
 
 <script>
 $(function() {
-    $("#draggable").sortable();
-    $("#draggable").disableSelection();
+    $("#gallery").sortable();
+    $("#gallery").disableSelection();
+});
+
+$(function() {
+    $("#pre-imgs").sortable();
+    $("#pre-imgs").disableSelection();
 });
 
 $(document).ready(function(){

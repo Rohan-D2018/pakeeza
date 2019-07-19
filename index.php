@@ -35,15 +35,14 @@
             </div>
         </div>
         <div class="container">
-            <div class="row justify-content-center">
+            <div class="row">
                 <!-- Single Catagory -->
                 <?php while($row = mysqli_fetch_assoc($collections)){?>
-                <div class="col-12 col-sm-6 col-md-4" style="margin-top: 2%;">
-                    <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img" style="background-image: url(<?php echo 'admin/uploads/collections/'.$row['collection_picture_url']; ?>);">
-                        <div class="catagory-content">
-                            <a href="<?php echo 'collections.php?id='.$row['collection_id']; ?>"><?php echo $row['collection_name']; ?></a>
-                        </div>
-                    </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-md-12 text-center" style="padding: 25px;">
+                    <a href="<?php echo 'collections.php?id='.$row['collection_id']; ?>">    
+                        <img class="img-fluid" src="<?php echo 'admin/uploads/collections/'.$row['collection_picture_url']; ?>" style="opacity: 0.8;">
+                        <h3 id="imp-caption" style="margin-top: 2%;"><?php echo $row['collection_name']; ?></h3>
+                    </a>
                 </div>
                 <?php }?>
             </div>
@@ -72,7 +71,7 @@
     <!-- ##### CTA Area End ##### -->
 
     <!-- ##### New Arrivals Area Start ##### -->
-    <section class="new_arrivals_area section-padding-80 clearfix">
+    <section class="new_arrivals_area clearfix">
         <div class="container">
             <div class="row">
                 <div class="col-12">
