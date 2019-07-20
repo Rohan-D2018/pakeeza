@@ -11,6 +11,9 @@ else{
 $sql ="SELECT * FROM tbl_collections ORDER BY collection_name";
 $collections = mysqli_query($conn, $sql);
 
+$sql ="SELECT * FROM tbl_sub_branch ORDER BY sub_branch_name";
+$sub_branch = mysqli_query($conn, $sql);
+
 $sql ="SELECT * FROM tbl_products where delete_status=0 and product_id in (SELECT product_id FROM tbl_cart where user_id='".$_SESSION['user_id']."' and cart_product_status=0)";
 $products_cart = mysqli_query($conn, $sql);
 
@@ -74,6 +77,13 @@ $details_count = mysqli_query($conn, $sql);
                     <div class="classynav">
                         <ul>
                             <li><a href="shop.php">Shop</a>
+                                <ul class="dropdown">
+                                    <?php
+                                        while($row = mysqli_fetch_array($sub_branch)){
+                                            echo "<li><a href='sub_branch.php?id=".$row["sub_branch_id"]."'>".$row['sub_branch_name']."</a></li>";  
+                                        }
+                                    ?>
+                                </ul>
                                 <!-- <div class="megamenu">
                                     <ul class="single-mega cn-col-4">
                                         <li class="title">Women's Collection</li>
