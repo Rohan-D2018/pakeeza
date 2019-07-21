@@ -24,6 +24,60 @@ if(isset($_GET['id'])){
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />    
 
+<style>
+
+
+    .multiselect {
+     
+    display: inline-block;
+    width: 100%;
+   
+    background: #fff;
+    background-size: 8px 10px;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+   
+    }
+
+    .selectBox {
+      position: relative;
+    }
+
+    .selectBox select {
+      width: 100%;
+      /*font-weight: bold;*/
+      height: calc(2.25rem + 2px);
+    }
+
+    .overSelect {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+    }
+
+    #checkboxes {
+      display: none;
+      border: 1px #dadada solid;
+
+      /*this is for scroll*/
+      max-height: 100px;
+      overflow-y: scroll;
+
+    }
+
+    #checkboxes label {
+      display: block;
+
+    }
+
+    #checkboxes label:hover {
+      background-color: #1e90ff;
+    }
+</style>
+
+
 <div class="container" style="margin-top: 2%">
     <form method="post" action="update_data.php" enctype="multipart/form-data">
         <div class="row">
@@ -150,60 +204,63 @@ if(isset($_GET['id'])){
                     <option value="kids">Kids</option>
                 </select>
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label for="Keywords">Previous Keywords</label>
                     <textarea class='form-control' cols=10 rows=3 name='product_keywords2' id='product_keywords2' required readonly></textarea>
-                </div>
+                </div> -->
 
-                <div class="row" style="margin-left: 3%; margin-right: 3%">
-                    <b class="clearfix">Keywords:</b>
-                    <select class="browser-default custom-select" id="framework" name="product_keywords[]" multiple>
-                      <?php
-                         $sql = "SELECT DISTINCT(keyword) FROM tbl_keywords";
-                      
-                          $result = mysqli_query($conn, $sql);
-                          while($row = mysqli_fetch_array($result))
-                         {
-                          echo '<option value="' . $row["keyword"] . '">' . $row["keyword"] . '</option>'; 
-                         }
-                          if (!$result)
-                           {
-                              die ('SQL Error: ' . mysqli_error($conn));
-                           }
-                      ?>
+                <div class="multiselect" style="margin-bottom: 5%;">
+                    <div class="selectBox"  onclick="showCheckboxes()">
+                    <select class="form-control">
+                        <option>Select Keyword</option>
                     </select>
+                    <!-- <div class="overSelect"></div> -->
+                    </div>
+                    <div id="checkboxes">
+                        <?php
+                            $sql = "SELECT DISTINCT(keyword) FROM tbl_keywords";
+                        
+                            $result = mysqli_query($conn, $sql);
+                            while($row = mysqli_fetch_array($result))
+                            {
+                            echo '<label for="one"><input type="checkbox" value="'.$row["keyword"].'" id="'.$row["keyword"].'" name = "product_keywords2[]" />'.$row["keyword"].'</label>'; 
+                            }
+                            if (!$result)
+                            {
+                                die ('SQL Error: ' . mysqli_error($conn));
+                            }
+                        ?>
+                    </div>
                 </div>
 
-                <div class="row"  style="margin-left: 3%; margin-right: 3%; margin-top: 2%">  
-                    <table class="table" id="sizes" style="border: none;">
-                        <thead class="thead-dark" style=" padding-top:2px;padding-bottom:5px;">
-                            <tr>                   
-                                <th width="50%" style="text-align: left;">Size</th>   
-                                <th width="50%" style="text-align: left;">Quantity</th>   
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php 
-                                $sql = "SELECT size,size_id FROM tbl_product_size";
-                    
-                                $result = mysqli_query($conn, $sql);
-                                // print_r($result);
-                                while($row = mysqli_fetch_array($result))
-                                {     
-                                    // echo $row['group_name']; 
-                                    echo '<tr>
-                                                <td><input type="checkbox" name="size_list[]" id="'.$row['size'].'" value="'.$row['size'].'" style="float:left"><label style="font-weight: normal; float: left;margin-left:10px;">'.$row['size'].'</label></td>
-                                                <td><input type="number"  id="quantity_'.$row['size'].'" class="form-control clearfix" name="quantity_list[]"></td>
-                                          </tr>';   
-                                }
-                                if (!$result)
-                                {
-                                    die ('SQL Error: ' . mysqli_error($conn));
-                                }
-                            ?>   
-                        </tbody>
-                    </table>              
-                </div>
+                <table class="table" id="sizes" style="border: none;">
+                    <thead class="thead-dark" style=" padding-top:2px;padding-bottom:5px;">
+                        <tr>                   
+                            <th width="50%" style="text-align: left;">Size</th>   
+                            <th width="50%" style="text-align: left;">Quantity</th>   
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php 
+                            $sql = "SELECT size,size_id FROM tbl_product_size";
+                
+                            $result = mysqli_query($conn, $sql);
+                            // print_r($result);
+                            while($row = mysqli_fetch_array($result))
+                            {     
+                                // echo $row['group_name']; 
+                                echo '<tr>
+                                            <td><input type="checkbox" name="size_list[]" id="'.$row['size'].'" value="'.$row['size'].'" style="float:left"><label style="font-weight: normal; float: left;margin-left:10px;">'.$row['size'].'</label></td>
+                                            <td><input type="number"  id="quantity_'.$row['size'].'" class="form-control clearfix" name="quantity_list[]"></td>
+                                        </tr>';   
+                            }
+                            if (!$result)
+                            {
+                                die ('SQL Error: ' . mysqli_error($conn));
+                            }
+                        ?>   
+                    </tbody>
+                </table>
 
                 <button type="submit" value="submit" id="btn_edit_products" name="btn_edit_products" class="btn btn-primary" style="float: right;">Update</button>
             </div>
@@ -348,4 +405,46 @@ $(document).ready(function(){
     });
 });
 
+</script>
+
+<script>
+var expanded = false;
+
+function showCheckboxes() {
+  var checkboxes = document.getElementById("checkboxes");
+  if (!expanded) {
+    checkboxes.style.display = "block";
+    expanded = true;
+  } else {
+    checkboxes.style.display = "none";
+    expanded = false;
+  }
+}
+</script>
+
+
+
+<script type="text/javascript">
+    
+   $(document).ready(function(){
+    var product_id = '<?php echo $product_id; ?>';
+    console.log(product_id)
+    $.ajax({
+        url:'fetch_keywords.php',
+        method:'POST',
+        data: {'product_id': product_id},
+        dataType:"json",
+        success: function(data){
+           
+            console.log(data);
+          
+            for (index = 0; index < data.length; index++) {
+                // console.log("inside :")
+                console.log(data[index]);
+                document.getElementById(data[index]['keyword']).checked = true;   
+            }
+        },
+
+    });
+});
 </script>

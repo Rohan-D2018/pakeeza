@@ -1,6 +1,8 @@
 <?php
 session_start();
 require 'config.php';
+// error_reporting(E_ALL);
+// ini_set('display_errors', TRUE);
 
 if (!isset($_SESSION['username']))
     {

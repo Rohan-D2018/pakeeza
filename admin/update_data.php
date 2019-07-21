@@ -18,7 +18,14 @@ if(isset($_POST["btn_edit_products"]))
     $product_color =  mysqli_real_escape_string($conn, $_POST['product_color2']);
     // $product_keywords =  $_POST['product_keywords2'];
 
-     $product_keywords = '';
+    if(isset($_POST["product_keywords2"])){
+        $product_keywords = mysqli_real_escape_string($conn, $_POST['product_keywords2']);
+    }
+    else{
+        $product_keywords = "";
+    }
+
+    $product_keywords = '';
     foreach($_POST["product_keywords"] as $row)
     {
      $product_keywords .= $row . ', ';
@@ -161,6 +168,30 @@ if(isset($_POST["btn_edit_products"]))
             $sql ="INSERT INTO tbl_product_size_mapping (size_id,product_id,product_quantity) VALUES ($size_id,$product_id,$product_quantity)";
             $result = mysqli_query($conn,$sql);
             $quantity_counter += 1;
+        }
+    }
+
+    if(!empty($_POST['product_keywords2'])) 
+    {
+        
+        $sql_2 ="DELETE FROM tbl_product_keyword_mapping  WHERE product_id = '$product_id'";
+        $result_2 = mysqli_query($conn,$sql_2);
+
+        $product_keywords =  $_POST['product_keywords2'];
+        // $sizes= $size_list;
+    
+        foreach ($product_keywords as $keyword)
+        {
+            
+            $sql = "SELECT DISTINCT(keyword_id) from tbl_keywords WHERE keyword = '$keyword'";
+            $result = mysqli_query($conn,$sql);
+            $row = mysqli_fetch_array($result);
+            $keyword_id = $row['keyword_id'];
+            echo($keyword_id);
+            
+            $sql ="INSERT INTO tbl_product_keyword_mapping (product_id,keyword_id) VALUES ($product_id,$keyword_id)";
+            $result = mysqli_query($conn,$sql);
+        
         }
     }
 

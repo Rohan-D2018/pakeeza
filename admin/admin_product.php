@@ -120,15 +120,19 @@ function add_products()
         // }
 
 
-       
-        $product_keywords = '';
+        if(isset($_POST["product_keywords"])){
+            $product_keywords = mysqli_real_escape_string($conn, $_POST["product_keywords"]);
+        }
+        else{
+            $product_keywords = "NA";
+        }
+        
+        $product_keywords_array = '';
         foreach($_POST["product_keywords"] as $row)
         {
-         $product_keywords .= $row . ', ';
+            $product_keywords_array .= $row . ', ';
         }
-        $product_keywords = substr($product_keywords, 0, -2);
-        // echo "\nThe selected data\n";
-        // echo ($product_keywords);
+        $product_keywords_array = substr($product_keywords, 0, -2);
 
 
      
@@ -144,7 +148,7 @@ function add_products()
 
         
         // insert records in product table
-        $sql ="INSERT INTO tbl_products (product_name,product_type,price,product_code,material,discount,product_description,gender,product_keywords,collection_id,sub_branch_id) VALUES ('$product_name','$product_type','$product_price','$product_code','$product_material','$product_discount','$product_desp','$gender','$product_keywords','$collection_id','$sub_branch_id')";
+        $sql ="INSERT INTO tbl_products (product_name,product_type,price,product_code,material,discount,product_description,gender,product_keywords,collection_id,sub_branch_id) VALUES ('$product_name','$product_type','$product_price','$product_code','$product_material','$product_discount','$product_desp','$gender','$product_keywords_array','$collection_id','$sub_branch_id')";
         
         echo $sql;
         $result = mysqli_query($conn,$sql);
@@ -252,7 +256,25 @@ function add_products()
         //     }
         // }
 
-
+        if(!empty($_POST['product_keywords'])) 
+        {
+        
+            $product_keywords = $_POST['product_keywords'];
+            // $sizes= $size_list;
+        
+            foreach ($product_keywords as $keyword)
+            {
+                
+                $sql = "SELECT DISTINCT(keyword_id) from tbl_keywords WHERE keyword = '$keyword'";
+                $result = mysqli_query($conn,$sql);
+                $row = mysqli_fetch_array($result);
+                $keyword_id = $row['keyword_id'];
+                
+                $sql ="INSERT INTO tbl_product_keyword_mapping (product_id,keyword_id) VALUES ($product_id,$keyword_id)";
+                $result = mysqli_query($conn,$sql);
+            
+            }
+        }
 }
 add_products();
 header("Location: products.php");
