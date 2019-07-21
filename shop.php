@@ -107,33 +107,27 @@ $collections = mysqli_query($conn, $sql);
                                     </ul>
                                 </li>
                             </ul>
-                        </div>
 
-                        <!-- ##### Single Widget ##### -->
-                        <div class="widget color mb-50">
-                            <!-- Widget Title 2 -->
-                            <p class="widget-title2 mb-30">Color</p>
-                            <div class="widget-desc">
-                                <ul class="d-flex">
-                                    <?php
-                                        $sql ="SELECT * FROM tbl_product_color";
-                                        $colors = mysqli_query($conn, $sql);
-                                        while($row = mysqli_fetch_array($colors)){
-                                            echo "<li><a class='color_filter' href='#' id='".$row['product_color_hex']."' style='background-color:".$row['product_color_hex'].";'></a></li>";  
-                                        }
-                                    ?>
-                                    <!-- <li><a href="#" class="color1"></a></li>
-                                    <li><a href="#" class="color2"></a></li>
-                                    <li><a href="#" class="color3"></a></li>
-                                    <li><a href="#" class="color4"></a></li>
-                                    <li><a href="#" class="color5"></a></li>
-                                    <li><a href="#" class="color6"></a></li>
-                                    <li><a href="#" class="color7"></a></li>
-                                    <li><a href="#" class="color8"></a></li>
-                                    <li><a href="#" class="color9"></a></li>
-                                    <li><a href="#" class="color10"></a></li> -->
-                                </ul>
-                            </div>
+                            <!-- ##### Single Widget ##### -->
+                            <ul id="menu-content2" class="menu-content">
+                                <!-- Single Item -->
+                                <li>
+                                    <a class="widget-title2 mb-30 collapsed" href="#" data-toggle="collapse" data-target="#color">Color <i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                                    <ul class="sub-menu collapse widget color mb-50" id="color">
+                                        <div class="widget-desc">
+                                            <ul class="d-flex">
+                                                <?php
+                                                    $sql ="SELECT * FROM tbl_product_color";
+                                                    $colors = mysqli_query($conn, $sql);
+                                                    while($row = mysqli_fetch_array($colors)){
+                                                        echo "<li><a class='color_filter' href='#' id='".$row['product_color_hex']."' style='background-color:".$row['product_color_hex'].";'></a></li>";  
+                                                    }
+                                                ?>
+                                            </ul>
+                                        </div>
+                                    </ul>
+                                </li>
+                            </ul>
                         </div>
 
                         <!-- ##### Single Widget ##### -->
@@ -220,7 +214,7 @@ $collections = mysqli_query($conn, $sql);
                                             <div class="hover-content">
                                                 <!-- Add to Cart -->
                                                 <div class="add-to-cart-btn">
-                                                    <a href="#" class="btn essence-btn">Add to Cart</a>
+                                                    <a href="<?php echo 'product_details.php?id='.$row["product_id"]; ?>" class="btn essence-btn">Add to Cart</a>
                                                 </div>
                                             </div>
                                         </div>

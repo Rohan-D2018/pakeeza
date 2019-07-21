@@ -27,7 +27,7 @@ require 'config.php';
                 <div id="gallery" class="row">
                     <!-- <img id="default" src="http://www.stleos.uq.edu.au/wp-content/uploads/2016/08/image-placeholder-350x350.png" data-image="http://www.stleos.uq.edu.au/wp-content/uploads/2016/08/image-placeholder-350x350.png"> -->
                 </div>
-                <div class="row clearfix" style="margin-left: 3%;margin-right: 1%;">
+                <div class="row clearfix" id="default-img" style="margin-left: 3%;margin-right: 1%;">
                     <img class="img-fluid" id="default" src="http://via.placeholder.com/400x550">
                     <input type="file" name= "files[]" id="profile-img" style="margin-top: 3%" multiple>
                     <input type="button" id="removeImage1" value="x" class="btn-rmv1 btn btn-success" style="margin-top: 3%;margin-left:5%"/>
@@ -249,8 +249,8 @@ $(document).ready(function(){
         e.preventDefault();
         $("#profile-img").val("");
         $("#profile-img-tag").attr("src", "");
-        // $('.preview1').removeClass('it');
-        // $('.btn-rmv1').removeClass('rmv');
+        $("#gallery img").remove();
+        $("#default-img").prepend('<img class="img-fluid" id="default" src="http://via.placeholder.com/400x550">');
     });
 
     $(function() {
