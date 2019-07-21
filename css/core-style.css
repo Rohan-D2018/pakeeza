@@ -238,7 +238,7 @@ img {
   font-weight: 600; }
   .essence-btn:hover, .essence-btn:focus {
     color: #ffffff;
-    background-color: #dc0345; }
+    background-color: #FDBA17; }
 
 /* :: 4.0 Header Area CSS */
 .header_area {
@@ -1139,9 +1139,9 @@ img {
   position: relative;
   z-index: 1;
   width: 100%;
-  height: 140px; }
+  height: 400px; }
   .breadcumb_area:after {
-    background-color: rgba(255, 255, 255, 0.9);
+    /* background-color: rgba(211, 120, 120, 0.9); */
     position: absolute;
     width: 100%;
     height: 100%;

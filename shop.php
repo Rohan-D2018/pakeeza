@@ -1,15 +1,53 @@
 <?php
 
 include('header.php');
-$sql ="SELECT * FROM tbl_products WHERE delete_status=0";
-$products = mysqli_query($conn, $sql);
+if(isset($_POST["search"]))
+{
+	//echo $_POST["search"];
+	$sql ="SELECT * FROM tbl_products WHERE delete_status=0 and product_name like '%".$_POST["search"]."%' or product_description like '%".$_POST["search"]."%'";
+	//echo $sql;
+	$products = mysqli_query($conn, $sql);
+	if(mysqli_num_rows($products)==0)
+	{
+		$sql ="SELECT * FROM tbl_products WHERE delete_status=0 and collection_id in (select collection_id from tbl_collections where delete_status=0 and collection_name like '%".$_POST["search"]."%' or collection_description like '%".$_POST["search"]."%') or sub_branch_id in (select sub_branch_id from tbl_sub_branch where delete_status=0 and sub_branch_name like '%".$_POST["search"]."%' or sub_branch_description like '%".$_POST["search"]."%')";
+		//echo $sql;
+		$products = mysqli_query($conn, $sql);
+		if(mysqli_num_rows($products)==0)
+		{
+			$sql = "select * from tbl_products where product_id in (select product_id from tbl_product_keyword_mapping where keyword_id in (select keyword_id from tbl_keywords where keyword like '%".$_POST["search"]."%'))";
+			//echo $sql;
+			$products = mysqli_query($conn, $sql);
+			if(mysqli_num_rows($products)==0)
+			{
+				$sql ="SELECT * FROM tbl_products WHERE delete_status=0";
+				$products = mysqli_query($conn, $sql);
+			}
+		}
+	}
+}
+else if(isset($_GET["id"]))
+{
+	echo $_GET["id"];
+	$sql ="SELECT * FROM tbl_products WHERE delete_status=0 and sub_branch_id=".$_GET["id"];
+	$products = mysqli_query($conn, $sql);
+	if(mysqli_num_rows($products)==0)
+	{
+		$sql ="SELECT * FROM tbl_products WHERE delete_status=0";
+		$products = mysqli_query($conn, $sql);
+	}
+}
+else
+{
+	$sql ="SELECT * FROM tbl_products WHERE delete_status=0";
+	$products = mysqli_query($conn, $sql);
+}
 
 $sql ="SELECT * FROM tbl_collections WHERE delete_status=0 ORDER BY collection_name";
 $collections = mysqli_query($conn, $sql);
 ?>
     <!-- ##### Breadcumb Area Start ##### -->
-    <div class="breadcumb_area bg-img" style="background-image: url(img/bg-img/breadcumb.jpg);">
-        <div class="container h-100">
+    <div class="breadcumb_area bg-img" style="background-image: url(img/skyline.png);">
+        <div class="container h-50">
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="page-title text-center">
@@ -22,7 +60,7 @@ $collections = mysqli_query($conn, $sql);
     <!-- ##### Breadcumb Area End ##### -->
 
     <!-- ##### Shop Grid Area Start ##### -->
-    <section class="shop_grid_area section-padding-80">
+    <section class="shop_grid_area">
         <div class="container">
             <div class="row">
                 <div class="col-12 col-md-4 col-lg-3">

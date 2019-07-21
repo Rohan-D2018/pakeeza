@@ -6,6 +6,16 @@
         $sql = "SELECT * FROM tbl_sub_branch WHERE sub_branch_id=".$sub_branch_id;  //." AND delete_status=0";           
         $sub_branch = mysqli_query($conn, $sql);
         $sub_branch = mysqli_fetch_assoc($sub_branch);
+        $sub_branch_name = strtolower($sub_branch['sub_branch_name']);
+        if ($sub_branch_name == 'lams'){
+            $sub_branch_img = 'img/lams.png';
+        }else if($sub_branch_name == 'raqs'){
+            $sub_branch_img = 'img/raqs.png';
+        }else if($sub_branch_name == 'nawab'){
+            $sub_branch_img = 'img/nawab.png';
+        }else if($sub_branch_name == 'uns'){
+            $sub_branch_img = 'img/uns.png';
+        }
 
         $sql = "SELECT * FROM tbl_products WHERE sub_branch_id=".$sub_branch_id." AND delete_status=0";
         $products = mysqli_query($conn, $sql);
@@ -95,6 +105,18 @@
             </div>
         </div>
     </section>
+
+    <div class="container" style="padding-bottom: 20px;">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                <!-- <img src="img/Emblem.png"> -->
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <img class="img-fluid" src="<?php echo $sub_branch_img; ?>" height="200">
+            </div>
+        </div>
+    </div>
 <?php
     include('footer.php');
 ?>

@@ -154,12 +154,12 @@ $sub_branch = mysqli_query($conn, $sql);
             <!-- Header Meta Data -->
             <div class="header-meta d-flex clearfix justify-content-end">
                 <!-- Search Area -->
-                <!-- <div class="search-area">
-                    <form action="#" method="post">
+                <div class="search-area">
+                    <form action="shop.php" method="post">
                         <input type="search" name="search" id="headerSearch" placeholder="Type for search">
                         <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                     </form>
-                </div> -->
+                </div>
                 <!-- Favourite Area -->
                 <!-- <div class="favourite-area">
                     <a href="#"><img src="img/core-img/heart.svg" alt=""></a>
