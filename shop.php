@@ -29,7 +29,7 @@ $collections = mysqli_query($conn, $sql);
                     <div class="shop_sidebar_area">
 
                         <!-- ##### Single Widget ##### -->
-                        <div class="widget catagory mb-50">
+                        <div class="widget catagory" style="margin-bottom: 30px;">
                             <!-- Widget Title -->
                             <h6 class="widget-title mb-30">Categories</h6>
 

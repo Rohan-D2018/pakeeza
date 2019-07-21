@@ -70,6 +70,18 @@
     </div> -->
     <!-- ##### CTA Area End ##### -->
 
+    <div class="container" style="padding-bottom: 40px;">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                <!-- <img src="img/Emblem.png"> -->
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-center">
+                <img class="img-fluid" src="img/Emblem.png" style="height: 100px;">
+            </div>
+        </div>
+    </div>
+
     <!-- ##### New Arrivals Area Start ##### -->
     <section class="new_arrivals_area clearfix">
         <div class="container">
@@ -127,6 +139,18 @@
             </div>
         </div>
     </section>
+
+    <div class="container" style="padding-bottom: 20px;">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                <!-- <img src="img/Emblem.png"> -->
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <img class="img-fluid" src="img/Emblem.png" height="200">
+            </div>
+        </div>
+    </div>
     <!-- ##### New Arrivals Area End ##### -->
 
     <!-- ##### Brands Area Start ##### -->

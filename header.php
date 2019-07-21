@@ -1,27 +1,32 @@
 <?php
 session_start();
+// error_reporting(E_ALL);
+// ini_set('display_errors', TRUE);
 
 require 'admin/config.php';
 if (!isset($_SESSION['username'])){
     $login = FALSE;
+    $details_count = 0;
+    $products_cart = null;
+    $details_sum = null;
 }
 else{
     $login = TRUE;
+    $sql ="SELECT * FROM tbl_products where delete_status=0 and product_id in (SELECT product_id FROM tbl_cart where user_id='".$_SESSION['user_id']."' and cart_product_status=0)";
+    $products_cart = mysqli_query($conn, $sql);
+
+    $sql ="SELECT sum(price) as sum from tbl_products where delete_status=0 and product_id in (SELECT product_id FROM tbl_cart where user_id='".$_SESSION['user_id']."' and cart_product_status=0)";
+    $details_sum = mysqli_query($conn, $sql);
+
+    $sql ="SELECT count(cart_id) as count from tbl_cart where cart_product_status=0 and user_id='".$_SESSION['user_id']."'";
+    $details_count = mysqli_query($conn, $sql);
+    $details_count = mysqli_fetch_array($details_count)["count"];
 }
 $sql ="SELECT * FROM tbl_collections ORDER BY collection_name";
 $collections = mysqli_query($conn, $sql);
 
 $sql ="SELECT * FROM tbl_sub_branch ORDER BY sub_branch_name";
 $sub_branch = mysqli_query($conn, $sql);
-
-$sql ="SELECT * FROM tbl_products where delete_status=0 and product_id in (SELECT product_id FROM tbl_cart where user_id='".$_SESSION['user_id']."' and cart_product_status=0)";
-$products_cart = mysqli_query($conn, $sql);
-
-$sql ="SELECT sum(price) as sum from tbl_products where delete_status=0 and product_id in (SELECT product_id FROM tbl_cart where user_id='".$_SESSION['user_id']."' and cart_product_status=0)";
-$details_sum = mysqli_query($conn, $sql);
-
-$sql ="SELECT count(cart_id) as count from tbl_cart where cart_product_status=0 and user_id='".$_SESSION['user_id']."'";
-$details_count = mysqli_query($conn, $sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -76,13 +81,14 @@ $details_count = mysqli_query($conn, $sql);
                     <!-- Nav Start -->
                     <div class="classynav">
                         <ul>
-                            <li><a href="shop.php">Shop</a>
+                            <li><a href="#">Shop</a>
                                 <ul class="dropdown">
                                     <?php
                                         while($row = mysqli_fetch_array($sub_branch)){
                                             echo "<li><a href='sub_branch.php?id=".$row["sub_branch_id"]."'>".$row['sub_branch_name']."</a></li>";  
                                         }
                                     ?>
+                                    <li><a href="shop.php">All Products</a></li>
                                 </ul>
                                 <!-- <div class="megamenu">
                                     <ul class="single-mega cn-col-4">
@@ -125,7 +131,7 @@ $details_count = mysqli_query($conn, $sql);
                                     <li><a href="shop.php">Gulshan</a></li>
                                     <li><a href="shop.php">Aks</a></li> -->
                                     <li><a href="product_details.php/?id=42">Product Details</a></li>
-                                    <li><a href="checkout.html">Checkout</a></li>
+                                    <li><a href="checkout.php">Checkout</a></li>
                                     <!-- <li><a href="blog.html">Blog</a></li>
                                     <li><a href="single-blog.html">Single Blog</a></li>
                                     <li><a href="regular-page.html">Regular Page</a></li> -->
@@ -169,8 +175,7 @@ $details_count = mysqli_query($conn, $sql);
                 <?php }?>
                 <!-- Cart Area -->
                 <div class="cart-area">
-	    	    <?php $row = mysqli_fetch_array($details_count); ?>
-                    <a href="#" id="essenceCartBtn"><img src="img/core-img/bag.svg" alt=""> <span><?php echo $row["count"]?></span></a>
+                    <a href="#" id="essenceCartBtn"><img src="img/core-img/bag.svg" alt=""> <span><?php echo $details_count;?></span></a>
                 </div>
             </div>
 
@@ -192,7 +197,9 @@ $details_count = mysqli_query($conn, $sql);
 
             <!-- Cart List Area -->
             <div class="cart-list">
-		<?php while($row = $products_cart->fetch_assoc()){ 
+        <?php if($products_cart)
+              {
+                while($row = $products_cart->fetch_assoc()){ 
             $sql = "SELECT * FROM tbl_pictures WHERE product_id=".$row['product_id']." LIMIT 1";
             $product_img = mysqli_query($conn, $sql);
             $product_img = $product_img->fetch_assoc(); 
@@ -217,13 +224,18 @@ $details_count = mysqli_query($conn, $sql);
                         </div>
                     </a>
                 </div>
-		<?php } ?>
+        <?php       }
+               } ?>
             </div>
 
             <!-- Cart Summary -->
             <div class="cart-amount-summary">
                 <h2>Summary</h2>
-		        <?php $row = mysqli_fetch_array($details_sum); ?>
+		        <?php if ($details_sum){
+                        $row = mysqli_fetch_array($details_sum);
+                 }else{
+                     $row["sum"] = 0;
+                 } ?>
                 <ul class="summary-table">
                     <li><span>Subtotal:</span> <span>₹<?php echo $row["sum"]?></span></li>
                     <li><span>Delivery:</span> <span>₹150</span></li>
@@ -232,7 +244,7 @@ $details_count = mysqli_query($conn, $sql);
                     <li><span>Total:</span> <span>₹<?php echo $row["sum"]*1.18+150 ?></span></li>
                 </ul>
                 <div class="checkout-btn mt-100">
-                    <a href="checkout.html" class="btn essence-btn">check out</a>
+                    <a href="checkout.php" class="btn essence-btn">check out</a>
                 </div>
             </div>
         </div>
