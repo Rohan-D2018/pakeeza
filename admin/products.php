@@ -220,7 +220,8 @@ $(document).ready(function(){
     nonSelectedText: 'Select Keywords',
     enableFiltering: true,
     enableCaseInsensitiveFiltering: true,
-    buttonWidth:'400px'
+    buttonWidth:'400px',
+    maxHeight: 400
   });
 });
 </script>

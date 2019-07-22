@@ -2,11 +2,6 @@
 include('header.php');
 require 'admin/config.php';
 
-if (!isset($_SESSION['user_id'])){
-    header('Location: login/login.php');
-}
-$user_id = $_SESSION['user_id'];
-
 
 $api_key = "rzp_test_4wzwSi2HAtSYUL";
 

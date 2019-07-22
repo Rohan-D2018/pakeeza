@@ -1,11 +1,14 @@
 <?php
- require 'admin/config.php';
+//  require 'admin/config.php';
 
-if (!isset($_SESSION['user_id'])){
-    header('Location: login/login.php');
-}
-$user_id = $_SESSION['user_id'];
-
+// $user_id = 1;
+    session_start();
+    if (!isset($_SESSION['user_id'])){
+        header('Location: login/login.php');
+    }
+    // include('header.php');
+    require 'admin/config.php';
+    $user_id = $_SESSION['user_id']; 
 
 // echo "<pre>";
 // print_r($_POST);
@@ -39,7 +42,7 @@ else{
 }
 
 
-echo $radio_selection.' , '.$shipping_address.' ,'.$shipping_address2;
+// echo $radio_selection.' , '.$shipping_address.' ,'.$shipping_address2;
 
 
 //Inserting into orders
@@ -60,9 +63,13 @@ $result = mysqli_query($conn,$sql);
 // selecting the order id that recently added in the table
 $sql = "SELECT MAX(order_id) as order_id FROM tbl_orders";                  
 $result = mysqli_query($conn, $sql);
-$row = mysqli_fetch_array($result);
-$order_id = $row['order_id'];
 
+while ($row = mysqli_fetch_array($result))
+{
+// $row = mysqli_fetch_array($result);
+
+$order_id = $row['order_id'];
+}
 
 echo ($order_id);
 
@@ -85,6 +92,11 @@ while ($row = mysqli_fetch_array($result))
     $sql_1 = "INSERT INTO tbl_order_details(order_id,product_id,price,size,color) VALUES ('$order_id', '$product_id','$price','$size','$color')";    
     $result_1 = mysqli_query($conn, $sql_1);
 }
+
+
+
+$sql_1 = "INSERT INTO tbl_user_details(user_id,address_1) VALUES ('$user_id', '$final_shipping_address')";    
+$result_1 = mysqli_query($conn, $sql_1);
 
 header("Location: index.php");
 die;

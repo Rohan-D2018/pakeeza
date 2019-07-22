@@ -46,7 +46,7 @@
             <form class="cart-form clearfix" method="post" action="add_to_cart.php">
                 <!-- Select Box -->
                 <div class="select-box d-flex mt-50 mb-30">
-                    <select name="select" id="productSize" class="mr-5">
+                    <select name="size" id="productSize" class="mr-5">
                        <?php
                         $sql          = "SELECT ps.size
                                         FROM tbl_product_size ps
@@ -56,11 +56,11 @@
                         $product_info = mysqli_query($conn, $sql);
 
                         while($row=mysqli_fetch_assoc($product_info)){
-                            echo '<option value="value">Size: '.$row['size'].'</option>';
+                            echo '<option value="'.$row['size'].'">Size: '.$row['size'].'</option>';
                         }
                        ?>
                     </select>
-                    <select name="select" id="productColor">
+                    <select name="color" id="productColor">
                         <?php
                         $sql          = "SELECT pc.color_name
                                         FROM tbl_product_color pc
@@ -70,7 +70,7 @@
                         $product_info = mysqli_query($conn, $sql);
 
                         while($row=mysqli_fetch_assoc($product_info)){
-                            echo '<option value="value">Color: '.$row['color_name'].'</option>';
+                            echo '<option value="'.$row['color_name'].'">Color: '.$row['color_name'].'</option>';
                         }
                        ?>
                     </select>

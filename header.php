@@ -213,8 +213,12 @@ $sub_branch = mysqli_query($conn, $sql);
                             <span class="product-remove" id="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
                             <!--<span class="badge">Mango</span>-->
                             <h6><?php echo $row["product_name"] ?></h6>
-                            <p class="size">Size:  <?php echo 's' ?></p>
-                            <p class="color">Color:  <?php echo 'red' ?></p>
+                            <?php $sql = "select * from tbl_cart where product_id=".$row["product_id"];
+                                $cart_details = mysqli_query($conn, $sql);
+                                $row_cart = mysqli_fetch_array($cart_details); 
+                            ?>
+                            <p class="size">Size:  <?php echo $row_cart['size']; ?></p>
+                            <p class="color">Color:  <?php echo $row_cart['color']; ?></p>
                             <?php $sql = "select count(cart_id) as count from tbl_cart where product_id=".$row["product_id"];
                                 $product_count = mysqli_query($conn, $sql);
                                 $row_prod_count = mysqli_fetch_array($product_count); 

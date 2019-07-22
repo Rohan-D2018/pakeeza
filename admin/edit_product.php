@@ -97,7 +97,8 @@ if(isset($_GET['id'])){
                 </div>
                 <input type="file" name= "files[]" id="profile-img" style="margin-top: 3%" multiple>
 
-                 <button type="button" value="button" onclick="location.href='show_products.php';" class="btn btn-danger" style="float: right;">Back</button>
+                <button type="submit" value="submit" id="btn_edit_products" name="btn_edit_products" class="btn btn-primary" style="margin-top: 3%">Update</button>
+                <button type="button" value="button" onclick="location.href='show_products.php';" class="btn btn-danger" style="margin-top: 3%">Back</button>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                 <div class="form-group">
@@ -262,7 +263,7 @@ if(isset($_GET['id'])){
                     </tbody>
                 </table>
 
-                <button type="submit" value="submit" id="btn_edit_products" name="btn_edit_products" class="btn btn-primary" style="float: right;">Update</button>
+                <!--<button type="submit" value="submit" id="btn_edit_products" name="btn_edit_products" class="btn btn-primary" style="float: right;">Update</button>-->
             </div>
         </div>
     </form>
