@@ -94,11 +94,10 @@ while ($row = mysqli_fetch_array($result))
 }
 
 
-
 $sql_1 = "INSERT INTO tbl_user_details(user_id,address_1) VALUES ('$user_id', '$final_shipping_address')";    
 $result_1 = mysqli_query($conn, $sql_1);
 
-header("Location: index.php");
+header("Location: after_payment.php");
 die;
 
 
