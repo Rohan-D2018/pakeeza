@@ -188,9 +188,9 @@ $collections = mysqli_query($conn, $sql);
                                                 array_push($image_array, $row_image['picture_url']);
                                             }
                                             echo '<div class="product-img">
-                                                    <img src="admin/uploads/'.$image_array[0].'" alt="">
+                                                    <img class="lozad" data-src="admin/uploads/'.$image_array[0].'" alt="">
                                                     <!-- Hover Thumb -->
-                                                    <img class="hover-img" src="admin/uploads/'.$image_array[1].'" alt="">
+                                                    <img class="hover-img lozad"  data-src="admin/uploads/'.$image_array[1].'" alt="">
 
                                                     <!-- Product Badge -->
                                                     <!-- <div class="product-badge offer-badge">

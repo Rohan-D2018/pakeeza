@@ -1,7 +1,7 @@
 <?php
 session_start();
-// error_reporting(E_ALL);
-// ini_set('display_errors', TRUE);
+error_reporting(E_ALL);
+ini_set('display_errors', TRUE);
 
 require 'admin/config.php';
 if (!isset($_SESSION['username'])){
@@ -139,7 +139,7 @@ $sub_branch = mysqli_query($conn, $sql);
                                 </ul>
                             </li>
                             <!-- <li><a href="blog.html">Blog</a></li> -->
-                            <li><a href="contact.php">Contact</a></li>
+                            <li><a href="contact.php">Contact Us</a></li>
                             <?php if($login){ ?>
                                 <li style="float: right">
                                     <a href="#"><b>Welcome, <?php echo $_SESSION['fullname']; ?></b></a>

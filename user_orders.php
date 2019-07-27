@@ -1,93 +1,117 @@
 <?php
-$page = 'order';
-require 'admin/config.php';
-include('header.php');
+    include('header.php');
+    if (!isset($_SESSION['user_id'])){
+        header('Location: login/login.php');
+    }
+    require 'admin/config.php';
+    $user_id = $_SESSION['user_id']; 
+
+
+    // $user_id =1;
 ?>
 
 
-<div class="container-fluid">
-	<div class="row" style="margin-top: 1%;">
+    <!-- ##### Breadcumb Area Start ##### -->
+    <div class="breadcumb_area bg-img" style="background-image: url(img/bg-img/breadcumb.jpg);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="page-title text-center">
+                        <h2>Orders</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <h3 style="color: #00529b;">Orders </h3> 
-    <div class="table-responsive">    
-        <table class="table display" id="products" style="margin-top: 20px; width:100%">
-            <thead class="thead-dark" style="background-color: #e8eaf6; padding-top:2px;padding-bottom:5px;">
-                <tr>                   
-                    <th width="8%" style="text-align: left;">Order ID</th>
-                    <th width="7%" style="text-align: left;">Product ID</th>
-                    <th width="8%" style="text-align: left;">User Address ID</th>
-                    <th width="8%" style="text-align: left;">Order Number</th>
-                    <th width="5%" style="text-align: left;">Order Date</th>
-                    <th width="6%" style="text-align: left;">Shipping Date</th>
-                    <th width="9%" style="text-align: left;">Shipping ID</th>
-                    <th width="5%" style="text-align: left;">Order Tax</th>
-                    <th width="9%" style="text-align: left;">Payment ID</th>
-                    <th width="7%" style="text-align: left;">Payment Date</th>
-                    <th width="6%" style="text-align: left;">Payment Status</th>
-                    <th width="7%" style="text-align: left;">Transaction Status</th>
-                </tr>
-            </thead>
-            <tbody >
-                <?php
-                    $sql = "select * from tbl_orders 
-			    INNER JOIN tbl_order_details on tbl_orders.order_id=tbl_order_details.order_id
-			    INNER JOIN tbl_payment on tbl_orders.payment_id = tbl_payment.payment_id where user_id=".$_GET["user_id"];
-                    
-                    $result = mysqli_query($conn, $sql);
-                    
-                    if (!$result) 
-                    {
-                        die ('SQL Error: ' . mysqli_error($conn));
-                    }
-                    
-                    while ($row = mysqli_fetch_array($result))
-                    { 
-                        
-                            echo '<tr>
-                                <td width="8%" style="text-align: left;">'.$row['order_id'].'</td>
-                                <td width="7%" style="text-align: left;"><a href="product_details.php?id='.$row['product_id'].'">'.$row['product_id'].'</a></td>
-                                <td width="8%" style="text-align: left;"><a href="user_address_details.php?user_address_id='.$row['user_address_id'].'">'.$row['user_address_id'].'</a></td>
-                                <td width="7%" style="text-align: left;">'.$row['order_number'].'</td>
-                                <td width="5%" style="text-align: left;">'.$row['order_date'].'</td>
-                                <td width="6%" style="text-align: left;">'.$row['shipping_date'].'</td>
-                                <td width="7%" style="text-align: left;">'.$row['shipping_id'].'</td>
-                                <td width="5%" style="text-align: left;">'.$row['order_tax'].'</td>
-                                <td width="7%" style="text-align: left;">'.$row['payment_id'].'</td>
-                                <td width="7%" style="text-align: left;">'.$row['payment_date'].'</td>
-                                <td width="6%" style="text-align: left;">'.$row['payment_status'].'</td>
-                                <td width="7%" style="text-align: left;">'.$row['transaction_status'].'</td>
+    <!-- ##### Breadcumb Area End ##### -->
 
-                            </tr>';
-			
-                  
-                    }
-                ?>        
-            </tbody>
-        </table>
-    </div>        
-</div>
+    <!-- ##### Order details Area Start ##### -->
+    <div class="checkout_area section-padding-80">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-12">
+                    <div class="mt-50 clearfix">
+                        <div class="cart-page-heading mb-30">
+                            <h5>Your Orders</h5>
+                        </div>
+                        <div class="row">
+                               
+                            <?php
+
+                                $sql = "SELECT tbl_orders.order_id,tbl_orders.shipping_address,tbl_order_details.product_id,tbl_order_details.price,tbl_order_details.size,tbl_order_details.color,tbl_products.product_name,tbl_pictures.picture_url
+                                        FROM tbl_orders
+                                        INNER JOIN tbl_order_details ON tbl_orders.order_id = tbl_order_details.order_id
+                                        INNER JOIN tbl_products ON tbl_order_details.product_id = tbl_products.product_id
+                                        INNER JOIN tbl_pictures ON tbl_products.product_id = tbl_pictures.product_id
+                                        WHERE tbl_pictures.picture_url IN(SELECT MAX(tbl_pictures.picture_url) FROM tbl_pictures GROUP BY tbl_pictures.product_id) AND tbl_orders.user_id= '$user_id'";
+
+                                $results = mysqli_query($conn, $sql);
 
 
 
-<script>
-    $(document).ready(function() {
-    $('#products').DataTable({
-    "lengthMenu": [ 7,10, 25, 50, 75, 100 ], 
-    "paging":   true,
-    } );
-    var topRow = $('#products_wrapper').children().first();
-    topRow.children().first().attr('class','col-sm-3');
-    topRow.children().eq(1).attr('class','col-sm-6');
-    var searchBar = $('#products_filter').children().first();
-    searchBar.children().first().css('width','300px');
+                                if(mysqli_num_rows($results) >= 1) 
+                                {
+                                    
+                                    while ($row = mysqli_fetch_array($results))
+                                    {
 
-    var lengthMenu =  $('#products_length')
-    lengthMenu.css('display','none');
-} );
+                                        //Get image here
+                                        // $image_name = 'github-pro.png';
+                                        $image_name = $row['picture_url'];
 
-</script>
+
+                                        echo    '<div class="col-md-6 col-sm-6 mb-100">
+                                                    <div class="product-img" >
+                                                        <img src="admin/uploads/'.$image_name.'" alt="">
+                                                    </div>
+                                                </div>';
+
+                                                
+                                        //get rest of the information here
+                                        echo   '<div class="col-md-6 col-sm-6 mb-100">
+                                                    <div class="cart-page-heading">
+                                                        
+                                                        <h6>Order Number : '.$row['order_id'].'</h6>
+                                                        <p>The Details</p>
+                                                        <ul class="order-details-form mb-4">
+                                                            <li><strong>Product Name : </strong><span>'.$row['product_name'].'</span></li>
+                                                            <li><strong>Price : </strong><span>'.$row['price'].'</span></li>
+                                                            <li><strong>Size : </strong><span>'.$row['size'].'</span></li>
+                                                            <li><strong>Color : </strong><span>'.$row['color'].'</span></li>
+
+                                                        </ul>
+                                                        <p>Shipping Address</p>
+                                                         <ul class="order-details-form mb-4">
+                                                            <li><span>'.$row['shipping_address'].'</span></li>
+                                                        </ul>
+                                                    </div>
+                                                    <a href="product_details.php?id='.$row['product_id'].'" class="btn essence-btn">View</a>
+                                                    
+                                                </div>' ;
+                                         echo '<hr/>';             
+                                      
+                                    }
+                                   
+
+                                }
+
+                                else
+                                {
+                                    echo '<h4>No orders yet</h4>';
+                                }
+                            
+                            ?> 
+
+                        </div>          
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Order details end  ##### -->
+
 
 
 <?php
-include('footer.php');
+    include('footer.php');
 ?>

@@ -1,12 +1,15 @@
 <?php
+   
     session_start();
     if (!isset($_SESSION['user_id'])){
         header('Location: login/login.php');
     }
     include('header.php');
     require 'admin/config.php';
-    $user_id = $_SESSION['user_id'];    
-    // $user_id = 1;
+    
+    $user_id = $_SESSION['user_id']; 
+
+
     $api_key = "rzp_test_4wzwSi2HAtSYUL";
 
     // $api_key = "rzp_test_4wzwSi2HAtSYUL";
@@ -17,6 +20,8 @@
     $total_price_sum = $row["sum"];
 
     $amount_in_paisa = $total_price_sum*100;
+
+
 ?>
     <style>
         .razorpay-payment-button{
@@ -67,14 +72,14 @@
 
                                     if(mysqli_num_rows($results) >= 1) 
                                     {
-                                        $i = 0;
+                                        $i = 1;
                                         while ($row = mysqli_fetch_array($results))
                                         {
                                             echo'
                                                 <div class="col-12 mb-3" id ="p_scents">
                                                     <p>
-                                                        <input type="radio" name="optradio" value="1"> 
-                                                        <input type="text" class="form-control mb-3" id="shipping_address" name="shipping_address" value= "' . $row["address_1"] .' '. $row["address_2"].'"  readonly="true">
+                                                        <input type="radio" name="optradio" value="'. $i.'"> 
+                                                        <input type="text" class="form-control mb-3" id="shipping_address_'. $i.'" name="shipping_address_'. $i.'" value= "' . $row["address_1"] .' '. $row["address_2"].'"  readonly="true">
                                                     </p>    
                                                 </div>';
                                                 $i++;
@@ -88,7 +93,8 @@
                                         echo'
                                             <div class="col-12 mb-3">
                                                 <label for="street_address">Address <span>*</span></label>
-                                                <input type="text" class="form-control mb-3" id="shipping_address" name="shipping_address" value="">
+                                                <input type="radio" name="optradio" value="1"> 
+                                                <input type="text" class="form-control mb-3" id="shipping_address_1" name="shipping_address_1" value="">
                                                
                                             </div>';
                                     }
@@ -183,7 +189,7 @@
             console.log(i)
             $('#addScnt').one('click', function() {
                  
-                    $('<p><input type="radio" name="optradio" value="'+i+'"><input type="text" class="form-control mb-3" id="shipping_address' +i+'" name="shipping_address' +i+'" placeholder="Enter address "><button type="button" class="btn btn-danger btn_remove" id="remScnt_' +i+'">Remove</button></p>').appendTo(scntDiv);
+                    $('<p><input type="radio" name="optradio" value="'+i+'"><input type="text" class="form-control mb-3" id="shipping_address_' +i+'" name="shipping_address_' +i+'" placeholder="Enter address "><button type="button" class="btn btn-danger btn_remove" id="remScnt_' +i+'">Remove</button></p>').appendTo(scntDiv);
 
                     // i++;
                     return false;

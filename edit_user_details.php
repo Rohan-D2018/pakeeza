@@ -1,213 +1,130 @@
 <?php
-
-require 'admin/config.php';
-date_default_timezone_set('Asia/Kolkata');
-
-if (isset($_POST['submit_register'])) {
-  register();
-}
-
-function register()
-{
+   session_start();
+    if (!isset($_SESSION['user_id'])){
+        header('Location: login/login.php');
+    }
+    include('header.php');
     require 'admin/config.php';
-    $first_name = $_POST["first_name"];
-    $last_name =  $_POST["last_name"];
-    $email_address = $_POST["email_address"];
-    $contact_number = $_POST["contact_number"];
-    $user_pass =  $_POST["password"];
-    $conf_pass =  $_POST["confirm_password"];
-    $user_status = 0;
-    $user_dob = $_POST["user_dob"];
-    $user_gender = $_POST['user_gender'];
-
-    // Change the date format to yyy-mm-dd
-    $$user_dob = strtr($user_dob, '/', '-');
-    $user_dob =  date('Y-m-d', strtotime($$user_dob));
-
-    // Array to store the count of errors
-    $errors  = array(); 
 
 
-    $sql = "select * from tbl_users_credentials where user_email = '$email_address'";
-    
-    $results = mysqli_query($conn,$sql);
+    $user_id = $_SESSION['user_id']; 
 
-    if(mysqli_num_rows($results) > 0) 
+    date_default_timezone_set('Asia/Kolkata');
+
+    if (isset($_POST['submit'])) 
     {
+
+        $first_name = $_POST["first_name"];
+        $last_name =  $_POST["last_name"];
+        $email_address = $_POST["user_email"];
+        $contact_number = $_POST["user_contact_number"];
+        $user_dob = $_POST["user_dob"];
+        $user_gender = $_POST['user_gender'];
+
         
-    }
+        $sql = "UPDATE tbl_users_credentials SET first_name = '$first_name',last_name = '$last_name',user_contact_number = '$contact_number',user_dob = '$user_dob', user_gender = '$user_gender'
+                WHERE user_id = '$user_id'";
+        $result = mysqli_query($conn,$sql);
 
-    if ($user_pass != $conf_pass)
-    {
-        $message = "Please enter the correct password";
-        array_push($errors, "Password should be same");
-        echo "<script type='text/javascript'>alert('$message');</script>";
     }
-
-    if (count($errors) == 0) 
-    {
-        $sql1 = "insert into tbl_users_credentials(first_name,last_name,user_email,user_contact_number,user_pass,user_status,user_dob,user_gender) values('$first_name','$last_name','$email_address','$contact_number',MD5('$user_pass'),'$user_status','$user_dob','$user_gender');";
-        $result1 = mysqli_query($conn,$sql1);
-        header('Location: login.php');
-        exit();
-    }
-
-}
 ?>
 
-<!DOCTYPE html>
-<html lang="en"> 
-
-<head>
-    <!-- Required meta tags-->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" >
-    <meta name="author">
-    <meta name="keywords" >
-
-    <!-- Title Page-->
-    <title>Pakeeza</title>
-
-    <!-- Icons font CSS-->
-    <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
-    <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
-    <!-- Font special for pages-->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
-    <!-- Vendor CSS-->
-    <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
-    <link href="vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
-
-    <!-- Main CSS-->
-    <link href="css/register.css" rel="stylesheet" media="all">
-</head>
-
-<body>
-    <div class="page-wrapper p-t-15 p-b-15 font-poppins" style="background-color: rgba(255, 245, 159, 0.1)">
-        <div class="wrapper wrapper--w680">
-            <div class="card card-4">
-                <div class="card-body">
-                    <h2 class="title">Register Below</h2>
-                    <form method="POST">
-                        <div class="row row-space">
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <label class="label">First Name</label>
-                                    <input class="input--style-4" type="text" name="first_name" id="first_name" required autocomplete="off">
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <label class="label">Last Name</label>
-                                    <input class="input--style-4" type="text" name="last_name" id="last_name" required autocomplete="off">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row row-space">
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <label class="label">Birthday</label>
-                                    <div class="input-group-icon">
-                                        <input class="input--style-4 js-datepicker" type="text" id="user_dob" name="user_dob" autocomplete="off">
-                                        <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <label class="label">Gender</label>
-                                    <div class="rs-select2 js-select-simple select--no-search">
-                                        <select name="user_gender" required>
-                                            <option disabled="disabled" selected="selected">Choose option</option>
-                                            <option value="male">Male</option>
-                                            <option value="female">Female</option>
-                                            <option value="others">Others</option>
-                                        </select>
-                                        <div class="select-dropdown"></div>
-                                    </div>
-                                </div>
-                            </div>  
-                        </div>
-                        <div class="row row-space">
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <label class="label">Email</label>
-                                    <input class="input--style-4" type="email" id="email_address" name="email_address" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"  title="Please enter evalid email address" autocomplete="off">
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <label class="label">Phone Number</label>
-                                    <input class="input--style-4" type="text" id="contact_number" name="contact_number" min="1111111111" max="9999999999" title="Please enter evalid number" autocomplete="off">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row row-space">
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <label class="label">Password</label>
-                                    <input class="input--style-4" type="password" name="password" required>
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <label class="label">Confirm Password</label>
-                                    <input class="input--style-4" type="password" name="confirm_password" required>
-                                </div>
-                            </div>
-                        </div>
-                     
-                        <div class="p-t-15">
-                            <button class="btn btn--radius-2 btn--blue" type="submit"  name="submit_register">Submit</button>
-                        </div>
-                    </form>
+    <!-- ##### Breadcumb Area Start ##### -->
+    <div class="breadcumb_area bg-img" style="background-image: url(img/bg-img/breadcumb.jpg);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="page-title text-center">
+                        <h2>Register</h2>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <!-- ##### Breadcumb Area End ##### -->
 
+    <!-- ##### Checkout Area Start ##### -->
+    <div class="checkout_area section-padding-80">
+        <div class="container">
+            <div class="row">
 
-    <!-- Jquery JS-->
-    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
-    <!-- Vendor JS-->
-    <script src="vendor/select2/select2.min.js"></script>
-    <script src="vendor/datepicker/moment.min.js"></script>
-    <script src="vendor/datepicker/daterangepicker.js"></script>
+                <div class="col-12 col-md-6">
+                    <div class="checkout_details_area mt-50 clearfix">
 
-    <!-- Main JS-->
-    <script src="js/global.js"></script>
+                        <div class="cart-page-heading mb-30">
+                            <h5>Edit Information</h5>
+                        </div>
 
-    <script>
-	$(document).ready(function(){
+                        <form action="edit_user_details.php" method="post">
+                            <div class="row">
+                                <div class="col-12 mb-4">
+                                    <label for="email_address">Email Address <span>*</span></label>
+                                    <input type="email" class="form-control" id="user_email" name="user_email" readonly >
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="first_name">First Name <span>*</span></label>
+                                    <input type="text" class="form-control" id="first_name" name="first_name"  required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="last_name">Last Name <span>*</span></label>
+                                    <input type="text" class="form-control" id="last_name" name="last_name" required>
+                                </div>
+                                
+                                <div class="col-md-6 mb-3">
+                                    <label for="dob">Birthday <span>*</span></label>
+                                    <input type="date" class="form-control" id="user_dob" name="user_dob"  required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="gender">Gender <span>*</span></label>
+                                    <select class="w-100" id="user_gender" name="user_gender">
+                                        <option disabled="disabled" selected="selected">Choose option</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <label for="phone_number">Phone No <span>*</span></label>
+                                    <input type="number" class="form-control" id="user_contact_number" name="user_contact_number" min="0" >
+                                </div>
+                         
+                            </div>
+                            
+                            <button type="submit" name="submit" class="btn essence-btn" style="float: right;">Update</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Checkout Area End ##### -->
 
-	    var user_id = <?php echo $_GET["user_id"]; ?>;
-	    
-	    $.ajax({
-		    url:'fetch_user.php',
-		    method:'POST',
-		    data: {'user_id':user_id},
-		    dataType:"json",
-		    success: function(data){
-		        console.log(data[0]);
-                data = data[0];
-		        $('#first_name').val(data.first_name);
-		        $('#last_name').val(data.last_name);
-		        $('#user_dob').val(data.user_dob);
-		        $('#user_gender').val(data.user_gender);
-		        $('#email_address').val(data.user_email);
-		        $('#contact_number').val(data.user_contact_number);
-		        $('#password').val(data.user_pass);
-		        $('#confirm_password').val(data.user_pass);
-		  },
+<?php
+    include('footer.php');
+?>
 
-	      });
-	});
-    </script>
+<script type="text/javascript">
+    
+    $(document).ready(function(){
+        var user_id = '<?php echo $user_id; ?>';
+        console.log(user_id)
+        $.ajax({
+            url:'fetch_user_details.php',
+            method:'POST',
+            data: {'user_id': user_id},
+            dataType:"json",
+            success: function(data){
+                console.log(data);
+                console.log(data.user_gender);
+                $('#first_name').val(data.first_name);
+                $('#last_name').val(data.last_name);
+                $('#user_dob').val(data.user_dob);
+                $('#user_gender').val(data.user_gender);
+                $('#user_email').val(data.user_email);
+                $('#user_contact_number').val(data.user_contact_number);
 
-</body>
-
-</html>
-<!-- end document-->
+                
+            },
+        });
+    });
+</script>
