@@ -1,9 +1,8 @@
 <?php
-   session_start();
+    include('header.php');
     if (!isset($_SESSION['user_id'])){
         header('Location: login/login.php');
     }
-    include('header.php');
     require 'admin/config.php';
 
 

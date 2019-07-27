@@ -26,11 +26,13 @@ function login()
 			$user_id = $row['user_id'];
 			$username = $row['user_email'];
 			$fullname = $row['first_name'] . ' ' . $row['last_name'];
+			$first_name = $row['first_name'];
         }
 		
 		$_SESSION['user_id'] = $user_id;
 		$_SESSION['username'] = $username;
 		$_SESSION['fullname'] = $fullname;
+		$_SESSION['first_name'] = $first_name;
 		header('Location: ../shop.php');
 		
 	}

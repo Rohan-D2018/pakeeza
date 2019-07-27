@@ -1,7 +1,7 @@
 <?php
 session_start();
-error_reporting(E_ALL);
-ini_set('display_errors', TRUE);
+// error_reporting(E_ALL);
+// ini_set('display_errors', TRUE);
 
 require 'admin/config.php';
 if (!isset($_SESSION['username'])){
@@ -141,10 +141,14 @@ $sub_branch = mysqli_query($conn, $sql);
                             <!-- <li><a href="blog.html">Blog</a></li> -->
                             <li><a href="contact.php">Contact Us</a></li>
                             <?php if($login){ ?>
-                                <li style="float: right">
-                                    <a href="#"><b>Welcome, <?php echo $_SESSION['fullname']; ?></b></a>
-                                </li>
-                            <?php }?>
+                            <li><a href=""><b><?php echo $_SESSION['first_name']; ?></b></a>
+                                <ul class="dropdown" style="margin-right: 2%; margin-left: 2%;">
+                                    <li><a href="edit_user_details.php">Edit Profile</a></li>
+                                    <li><a href="user_orders.php">User Orders</a></li>
+                                    <li><a href="logout.php">Logout</a></li>
+                                </ul>
+                            </li>
+                        <?php }?>
                         </ul>
                     </div>
                     <!-- Nav End -->
@@ -154,7 +158,7 @@ $sub_branch = mysqli_query($conn, $sql);
             <!-- Header Meta Data -->
             <div class="header-meta d-flex clearfix justify-content-end">
                 <!-- Search Area -->
-                <div class="search-area">
+                <div class="search-area" style="border-right: 1px solid #ebebeb;">
                     <form action="shop.php" method="post">
                         <input type="search" name="search" id="headerSearch" placeholder="Type for search">
                         <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
@@ -170,7 +174,7 @@ $sub_branch = mysqli_query($conn, $sql);
                         <a href="login/login.php">Login</a>
                     </div>
                     <div class="user-login-info">
-                        <a href="login/register.php">Sign Up</a>
+                        <a href="register_user.php">Sign Up</a>
                     </div>
                 <?php }?>
                 <!-- Cart Area -->

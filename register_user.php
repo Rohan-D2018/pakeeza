@@ -51,7 +51,8 @@ function register()
     {
         $sql1 = "insert into tbl_users_credentials(first_name,last_name,user_email,user_contact_number,user_pass,user_status,user_dob,user_gender) values('$first_name','$last_name','$email_address','$contact_number',MD5('$user_pass'),'$user_status','$user_dob','$user_gender');";
         $result1 = mysqli_query($conn,$sql1);
-        header('Location: login/login.php');
+        echo "<script>window.location='login/login.php.php'</script>";
+        // header('Location: login/login.php');
         exit();
     }
 
@@ -84,7 +85,7 @@ function register()
                             <h5>Register Below</h5>
                         </div>
 
-                        <form action="register.php" method="post">
+                        <form action="register_user.php" method="post">
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="first_name">First Name <span>*</span></label>
