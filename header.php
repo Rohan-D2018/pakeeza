@@ -171,7 +171,7 @@ $sub_branch = mysqli_query($conn, $sql);
                 <!-- User Login Info -->
                 <?php if(!$login){ ?>
                     <div class="user-login-info">
-                        <a href="login/login.php">Login</a>
+                        <a href="login.php">Login</a>
                     </div>
                     <div class="user-login-info">
                         <a href="register_user.php">Sign Up</a>
@@ -246,10 +246,8 @@ $sub_branch = mysqli_query($conn, $sql);
                  } ?>
                 <ul class="summary-table">
                     <li><span>Subtotal:</span> <span>₹<?php echo $row["sum"]?></span></li>
-                    <li><span>Delivery:</span> <span>₹150</span></li>
-                    <li><span>CGST:</span> <span>9%</span></li>
-                    <li><span>SGST:</span> <span>9%</span></li>
-                    <li><span>Total:</span> <span>₹<?php echo $row["sum"]*1.18+150 ?></span></li>
+                    <li><span>Delivery:</span> <span><?php if($row["sum"] > 8000){?>₹0<?php } else {?>₹150<?php } ?></span></li>
+                    <li><span>Total:</span> <span>₹<?php if($row["sum"] > 8000){ echo $row["sum"]; } else { echo $row["sum"]+150; } ?></span></li>
                 </ul>
                 <div class="checkout-btn mt-100">
                     <a href="checkout.php" class="btn essence-btn">check out</a>

@@ -62,6 +62,15 @@ while ($row = mysqli_fetch_array($result))
     $result_1 = mysqli_query($conn, $sql_1);
 }
 
+
+$sql = "SELECT size_id as order_id FROM tbl_product_size LIMIT 1";                  
+$result = mysqli_query($conn, $sql);
+
+while ($row = mysqli_fetch_array($result))
+{
+    $size_id = $row['size_id'];
+}
+
 $sql = "SELECT * 
         FROM tbl_user_details
         WHERE address_1='$shipping_address'";
@@ -78,7 +87,22 @@ else
     $result_1 = mysqli_query($conn, $sql_1);
 }
 
-// header("Location: after_payment.php");
+
+$sql = "DELETE FROM tbl_cart
+        WHERE user_id = '$user_id'";
+$result = mysqli_query($conn, $sql);
+
+
+//descrement the size of product
+$sql = "UPDATE tbl_product_size_mapping  
+        SET product_quantity = product_quantity - 1
+        WHERE size_id = '$size_id' 
+        AND product_id = '$product_id'
+        AND product_quantity > 0";
+
+$result = mysqli_query($conn, $sql);
+
+
 echo "<script>window.location='after_payment.php'</script>";
 die;
 
