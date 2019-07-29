@@ -27,21 +27,40 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="hero-content">
-                        <h2 style="color: black"><?php echo $sub_branch['sub_branch_name']; ?></h2>
-                        <h6 style="color: black"><?php echo $sub_branch['sub_branch_description']; ?></h6>
+                        
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <div class="row">
+        <div class="col-12 text-center jumbotron">
+            <h2><?php echo $sub_branch['sub_branch_name']; ?></h2>
+            <h6><?php echo $sub_branch['sub_branch_description']; ?></h6>
+        </div>
+    </div>
+
+    <div class="container" style="">
+        <div class="row">
+            <div class="col-lg-4 col-md-3 col-sm-12 col-xs-12">
+                <!-- <img src="img/Emblem.png"> -->
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                <img class="img-fluid" src="<?php echo $sub_branch_img; ?>" height="50">
+            </div>
+        </div>
+    </div>
+    
     <!-- ##### Welcome Area End ##### -->
 
     <!-- ##### New Arrivals Area Start ##### -->
-    <section class="new_arrivals_area section-padding-80 clearfix">
+    <section class="new_arrivals_area clearfix">
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="section-heading text-center">
+                    <div class="section-heading text-center" style="padding-bottom: 3%">
                         <h2>Popular Products</h2>
                     </div>
                 </div>
