@@ -22,7 +22,7 @@ else{
     $details_count = mysqli_query($conn, $sql);
     $details_count = mysqli_fetch_array($details_count)["count"];
 }
-$sql ="SELECT * FROM tbl_collections ORDER BY collection_name";
+$sql ="SELECT * FROM tbl_collections WHERE delete_status=0 ORDER BY collection_name";
 $collections = mysqli_query($conn, $sql);
 
 $sql ="SELECT * FROM tbl_sub_branch ORDER BY sub_branch_name";

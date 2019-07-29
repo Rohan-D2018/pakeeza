@@ -50,11 +50,11 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-12">
-                    <div class="popular-products-slides owl-carousel">
+                <!-- <div class="col-12"> -->
+                    <!-- <div class="popular-products-slides owl-carousel"> -->
                         <?php while($row = $products->fetch_assoc()){?>
                             <!-- Single Product -->
-                            <div class="">
+                            <div class="col-12 col-sm-6 col-lg-4">
                                 <div class="single-product-wrapper">
                                     <!-- Product Image -->
                                     <?php
@@ -100,8 +100,8 @@
                                 </div>
                             </div>
                         <?php } ?>
-                    </div>
-                </div>
+                    <!-- </div> -->
+                <!-- </div> -->
             </div>
         </div>
     </section>

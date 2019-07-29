@@ -46,12 +46,12 @@ $sql ="SELECT * FROM tbl_collections WHERE delete_status=0 ORDER BY collection_n
 $collections = mysqli_query($conn, $sql);
 ?>
     <!-- ##### Breadcumb Area Start ##### -->
-    <div class="breadcumb_area bg-img" style="background-image: url(img/skyline.png);">
-        <div class="container h-50">
-            <div class="row h-100 align-items-center">
+    <div class="breadcumb_area bg-img" style="background-image: url(img/skyline.png);background-size: 90%">
+        <div class="container">
+            <div class="row align-items-center">
                 <div class="col-12">
                     <div class="page-title text-center">
-                        <h2>dresses</h2>
+                        <h2 style="margin-top: 4%">All Products</h2>
                     </div>
                 </div>
             </div>

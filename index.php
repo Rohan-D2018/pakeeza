@@ -4,7 +4,7 @@
     $sql = "SELECT * FROM tbl_collections WHERE delete_status=0";           
     $collections = mysqli_query($conn, $sql);
 
-    $sql ="SELECT * FROM tbl_products WHERE delete_status=0";
+    $sql ="SELECT * FROM tbl_products WHERE delete_status=0 ORDER BY product_added_on DESC LIMIT 10";
     $products = mysqli_query($conn, $sql);
 ?>
     <!-- ##### Welcome Area Start ##### -->
