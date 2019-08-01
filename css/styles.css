@@ -1,3 +1,24 @@
 #imp-caption:hover{
     color:#44abe0;
 }
+@media only screen and (min-width: 600px) {
+/* For tablets: */
+
+}
+  
+@media only screen and (min-width: 768px) {
+/* For desktop: */
+    .breadcumb_area{
+        background-size: 90%;
+    }
+    .breadcrumb_title{
+        margin-top: 4%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+/* For mobile phones: */
+    .breadcrumb_title{
+        margin-top: 20%;
+    }
+}

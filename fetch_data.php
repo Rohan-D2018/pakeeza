@@ -12,6 +12,9 @@ if(isset($_POST["action"]))
     else if(isset($_POST['range'])){
         $sql = $sql . " WHERE price BETWEEN ".$_POST['range'][0]." AND ".$_POST['range'][1]." AND delete_status=0";
     }
+    else if(isset($_POST['material'])){
+        $sql = $sql . " WHERE material='".$_POST['material']."' AND delete_status=0";
+    }
     else if(isset($_POST['color_hex'])){
         $color_hex = $_POST['color_hex'];
         $sql = "SELECT color_id FROM tbl_product_color WHERE product_color_hex='".$color_hex."'";

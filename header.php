@@ -130,8 +130,6 @@ $sub_branch = mysqli_query($conn, $sql);
                                     <!-- <li><a href="index.html">Noor</a></li>
                                     <li><a href="shop.php">Gulshan</a></li>
                                     <li><a href="shop.php">Aks</a></li> -->
-                                    <li><a href="product_details.php/?id=42">Product Details</a></li>
-                                    <li><a href="checkout.php">Checkout</a></li>
                                     <!-- <li><a href="blog.html">Blog</a></li>
                                     <li><a href="single-blog.html">Single Blog</a></li>
                                     <li><a href="regular-page.html">Regular Page</a></li> -->

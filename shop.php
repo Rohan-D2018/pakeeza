@@ -44,14 +44,17 @@ else
 
 $sql ="SELECT * FROM tbl_collections WHERE delete_status=0 ORDER BY collection_name";
 $collections = mysqli_query($conn, $sql);
+
+$sql = "SELECT DISTINCT material FROM tbl_products";
+$materials = mysqli_query($conn, $sql);
 ?>
     <!-- ##### Breadcumb Area Start ##### -->
-    <div class="breadcumb_area bg-img" style="background-image: url(img/skyline.png);background-size: 90%">
+    <div class="breadcumb_area bg-img" style="background-image: url(img/skyline.png);">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-12">
                     <div class="page-title text-center">
-                        <h2 style="margin-top: 4%">All Products</h2>
+                        <h2 class="breadcrumb_title">All Products</h2>
                     </div>
                 </div>
             </div>
@@ -60,10 +63,10 @@ $collections = mysqli_query($conn, $sql);
     <!-- ##### Breadcumb Area End ##### -->
 
     <!-- ##### Shop Grid Area Start ##### -->
-    <section class="shop_grid_area">
-        <div class="container">
+    <section class="shop_grid_area" style="margin-left: 3%; margin-right: 1%;">
+        <div class="container-fluid">
             <div class="row">
-                <div class="col-12 col-md-4 col-lg-3">
+                <div class="col-md-4 col-lg-2">
                     <div class="shop_sidebar_area">
 
                         <!-- ##### Single Widget ##### -->
@@ -90,20 +93,33 @@ $collections = mysqli_query($conn, $sql);
                         </div>
 
                         <!-- ##### Single Widget ##### -->
-                        <div class="widget price mb-50">
+                        <div class="widget mb-50">
                             <!-- Widget Title -->
                             <h6 class="widget-title mb-30">Filter by</h6>
                             <!-- Widget Title 2 -->
-                            <ul id="menu-content2" class="menu-content">
+                            <ul id="menu-content2" class="menu-content" style="margin-bottom: 5%">
                                 <!-- Single Item -->
                                 <li>
-                                    <a class="widget-title2 mb-30 collapsed" href="#" data-toggle="collapse" data-target="#pricing">Price <i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                                    <a class="widget-title2 collapsed" href="#" data-toggle="collapse" data-target="#pricing" style="margin-bottom: 2%;">Price <i class="fa fa-caret-down" aria-hidden="true"></i></a>
                                     <ul class="sub-menu collapse" id="pricing">
-                                        <div class="widget-desc">
-                                            <div id="slider-range"></div>
-                                            <label for="amount" style="margin-top: 10%">Price range:</label>
-                                            <input type="text" id="amount" readonly style="border:0;">
-                                        </div>
+                                        <li class="price" low="0" high="2000"><a href="#">0 - 2000</a></li>
+                                        <li class="price" low="2000" high="4000"><a href="#">2000 - 4000</a></li>
+                                        <li class="price" low="4000" high="6000"><a href="#">4000 - 6000</a></li>
+                                        <li class="price" low="6000" high="8000"><a href="#">6000 - 8000</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+
+                            <ul id="menu-content2" class="menu-content" style="margin-bottom: 5%">
+                                <!-- Single Item -->
+                                <li>
+                                    <a href="#" class="collapsed" data-toggle="collapse" data-target="#material" aria-expanded="false"  aria-controls="material">Material <i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                                    <ul class="sub-menu collapse" id="material">
+                                        <?php
+                                            while($row = mysqli_fetch_array($materials)){
+                                                echo "<li><a href='#' material='".$row['material']."' class='material_filter'>".$row['material']."</a></li>";  
+                                            }
+                                        ?>
                                     </ul>
                                 </li>
                             </ul>
@@ -280,6 +296,24 @@ $collections = mysqli_query($conn, $sql);
             }
         });
     });
+
+    $(".material_filter").click(function(){
+        var id = $(this).attr("material");
+        action = 'fetch_data';
+        $.ajax({
+            url:"fetch_data.php",
+            method:"POST",
+            data:{
+                action:action,
+                material:id
+            },
+            success: function(data){
+                data = JSON.parse(data);
+                $("#products").html(data[0]);
+                $("#product_count").html(data[1]);
+            }
+        });
+    });
 </script>
 
 <script>
@@ -297,9 +331,8 @@ $collections = mysqli_query($conn, $sql);
       " - Rs. " + $( "#slider-range" ).slider( "values", 1 ) );
   } );
 
-    $( "#slider-range" ).on( "slidechange", function( event, ui ) {
-        values = ui.values;
-
+    $( ".price" ).on( "click", function() {
+        var values = [$(this).attr("low"), $(this).attr("high")];
         action = 'fetch_data';
         $.ajax({
             url:"fetch_data.php",
@@ -310,6 +343,7 @@ $collections = mysqli_query($conn, $sql);
             },
             success: function(data){
                 data = JSON.parse(data);
+                console.log(data);
                 $("#products").html(data[0]);
                 $("#product_count").html(data[1]);
             }
