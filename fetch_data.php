@@ -67,7 +67,7 @@ if(isset($_POST["action"]))
                     <div class="hover-content">
                         <!-- Add to Cart -->
                         <div class="add-to-cart-btn">
-                            <a href="product_details.php?id='.$row["product_id"].'" class="btn essence-btn">Add to Cart</a>
+                            <a href="product_details.php?id='.$row["product_id"].'" class="btn essence-btn">View Product</a>
                         </div>
                     </div>
                 </div>

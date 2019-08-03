@@ -22,6 +22,10 @@ require 'config.php';
 
                     <b class="clearfix float-left">Banner Link:</b>
                     <input type="textbox" class="form-control clearfix" name="banner_link" required>
+
+                    <b class="clearfix float-left">Banner Order:</b>
+                    <input type="number" class="form-control clearfix" name="banner_orders" required>
+
                 <div class="clearfix float-left">
                     <input type="submit" value="Add Banner" class="btn btn-success" style="margin-bottom: 10px;">
                 </div>
@@ -38,14 +42,15 @@ require 'config.php';
         <thead class="thead-dark" style="background-color: #e8eaf6; padding-top:2px;padding-bottom:5px;">
             <tr>                   
                 <th width="20%" style="text-align: left;">Banner Title</th>
-                <th width="40%" style="text-align: left;">Banner Link</th>
+                <th width="30%" style="text-align: left;">Banner Link</th>
+                <th width="10%" style="text-align: left;">Banner Order</th>
                 <th width="15%" style="text-align: right;"></th>
                 <th width="15%" style="text-align: left;"></th>
             </tr>
         </thead>
         <tbody >
             <?php
-                $sql = "SELECT banner_id,banner_title,banner_link FROM tbl_banners";
+                $sql = "SELECT banner_id,banner_title,banner_link,banner_order FROM tbl_banners";
                 
                 $result = mysqli_query($conn, $sql);
                 
@@ -60,10 +65,10 @@ require 'config.php';
                 // if equal to current
                     echo '<tr>
                         <td width="20%" style="text-align: left;">'.$row['banner_title'].'</td>
-                        <td width="40%" style="text-align: left;">'.$row['banner_link'].'</td>
+                        <td width="30%" style="text-align: left;">'.$row['banner_link'].'</td>
+                        <td width="10%" style="text-align: left;">'.$row['banner_order'].'</td>
 
                         <td width="3%" style="text-align: left;"><a href="edit_banners.php?id='.$row['banner_id'].'"><button type="button" name="edit" class="btn btn-primary edit_data"><i class="fa fa-pencil"></i></button></a></td>
-
                         <td width="15%" style="text-align: left;"><a href="javascript:delete_id('.$row['banner_id'].')"><button type="button" class="btn btn-danger fa fa-trash"></button></a></td>
                     </tr>';
                  

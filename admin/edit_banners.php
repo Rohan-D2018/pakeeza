@@ -33,6 +33,10 @@ if(isset($_GET['id']))
 
                     <b class="clearfix float-left">Banner URL:</b>
                     <textarea class="form-control clearfix" cols=10 rows=5 name="banner_title2" id="banner_title2" required></textarea>
+
+                    <b class="clearfix float-left">Banner Order:</b>
+                    <input type="text" class="form-control clearfix" name="banner_orders2" id="banner_orders2" required>
+
                     <div class="clearfix float-left">
                         <button type="submit" value="submit" id="btn_edit_banner" name="btn_edit_banner" class="btn btn-primary" style="float: right;">Update</button>
                     </div>
@@ -58,9 +62,11 @@ $(document).ready(function(){
             data: {'banner_id':banner_id},
             dataType:"json",
             success: function(data){
+                console.log(data)
                 $('#banner_id2').val(data.banner_id);
                 $('#banner_title2').val(data.banner_title);
                 $('#banner_link2').val(data.banner_link);
+                $('#banner_orders2').val(data.banner_order);
                 $('#sub-branch-img').attr('src', 'uploads/banners/' + data.banner_picture_url);
           },
 

@@ -23,14 +23,19 @@ if(isset($_GET['id']))
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <b class="clearfix float-left">Collection Id:</b>
-                    <input type="text" class="form-control clearfix" name="collection_id2" id="collection_id2" readonly="true">
+                <input type="text" class="form-control clearfix" name="collection_id2" id="collection_id2" readonly="true">
 
-                    <b class="clearfix float-left">Collection Name:</b>
-                    <input type='text' class='form-control ' name='collection_name2' id='collection_name2' required>
+                <b class="clearfix float-left">Collection Name:</b>
+                <input type='text' class='form-control ' name='collection_name2' id='collection_name2' required>
 
-                    <b class="clearfix float-left">Collection Description:</b>
-                    <textarea class="form-control clearfix" cols=10 rows=5 name="collection_description2"  id='collection_description2' required></textarea>
+                <b class="clearfix float-left">Collection Description:</b>
+                <textarea class="form-control clearfix" cols=10 rows=5 name="collection_description2"  id='collection_description2' required></textarea>
+
                 <div class="clearfix float-left">
+                    <b class="clearfix float-left">Show On Langing Page:</b>
+                    <input type="checkbox" name="show_on_landing_page2" id="show_on_landing_page2" value="1">  
+                </div>
+                <div class="clearfix float-right">
                      <button type="submit" value="submit" id="btn_edit_collections" name="btn_edit_collections" class="btn btn-primary">Update</button>
                 </div>
             </div>
@@ -54,10 +59,23 @@ $(document).ready(function(){
             data: {'collection_id':collection_id},
             dataType:"json",
             success: function(data){
+                // console.log(data)
                 $('#collection_id2').val(data.collection_id);
                 $('#collection_name2').val(data.collection_name);
                 $('#collection_description2').val(data.collection_description);
+                // $('#show_on_landing_page2').val(data.show_on_landing_page).checked = true;
                 $('#collection-img').attr('src', 'uploads/collections/' + data.collection_picture_url);
+                console.log(data.show_on_landing_page)
+
+                var show_on_landing_page_flag = data.show_on_landing_page 
+                if(show_on_landing_page_flag ==1)
+                {
+                    // console.log("inside");
+                    document.getElementById('show_on_landing_page2').checked = true;
+                }
+                else{
+                    document.getElementById('show_on_landing_page2').checked = false;
+                }
           },
 
       });

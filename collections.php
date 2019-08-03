@@ -81,7 +81,7 @@
                                 <div class="hover-content">
                                     <!-- Add to Cart -->
                                     <div class="add-to-cart-btn">
-                                        <a href="<?php echo 'product_details.php?id='.$row["product_id"]; ?>" class="btn essence-btn">Add to Cart</a>
+                                        <a href="<?php echo 'product_details.php?id='.$row["product_id"]; ?>" class="btn essence-btn">View Product</a>
                                     </div>
                                 </div>
                             </div>

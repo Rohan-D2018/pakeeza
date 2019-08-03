@@ -208,7 +208,19 @@ if(isset($_POST["btn_edit_collections"]))
     $collection_name = mysqli_real_escape_string($conn, $_POST['collection_name2']);
    
     $collection_description =  mysqli_real_escape_string($conn, $_POST['collection_description2']);
-   
+
+
+
+    if(isset($_POST["show_on_landing_page2"])){
+        $show_on_landing_page = $_POST["show_on_landing_page2"];
+    }
+    else{
+        $show_on_landing_page = 0;
+    }
+
+    // echo($show_on_landing_page);   
+
+
     // File upload configuration
     $targetDir = "uploads/collections/";
     $allowTypes = array('jpg','png','jpeg','gif');
@@ -228,7 +240,7 @@ if(isset($_POST["btn_edit_collections"]))
             
             if(!file_exists($targetFilePath)){
                 if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){
-                    $sql ="UPDATE tbl_collections SET collection_name = '$collection_name',collection_description = '$collection_description', collection_picture_url='$file_name' WHERE collection_id = '$collection_id'";
+                    $sql ="UPDATE tbl_collections SET collection_name = '$collection_name',collection_description = '$collection_description', collection_picture_url='$file_name', show_on_landing_page = '$show_on_landing_page' WHERE collection_id = '$collection_id'";
                     $result = mysqli_query($conn,$sql);
                 }
             }else{                                  //rename the file if another one exist
@@ -237,14 +249,14 @@ if(isset($_POST["btn_edit_collections"]))
                 $new_dir = $targetDir.$new_file_name;
                 
                 if(move_uploaded_file($_FILES["file"]["tmp_name"], $new_dir)){
-                    $sql ="UPDATE tbl_collections SET collection_name = '$collection_name',collection_description = '$collection_description', collection_picture_url='$new_file_name' WHERE collection_id = '$collection_id'";
+                    $sql ="UPDATE tbl_collections SET collection_name = '$collection_name',collection_description = '$collection_description', collection_picture_url='$new_file_name',show_on_landing_page = '$show_on_landing_page' WHERE collection_id = '$collection_id'";
                     $result = mysqli_query($conn,$sql);
                 }           
             }
         }
     }
     else{
-        $sql ="UPDATE tbl_collections SET collection_name = '$collection_name',collection_description = '$collection_description' WHERE collection_id = '$collection_id'";
+        $sql ="UPDATE tbl_collections SET collection_name = '$collection_name',collection_description = '$collection_description',show_on_landing_page = '$show_on_landing_page' WHERE collection_id = '$collection_id'";
         $result = mysqli_query($conn,$sql);
     }
     
@@ -377,6 +389,8 @@ if(isset($_POST["btn_edit_banner"]))
     $banner_title =  $_POST['banner_title2'];
     $banner_link =  $_POST['banner_link2'];
 
+    $banner_order =  $_POST['banner_orders2'];
+
     // File upload configuration
     $targetDir = "uploads/banners/";
     $allowTypes = array('jpg','png','jpeg','gif');
@@ -412,7 +426,7 @@ if(isset($_POST["btn_edit_banner"]))
         }
     }
     else{
-        $sql ="UPDATE tbl_banners SET banner_title = '$banner_title', banner_link = '$banner_link' WHERE banner_id = '$banner_id'";
+        $sql ="UPDATE tbl_banners SET banner_title = '$banner_title', banner_link = '$banner_link' , banner_order = '$banner_order' WHERE banner_id = '$banner_id'";
         $result = mysqli_query($conn,$sql);
     }
     

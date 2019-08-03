@@ -25,7 +25,7 @@ else{
 $sql ="SELECT * FROM tbl_collections WHERE delete_status=0 ORDER BY collection_name";
 $collections = mysqli_query($conn, $sql);
 
-$sql ="SELECT * FROM tbl_sub_branch ORDER BY sub_branch_name";
+$sql ="SELECT * FROM tbl_sub_branch ORDER BY sub_branch_id";
 $sub_branch = mysqli_query($conn, $sql);
 ?>
 <!DOCTYPE html>
@@ -82,7 +82,7 @@ $sub_branch = mysqli_query($conn, $sql);
                     <div class="classynav">
                         <ul>
                             <li><a href="#">Shop</a>
-                                <ul class="dropdown">
+                                <ul class="dropdown" style="height: 25vh !important;">
                                     <?php
                                         while($row = mysqli_fetch_array($sub_branch)){
                                             echo "<li><a href='sub_branch.php?id=".$row["sub_branch_id"]."'>".$row['sub_branch_name']."</a></li>";  
@@ -169,11 +169,11 @@ $sub_branch = mysqli_query($conn, $sql);
                 <!-- User Login Info -->
                 <?php if(!$login){ ?>
                     <div class="user-login-info">
+                        <a href="login.php"><img src="img/core-img/user.svg" alt=""></a>
+                    </div>
+                    <!-- <div class="user-login-info">
                         <a href="login.php">Login</a>
-                    </div>
-                    <div class="user-login-info">
-                        <a href="register_user.php">Sign Up</a>
-                    </div>
+                    </div> -->
                 <?php }?>
                 <!-- Cart Area -->
                 <div class="cart-area">

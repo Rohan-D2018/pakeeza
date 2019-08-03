@@ -21,6 +21,15 @@ function add_collection()
         $collection_description = "";
     }
 
+
+    if(isset($_POST["show_on_landing_page"])){
+        $show_on_landing_page = $_POST["show_on_landing_page"];
+    }
+    else{
+        $show_on_landing_page = 0;
+    }
+
+
     print_r($_FILES['file']);
 
     // insert images into tbl_pictures
@@ -43,7 +52,7 @@ function add_collection()
             
             if(!file_exists($targetFilePath)){
                 if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){
-                    $sql ="INSERT INTO tbl_collections (collection_name,collection_description,collection_picture_url) VALUES ('$collection_name','$collection_description','$file_name')";
+                    $sql ="INSERT INTO tbl_collections (collection_name,collection_description,collection_picture_url,show_on_landing_page) VALUES ('$collection_name','$collection_description','$file_name','$show_on_landing_page')";
                     $result = mysqli_query($conn,$sql);
                 }
             }else{                                  //rename the file if another one exist
@@ -52,7 +61,7 @@ function add_collection()
                 $new_dir = $targetDir.$new_file_name;
                 
                 if(move_uploaded_file($_FILES["file"]["tmp_name"], $new_dir)){
-                    $sql ="INSERT INTO tbl_collections (collection_name,collection_description,collection_picture_url) VALUES ('$collection_name','$collection_description','$new_file_name')";
+                    $sql ="INSERT INTO tbl_collections (collection_name,collection_description,collection_picture_url,show_on_landing_page) VALUES ('$collection_name','$collection_description','$new_file_name','$show_on_landing_page')";
                     $result = mysqli_query($conn,$sql);
                 }           
             }

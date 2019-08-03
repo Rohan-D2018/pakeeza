@@ -21,6 +21,21 @@ function add_banners()
         $banner_link = "";
     }
 
+
+
+    if(isset($_POST["banner_orders"])){
+        $banner_orders = $_POST["banner_orders"];
+    }
+    else{
+        $banner_orders = 1;
+    }
+    // if(isset($_POST["banner_order"])){
+    //     $banner_order = $_POST["banner_order"];
+    // }
+    // else{
+    //     $banner_order = "";
+    // }
+
     print_r($_FILES['file']);
 
     // insert images into tbl_pictures
@@ -52,7 +67,7 @@ function add_banners()
                 $new_dir = $targetDir.$new_file_name;
                 
                 if(move_uploaded_file($_FILES["file"]["tmp_name"], $new_dir)){
-                    $sql ="INSERT INTO tbl_banners (banner_title,banner_picture_url,banner_link) VALUES ('$banner_title','$new_file_name','$banner_link')";
+                    $sql ="INSERT INTO tbl_banners (banner_title,banner_picture_url,banner_link,banner_order) VALUES ('$banner_title','$new_file_name','$banner_link','$banner_orders')";
                     $result = mysqli_query($conn,$sql);
                 }           
             }

@@ -131,7 +131,7 @@ $materials = mysqli_query($conn, $sql);
                             <ul id="menu-content2" class="menu-content" style="margin-bottom: 5%">
                                 <!-- Single Item -->
                                 <li>
-                                    <a href="#" class="collapsed" data-toggle="collapse" data-target="#material" aria-expanded="false"  aria-controls="material">Material <i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                                    <a href="#" class="collapsed" data-toggle="collapse" data-target="#material" aria-expanded="false"  aria-controls="material">MATERIAL <i class="fa fa-caret-down" aria-hidden="true"></i></a>
                                     <ul class="sub-menu collapse" id="material">
                                         <?php
                                             while($row = mysqli_fetch_array($materials)){
@@ -266,7 +266,7 @@ $materials = mysqli_query($conn, $sql);
                                             <div class="hover-content">
                                                 <!-- Add to Cart -->
                                                 <div class="add-to-cart-btn">
-                                                    <a href="<?php echo 'product_details.php?id='.$row["product_id"]; ?>" class="btn essence-btn">Add to Cart</a>
+                                                    <a href="<?php echo 'product_details.php?id='.$row["product_id"]; ?>" class="btn essence-btn">View Product</a>
                                                 </div>
                                             </div>
                                         </div>

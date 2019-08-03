@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"> 
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -128,6 +128,11 @@
 	  color: white;
 	}
 
+	.center {
+	  display: block;
+	  margin-left: auto;
+	  margin-right: auto;
+	}
 </style>
 </head>
 <body>
@@ -147,6 +152,9 @@
 				<h4 class="modal-title">आपका यह नवाज़िश-ए-करम बरकरार रहे!</h4>	
 			</div>
 			<div class="modal-body">
+				<div class="logo-box">
+					<img src="img/logo.png" alt="" class="center">
+				</div>	
 				<p class="text-center">Thank you so much for shopping at Pakeeza! It was an absolute pleasure serving you and we sincerely hope you'll come back for more.</p>
 
 				<p class="text-center">In the meanwhile, let's be friends on Facebook and Instagram and do spread the word!</p>

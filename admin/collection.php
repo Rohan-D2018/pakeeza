@@ -25,7 +25,11 @@ require 'config.php';
                     <!-- <input type="textbox" class="form-control clearfix" name="collection_description" required> -->
 
                 <div class="clearfix float-left">
-                    <input type="submit" value="Add Collection" class="btn btn-success" style="margin-bottom: 10px;">
+                    <b class="clearfix float-left">Show On Langing Page:</b>
+                    <input type="checkbox" name="show_on_landing_page" id="show_on_landing_page" value="1">  
+                </div>
+                <div class="clearfix float-right">
+                    <input type="submit" value="Add Collection" class="btn btn-success" style="float:right;margin-bottom: 10px;">
                 </div>
             </div>
         </div>
@@ -41,13 +45,14 @@ require 'config.php';
             <tr>                   
                 <th width="20%" style="text-align: left;">Collection Name</th>
                 <th width="40%" style="text-align: left;">Collection Description</th>
-                <th width="15%" style="text-align: right;"></th>
-                <th width="15%" style="text-align: left;"></th>
+                <th width="20%" style="text-align: left;">Show on Landing page</th>
+                <th width="5%" style="text-align: right;"></th>
+                <th width="5%" style="text-align: left;"></th>
             </tr>
         </thead>
         <tbody >
             <?php
-                $sql = "SELECT collection_id,collection_name,collection_description FROM tbl_collections WHERE delete_status = 0";
+                $sql = "SELECT collection_id,collection_name,collection_description,show_on_landing_page FROM tbl_collections WHERE delete_status = 0";
                 
                 $result = mysqli_query($conn, $sql);
                 
@@ -63,11 +68,11 @@ require 'config.php';
                     echo '<tr>
                         <td width="20%" style="text-align: left;">'.$row['collection_name'].'</td>
                         <td width="40%" style="text-align: left;">'.$row['collection_description'].'</td>
-
-                        <td width="15%" style="text-align: left;"><a href="edit_collections.php?id='.$row['collection_id'].'"><button type="button" name="edit" class="btn btn-primary edit_data"><i class="fa fa-pencil"></i></button></a></td>
+                        <td width="20%" style="text-align: left;">'.$row['show_on_landing_page'].'</td>
+                        <td width="5%" style="text-align: left;"><a href="edit_collections.php?id='.$row['collection_id'].'"><button type="button" name="edit" class="btn btn-primary edit_data"><i class="fa fa-pencil"></i></button></a></td>
 
                         
-                        <td width="15%" style="text-align: left;"><a href="javascript:delete_id('.$row['collection_id'].')"><button type="button" class="btn btn-danger fa fa-trash"></button></a></td>
+                        <td width="5%" style="text-align: left;"><a href="javascript:delete_id('.$row['collection_id'].')"><button type="button" class="btn btn-danger fa fa-trash"></button></a></td>
                     </tr>';
                  
                 }

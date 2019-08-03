@@ -1,12 +1,27 @@
 <?php
     include('header.php');
 
-    $sql = "SELECT * FROM tbl_collections WHERE delete_status=0";           
+    $sql = "SELECT * FROM tbl_collections WHERE show_on_landing_page = 1 AND delete_status=0 LIMIT 6";           
     $collections = mysqli_query($conn, $sql);
 
-    $sql ="SELECT * FROM tbl_products WHERE delete_status=0 ORDER BY product_added_on DESC LIMIT 10";
+    $sql = "SELECT * FROM tbl_collections WHERE show_on_landing_page = 0 AND delete_status=0";           
+    $other_collections = mysqli_query($conn, $sql);
+
+    $sql ="SELECT * FROM tbl_products WHERE delete_status=0";
     $products = mysqli_query($conn, $sql);
 ?>
+
+
+    <style type="text/css">
+        
+    .more_products {
+      display: none;
+    }
+
+
+    </style>
+
+
     <!-- ##### Welcome Area Start ##### -->
     <section class="welcome_area bg-img background-overlay" style="background-image: url(img/cover_photos/main2.jpeg);">
         <div class="container h-100">
@@ -45,6 +60,26 @@
                     </a>
                 </div>
                 <?php }?>
+
+                <div class="col-lg-4 col-md-4 col-sm-12 col-md-12 text-center">
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12 col-md-12 text-center">
+                    <button type="button" id="myBtn" onclick="myFunction()" class="btn essence-btn">View More</button>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12 col-md-12 text-center">
+                </div>
+                <!-- <div id="more_products"> -->
+                    <?php while($row = mysqli_fetch_assoc($other_collections)){?>
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-md-12 text-center more_products" style="padding: 25px;">
+                            <a href="<?php echo 'collections.php?id='.$row['collection_id']; ?>">    
+                                <img class="img-fluid" src="<?php echo 'admin/uploads/collections/'.$row['collection_picture_url']; ?>" style="opacity: 0.8;">
+                                <h3 id="imp-caption" style="margin-top: 2%;"><?php echo $row['collection_name']; ?></h3>
+                            </a>
+                        </div>
+                    <?php }?>
+                <!-- </div> -->
             </div>
         </div>
     </div>
@@ -175,6 +210,33 @@
         </div>
     </div> -->
     <!-- ##### Brands Area End ##### -->
+
+
+<script>
+function myFunction() {
+    // var x = document.getElementById("more_products");
+    // var x = document.getElementsByClassName("more_products");
+    var btnText = document.getElementById("myBtn");
+
+    var x = document.getElementsByClassName("more_products");
+    
+    for (var i = 0, len = x.length; i < len; i++) 
+    {
+        // elements[i].style ...
+        console.log(x[i]);
+        if(x[i].style.display === "none" || x[i].style.display === '')
+        {
+            x[i].style.display = "block";
+            btnText.style.display = "none";    
+        }
+        
+    }
+    
+    
+  
+}
+</script>
+
 <?php
     include('footer.php');
 ?>

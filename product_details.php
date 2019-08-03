@@ -52,7 +52,7 @@
                                         FROM tbl_product_size ps
                                         INNER JOIN tbl_product_size_mapping psm ON (psm.size_id=ps.size_id)
                                         INNER JOIN tbl_products p ON (p.product_id=psm.product_id)
-                                        WHERE p.product_id=".$product_id;
+                                        WHERE p.product_id=".$product_id." ORDER BY ps.size DESC";
                         $product_info = mysqli_query($conn, $sql);
 
                         while($row=mysqli_fetch_assoc($product_info)){

@@ -30,7 +30,7 @@ h3,
 h4,
 h5,
 h6 {
-  color: #4a494a;
+  color: #5c5c5c;
   line-height: 1.3;
   font-weight: 700;
   font-family: "Ubuntu", sans-serif; }
@@ -46,7 +46,7 @@ a {
   transition: all 500ms ease 0s;
   text-decoration: none;
   outline: 0 solid transparent;
-  color: #4a494a;
+  color: #5c5c5c;
   font-weight: 600;
   font-size: 12px; }
   a:hover, a:focus {
@@ -54,7 +54,7 @@ a {
     transition: all 500ms ease 0s;
     text-decoration: none;
     outline: 0 solid transparent;
-    color: #4a494a;
+    color: #5c5c5c;
     font-weight: 600;
     font-size: 12px; }
 
@@ -170,7 +170,7 @@ img {
   background-color: #ffffff !important; }
 
 .bg-dark {
-  background-color: #4a494a !important; }
+  background-color: #5c5c5c !important; }
 
 .bg-transparent {
   background-color: transparent !important; }
@@ -291,14 +291,14 @@ img {
     font-size: 16px;
     color: #707071; }
     .header_area .classynav ul li a:hover {
-      color: #4a494a; }
+      color: #5c5c5c; }
   .header_area .classynav ul li .megamenu li a,
   .header_area .classynav ul li .dropdown li a {
     font-size: 14px;
     color: #707071; }
     .header_area .classynav ul li .megamenu li a:hover,
     .header_area .classynav ul li .dropdown li a:hover {
-      color: #4a494a; }
+      color: #5c5c5c; }
   .header_area .search-area form {
     position: relative;
     z-index: 1;
@@ -602,7 +602,7 @@ img {
             margin-bottom: 50px; } }
       .right-side-cart-area .cart-content .cart-amount-summary .summary-table li {
         margin-bottom: 20px;
-        color: #4a494a;
+        color: #5c5c5c;
         font-size: 14px;
         letter-spacing: 0.75px;
         text-transform: uppercase;
@@ -720,7 +720,7 @@ img {
       margin-bottom: 10px; }
     .cta-area .cta-content h2 {
       font-size: 60px;
-      color: #4a494a;
+      color: #5c5c5c;
       margin-bottom: 50px; }
       @media only screen and (min-width: 768px) and (max-width: 991px) {
         .cta-area .cta-content h2 {
@@ -764,7 +764,7 @@ img {
       visibility: hidden; }
     .single-product-wrapper .product-img .product-badge {
       height: 25px;
-      background-color: #4a494a;
+      background-color: #5c5c5c;
       color: #ffffff;
       font-family: "Ubuntu", sans-serif;
       font-weight: 700;
@@ -810,14 +810,14 @@ img {
       letter-spacing: 0.75px;
       font-weight: 600; }
     .single-product-wrapper .product-description h6 {
-      color: #222222;
+      color: #5c5c5c;
       margin-bottom: 5px; }
     .single-product-wrapper .product-description p {
       margin-bottom: 0;
       font-size: 14px;
       font-family: "Ubuntu", sans-serif;
       font-weight: 700;
-      color: #4a494a; }
+      color: #5c5c5c; }
       .single-product-wrapper .product-description p span {
         font-size: 14px;
         font-family: "Ubuntu", sans-serif;
@@ -1194,7 +1194,7 @@ img {
     margin-bottom: 15px;
     display: block;
     margin-bottom: 0;
-    color: #4a494a;
+    color: #5c5c5c;
     font-weight: 600; }
   .widget .catagories-menu li > a {
     text-transform: uppercase;
@@ -1214,7 +1214,7 @@ img {
       .widget .catagories-menu .sub-menu li > a:hover {
         color: #44abe0; }
   .widget.price .ui-slider-handle {
-    background-color: #4a494a;
+    background-color: #5c5c5c;
     border: none;
     border-radius: 0;
     top: -6px;
@@ -1287,7 +1287,7 @@ img {
     margin-bottom: 0;
     font-size: 12px;
     font-weight: 600;
-    color: #4a494a;
+    color: #5c5c5c;
     text-transform: uppercase;
     letter-spacing: 0.75px; }
     .product-topbar .total-products p span {
@@ -1296,7 +1296,7 @@ img {
     margin-bottom: 0;
     font-size: 12px;
     font-weight: 600;
-    color: #4a494a;
+    color: #5c5c5c;
     text-transform: uppercase;
     letter-spacing: 0.75px;
     margin-right: 15px; }
@@ -1306,7 +1306,7 @@ img {
     .product-topbar .product-sorting form select option {
       font-size: 12px;
       font-weight: 600;
-      color: #4a494a;
+      color: #5c5c5c;
       text-transform: uppercase;
       letter-spacing: 0.75px; }
   .product-topbar .nice-select {
@@ -1740,7 +1740,7 @@ img {
       margin-bottom: 10px; }
       .contact-area .contact-info .contact-address p span {
         font-weight: 600;
-        color: #4a494a;
+        color: #5c5c5c;
         width: 100px;
         display: inline-block;
         text-transform: uppercase; }

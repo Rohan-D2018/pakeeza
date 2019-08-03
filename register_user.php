@@ -5,7 +5,7 @@
     date_default_timezone_set('Asia/Kolkata');
 
 if (isset($_POST['submit_register'])) {
-  register();
+    register();
 }
 
 function register()
@@ -60,8 +60,8 @@ function register()
 ?>
 
     <!-- ##### Breadcumb Area Start ##### -->
-    <div class="breadcumb_area bg-img" style="background-image: url(img/bg-img/breadcumb.jpg);">
-        <div class="container h-100">
+    <div class="breadcumb_area bg-img" style="background-image: url(img/skyline.png);">
+        <div class="container h-80">
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="page-title text-center">
@@ -74,10 +74,11 @@ function register()
     <!-- ##### Breadcumb Area End ##### -->
 
     <!-- ##### Checkout Area Start ##### -->
-    <div class="checkout_area section-padding-80">
+    <div class="checkout_area section-padding-10">
         <div class="container">
-            <div class="row">
-
+            <div class="row" style="margin-bottom: 10px;">
+                <div class="col-12 col-md-3">
+                </div>
                 <div class="col-12 col-md-6">
                     <div class="checkout_details_area mt-50 clearfix">
 
@@ -134,6 +135,8 @@ function register()
                             <button type="submit" name="submit_register" class="btn essence-btn" style="float: right;">Submit</button>
                         </form>
                     </div>
+                </div>
+                <div class="col-12 col-md-3">
                 </div>
             </div>
         </div>

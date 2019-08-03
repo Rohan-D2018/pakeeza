@@ -98,7 +98,11 @@ if(isset($_GET['id'])){
                 <input type="file" name= "files[]" id="profile-img" style="margin-top: 3%" multiple>
 
                 <button type="submit" value="submit" id="btn_edit_products" name="btn_edit_products" class="btn btn-primary" style="margin-top: 3%">Update</button>
-                <button type="button" value="button" onclick="location.href='show_products.php';" class="btn btn-danger" style="margin-top: 3%">Back</button>
+                <!-- <button type="button" value="button" onclick="location.href='show_products.php';" class="btn btn-danger" style="margin-top: 3%">Back</button> -->
+                    
+                <button type="button" value="button" onclick="window.history.go(-1); return false;" class="btn btn-danger" style="margin-top: 3%">Back</button>
+
+
             </div>
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                 <div class="form-group">
@@ -134,7 +138,7 @@ if(isset($_GET['id'])){
                     ?>
                 </select>
 
-
+ 
                 <label for="product_sub_branch">Select Sub-Branch</label>
                 <select class="browser-default custom-select form-group" id="sub_branch_name2" name="sub_branch_name2" required>
                     <!-- <option selected>Select Collection</option> -->
@@ -287,9 +291,6 @@ $(document).ready(function(){
 </script>
 
 
-
-
-
 <script type="text/javascript">
     
    $(document).ready(function(){
@@ -320,8 +321,6 @@ $(document).ready(function(){
     });
 });
 </script>
-
-
 
 
 <script type="text/javascript">
