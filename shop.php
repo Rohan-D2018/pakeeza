@@ -36,6 +36,24 @@ else if(isset($_GET["id"]))
 		$products = mysqli_query($conn, $sql);
 	}
 }
+else if(isset($_GET['sort'])){
+    if($_GET['sort'] == 'a_to_z'){
+        $sql ="SELECT * FROM tbl_products WHERE delete_status=0 ORDER BY product_name";
+        $products = mysqli_query($conn, $sql);
+    }
+    else if($_GET['sort'] == 'z_to_a'){
+        $sql ="SELECT * FROM tbl_products WHERE delete_status=0 ORDER BY product_name DESC";
+        $products = mysqli_query($conn, $sql);
+    }
+    else if($_GET['sort'] == 'price_low_to_high'){
+        $sql ="SELECT * FROM tbl_products WHERE delete_status=0 ORDER BY price";
+        $products = mysqli_query($conn, $sql);
+    }
+    else if($_GET['sort'] == 'price_high_to_low'){
+        $sql ="SELECT * FROM tbl_products WHERE delete_status=0 ORDER BY price DESC";
+        $products = mysqli_query($conn, $sql);
+    }
+}
 else
 {
 	$sql ="SELECT * FROM tbl_products WHERE delete_status=0";
@@ -159,6 +177,24 @@ $materials = mysqli_query($conn, $sql);
                                 </ul>
                             </div>
                         </div> -->
+                    </div>
+
+                    <div class="widget" syle>
+                        <!-- Widget Title -->
+                        <h6 class="widget-title mb-30">Sort</h6>
+                        <!-- Widget Title 2 -->
+                        <ul id="menu-content2" class="menu-content" style="margin-bottom: 5%">
+                            <!-- Single Item -->
+                            <li>
+                                <a class="widget-title2 collapsed" href="#" data-toggle="collapse" data-target="#sort" style="margin-bottom: 2%;">Sort By <i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                                <ul class="sub-menu collapse" id="sort">
+                                    <li><a href="?sort=a_to_z">Alphabetially (A-Z)</a></li>
+                                    <li><a href="?sort=z_to_a">Alphabetially (Z-A)</a></li>
+                                    <li><a href="?sort=price_low_to_high">Price Low to High</a></li>
+                                    <li><a href="?sort=price_high_to_low">Price High to Low</a></li>
+                                </ul>
+                            </li>
+                        </ul>
                     </div>
                 </div>
 
