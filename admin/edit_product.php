@@ -62,7 +62,7 @@ if(isset($_GET['id'])){
       border: 1px #dadada solid;
 
       /*this is for scroll*/
-      max-height: 100px;
+      max-height: 250px;
       overflow-y: scroll;
 
     }
@@ -100,7 +100,7 @@ if(isset($_GET['id'])){
                 <button type="submit" value="submit" id="btn_edit_products" name="btn_edit_products" class="btn btn-primary" style="margin-top: 3%">Update</button>
                 <!-- <button type="button" value="button" onclick="location.href='show_products.php';" class="btn btn-danger" style="margin-top: 3%">Back</button> -->
                     
-                <button type="button" value="button" onclick="window.history.go(-1); return false;" class="btn btn-danger" style="margin-top: 3%">Back</button>
+                <button type="button" value="button" onclick="goBack()" class="btn btn-danger" style="margin-top: 3%">Back</button>
 
 
             </div>
@@ -291,6 +291,9 @@ $(document).ready(function(){
 </script>
 
 
+
+
+
 <script type="text/javascript">
     
    $(document).ready(function(){
@@ -323,6 +326,8 @@ $(document).ready(function(){
 </script>
 
 
+
+
 <script type="text/javascript">
     function readURL(input) {
         var total_file = document.getElementById("profile-img").files.length;
@@ -337,7 +342,7 @@ $(document).ready(function(){
             $('#gallery').append("<div class='col-lg-5 col-md-5 col-sm-5 col-xs-5'><img src='"+URL.createObjectURL(event.target.files[i])+"' class='img-fluid'></div>");
         }
         // $("#gallery").unitegallery({
-        //     gallery_width:1000,							//gallery width		
+        //     gallery_width:1000,                          //gallery width     
         //     gallery_height:1364,
         // });
     }
@@ -356,7 +361,7 @@ $(document).ready(function(){
 <script>
 $(document).ready(function(){
     // $("#gallery").unitegallery({
-    //     gallery_width:1000,							//gallery width		
+    //     gallery_width:1000,                          //gallery width     
     //     gallery_height:1364,
     // });
 
@@ -447,4 +452,10 @@ function showCheckboxes() {
 
     });
 });
+</script>
+
+<script>
+function goBack() {
+  window.history.back();
+}
 </script>

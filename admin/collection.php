@@ -183,8 +183,9 @@ require 'config.php';
 <script>
     $(document).ready(function() {
     $('#collections').DataTable({
-    "lengthMenu": [50, 75, 100 ], 
+    "lengthMenu": [5, 75, 100 ], 
     "paging":   true,
+    "stateSave": true,
     } );
     var topRow = $('#collections_wrapper').children().first();
     topRow.children().first().attr('class','col-sm-3');

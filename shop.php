@@ -65,6 +65,9 @@ $collections = mysqli_query($conn, $sql);
 
 $sql = "SELECT DISTINCT material FROM tbl_products";
 $materials = mysqli_query($conn, $sql);
+
+$sql = "SELECT DISTINCT size FROM tbl_product_size";
+$size = mysqli_query($conn, $sql);
 ?>
     <!-- ##### Breadcumb Area Start ##### -->
     <div class="breadcumb_area bg-img" style="background-image: url(img/skyline.png);">
@@ -124,6 +127,7 @@ $materials = mysqli_query($conn, $sql);
                                         <li class="price" low="2000" high="4000"><a href="#">2000 - 4000</a></li>
                                         <li class="price" low="4000" high="6000"><a href="#">4000 - 6000</a></li>
                                         <li class="price" low="6000" high="8000"><a href="#">6000 - 8000</a></li>
+                                        <li class="price" low="8000" high="above"><a href="#">8000 - Above</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -136,6 +140,21 @@ $materials = mysqli_query($conn, $sql);
                                         <?php
                                             while($row = mysqli_fetch_array($materials)){
                                                 echo "<li><a href='#' material='".$row['material']."' class='material_filter'>".$row['material']."</a></li>";  
+                                            }
+                                        ?>
+                                    </ul>
+                                </li>
+                            </ul>
+
+                            <!-- ##### Single Widget ##### -->
+                            <ul id="menu-content2" class="menu-content" style="margin-bottom: 5%">
+                                <!-- Single Item -->
+                                <li>
+                                    <a href="#" class="collapsed" data-toggle="collapse" data-target="#size" aria-expanded="false"  aria-controls="size">SIZE <i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                                    <ul class="sub-menu collapse" id="size">
+                                        <?php
+                                            while($row = mysqli_fetch_array($size)){
+                                                echo "<li><a href='#' size='".$row['size']."' class='size_filter'>".$row['size']."</a></li>";  
                                             }
                                         ?>
                                     </ul>
@@ -342,6 +361,24 @@ $materials = mysqli_query($conn, $sql);
             data:{
                 action:action,
                 material:id
+            },
+            success: function(data){
+                data = JSON.parse(data);
+                $("#products").html(data[0]);
+                $("#product_count").html(data[1]);
+            }
+        });
+    });
+
+    $(".size_filter").click(function(){
+        var id = $(this).attr("size");
+        action = 'fetch_data';
+        $.ajax({
+            url:"fetch_data.php",
+            method:"POST",
+            data:{
+                action:action,
+                size:id
             },
             success: function(data){
                 data = JSON.parse(data);

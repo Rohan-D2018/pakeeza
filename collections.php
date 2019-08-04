@@ -12,7 +12,7 @@
     }
 ?>
     <!-- ##### Welcome Area Start ##### -->
-    <section class="welcome_area bg-img background-overlay" style="background-image: url(<?php echo 'admin/uploads/collections/'.$collection['collection_picture_url']; ?>);">
+    <section class="welcome_area bg-img background-overlay" style="background-image: url('<?php echo 'admin/uploads/collections/'.$collection['collection_picture_url']; ?>');">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12">

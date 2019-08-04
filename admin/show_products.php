@@ -26,7 +26,6 @@ include('header.php');
                     <th width="12%" style="text-align: left;">Name</th>
                     <th width="7%" style="text-align: left;">Collection</th>
                     <th width="5%" style="text-align: left;">Branch</th>
-                    <th width="25%" style="text-align: left;">Description</th>
                     <th width="7%" style="text-align: left;">Price</th>
                     <th width="3%" style="text-align: left;">Discount</th>
                     <th width="6%" style="text-align: left;">Color</th>
@@ -61,16 +60,15 @@ include('header.php');
                         if ((in_array("admin", $_SESSION['access_role'], TRUE)))
                         {
                             echo '<tr>
-                                <td width="12%" style="text-align: left;">'.$row['product_name'].'</td>
-                                <td width="7%" style="text-align: left;">'.$row['collection_name'].'</td>
-                                 <td width="5%" style="text-align: left;">'.$row['sub_branch_name'].'</td>
-                                <td width="25%" style="text-align: left;">'.$row['product_description'].'</td>
+                                <td width="20%" style="text-align: left;">'.$row['product_name'].'</td>
+                                <td width="10%" style="text-align: left;">'.$row['collection_name'].'</td>
+                                <td width="10%" style="text-align: left;">'.$row['sub_branch_name'].'</td>
                                 <td width="7%" style="text-align: left;">'.$row['price'].'</td>
                                 <td width="3%" style="text-align: left;">'.$row['discount'].'</td>
                                 <td width="5%" style="text-align: left;">'.$row['color_name'].'</td>
                                 <td width="7%" style="text-align: left;">'.$row['product_type'].'</td>
                                 <td width="5%" style="text-align: left;">'.$row['product_code'].'</td>
-                                <td width="7%" style="text-align: left;">'.$row['material'].'</td>
+                                <td width="10%" style="text-align: left;">'.$row['material'].'</td>
                                 <td width="7%" style="text-align: left;">'.$row['gender'].'</td>
 
                                 <td width="3%" style="text-align: left;"><button type="button" id="'.$row['product_id'].'" class="show_data btn btn-secondary fa fa-plus-square" style="color:white"></button></td>
@@ -82,16 +80,15 @@ include('header.php');
                         else
                         {
                              echo '<tr>
-                                <td width="12%" style="text-align: left;">'.$row['product_name'].'</td>
-                                <td width="7%" style="text-align: left;">'.$row['collection_name'].'</td>
-                                <td width="5%" style="text-align: left;">'.$row['sub_branch_name'].'</td>
-                                <td width="25%" style="text-align: left;">'.$row['product_description'].'</td>
+                               <td width="20%" style="text-align: left;">'.$row['product_name'].'</td>
+                                <td width="10%" style="text-align: left;">'.$row['collection_name'].'</td>
+                                <td width="10%" style="text-align: left;">'.$row['sub_branch_name'].'</td>
                                 <td width="7%" style="text-align: left;">'.$row['price'].'</td>
                                 <td width="3%" style="text-align: left;">'.$row['discount'].'</td>
                                 <td width="5%" style="text-align: left;">'.$row['color_name'].'</td>
                                 <td width="7%" style="text-align: left;">'.$row['product_type'].'</td>
                                 <td width="5%" style="text-align: left;">'.$row['product_code'].'</td>
-                                <td width="7%" style="text-align: left;">'.$row['material'].'</td>
+                                <td width="10%" style="text-align: left;">'.$row['material'].'</td>
                                 <td width="7%" style="text-align: left;">'.$row['gender'].'</td>
 
 
@@ -335,8 +332,9 @@ include('header.php');
 <script>
     $(document).ready(function() {
     $('#products').DataTable({
-    "lengthMenu": [50, 75, 100 ], 
+    "lengthMenu": [20, 75, 100 ], 
     "paging":   true,
+    "stateSave": true,
     } );
     var topRow = $('#products_wrapper').children().first();
     topRow.children().first().attr('class','col-sm-3');

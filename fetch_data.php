@@ -10,7 +10,12 @@ if(isset($_POST["action"]))
         $sql = $sql . " WHERE collection_id=".$_POST['collection_id']." AND delete_status=0";
     }
     else if(isset($_POST['range'])){
-        $sql = $sql . " WHERE price BETWEEN ".$_POST['range'][0]." AND ".$_POST['range'][1]." AND delete_status=0";
+        if($_POST['range'][1] == 'above'){
+            $sql = $sql . " WHERE price > ".$_POST['range'][0]." AND delete_status=0";
+        }
+        else{
+            $sql = $sql . " WHERE price BETWEEN ".$_POST['range'][0]." AND ".$_POST['range'][1]." AND delete_status=0";
+        }
     }
     else if(isset($_POST['material'])){
         $sql = $sql . " WHERE material='".$_POST['material']."' AND delete_status=0";
@@ -27,6 +32,15 @@ if(isset($_POST["action"]))
         INNER JOIN tbl_product_color ON tbl_product_color_mapping.color_id = tbl_product_color.color_id
         WHERE tbl_product_color.color_id =".$color_id." AND tbl_products.delete_status=0";
         // $sql = $sql . " WHERE price BETWEEN ".$_POST['range'][0]." AND ".$_POST['range'][1]." AND delete_status=0";
+    }
+    else if(isset($_POST['size'])){
+        $size = mysqli_real_escape_string($conn, $_POST['size']);
+        $sql = "SELECT p.*
+        FROM tbl_product_size ps
+        INNER JOIN tbl_product_size_mapping psm ON (psm.size_id=ps.size_id)
+        INNER JOIN tbl_products p ON (p.product_id=psm.product_id)
+        WHERE ps.size='".$size."' AND p.delete_status=0";
+        $result = mysqli_query($conn,$sql);
     }
     $result = mysqli_query($conn,$sql);
     $return_output = array();

@@ -212,7 +212,7 @@ $sub_branch = mysqli_query($conn, $sql);
                         <img src="<?php echo 'admin/uploads/'.$product_img['picture_url']; ?>" class="cart-thumb" alt="">
                         <!-- Cart Item Desc -->
                         <div class="cart-item-desc">
-                            <span class="product-remove" id="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
+                            <span class="product-remove" id="product-remove" data-id="<?php echo $row['product_id']; ?>"><i class="fa fa-close" aria-hidden="true"></i></span>
                             <!--<span class="badge">Mango</span>-->
                             <h6><?php echo $row["product_name"] ?></h6>
                             <?php $sql = "select * from tbl_cart where product_id=".$row["product_id"];
