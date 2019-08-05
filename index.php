@@ -55,7 +55,7 @@
                 <?php while($row = mysqli_fetch_assoc($collections)){?>
                 <div class="col-lg-4 col-md-4 col-sm-12 col-md-12 text-center" style="padding: 25px;">
                     <a href="<?php echo 'collections.php?id='.$row['collection_id']; ?>">    
-                        <img class="img-fluid" src="<?php echo 'admin/uploads/collections/'.$row['collection_picture_url']; ?>" style="opacity: 0.8;">
+                        <img class="img-fluid" src="<?php echo 'admin/uploads/collections/'.$row['collection_picture_url']; ?>">
                         <h3 id="imp-caption" style="margin-top: 2%;"><?php echo $row['collection_name']; ?></h3>
                     </a>
                 </div>
