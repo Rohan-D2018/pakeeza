@@ -2,7 +2,6 @@
 session_start();
 // error_reporting(E_ALL);
 // ini_set('display_errors', TRUE);
-
 require 'admin/config.php';
 if (!isset($_SESSION['username'])){
     $login = FALSE;
@@ -14,22 +13,34 @@ else{
     $login = TRUE;
     $sql ="SELECT * FROM tbl_products where delete_status=0 and product_id in (SELECT product_id FROM tbl_cart where user_id='".$_SESSION['user_id']."' and cart_product_status=0)";
     $products_cart = mysqli_query($conn, $sql);
-
     $sql ="SELECT sum(price) as sum from tbl_products where delete_status=0 and product_id in (SELECT product_id FROM tbl_cart where user_id='".$_SESSION['user_id']."' and cart_product_status=0)";
     $details_sum = mysqli_query($conn, $sql);
-
     $sql ="SELECT count(cart_id) as count from tbl_cart where cart_product_status=0 and user_id='".$_SESSION['user_id']."'";
     $details_count = mysqli_query($conn, $sql);
     $details_count = mysqli_fetch_array($details_count)["count"];
 }
 $sql ="SELECT * FROM tbl_collections WHERE delete_status=0 ORDER BY collection_name";
 $collections = mysqli_query($conn, $sql);
-
 $sql ="SELECT * FROM tbl_sub_branch ORDER BY sub_branch_id";
 $sub_branch = mysqli_query($conn, $sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
+<style>
+@font-face {
+  font-family: 'perpetua';
+  src: url('perpetua.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */, 
+}
+
+h2 {
+  font-family: 'perpetua';
+}
+@font-face {
+  font-family: 'goudy';
+  src: url('goudos.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */, 
+}
+</style>
 
 <head>
     <meta charset="UTF-8">
@@ -55,7 +66,6 @@ $sub_branch = mysqli_query($conn, $sql);
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'UA-144173542-1');
     </script>
 </head>
@@ -81,14 +91,14 @@ $sub_branch = mysqli_query($conn, $sql);
                     <!-- Nav Start -->
                     <div class="classynav">
                         <ul>
-                            <li><a href="#">Shop</a>
+                            <li><a href="#" style="font-family: perpetua; color:#4a494a;">Shop</a>
                                 <ul class="dropdown" style="height: 25vh !important;">
                                     <?php
                                         while($row = mysqli_fetch_array($sub_branch)){
                                             echo "<li><a href='sub_branch.php?id=".$row["sub_branch_id"]."'>".$row['sub_branch_name']."</a></li>";  
                                         }
                                     ?>
-                                    <li><a href="shop.php">All Products</a></li>
+                                    <li><a href="shop.php" style="font-family: perpetua ; color:#4a494a;">All Products</a></li>
                                 </ul>
                                 <!-- <div class="megamenu">
                                     <ul class="single-mega cn-col-4">
@@ -120,7 +130,7 @@ $sub_branch = mysqli_query($conn, $sql);
                                     </div>
                                 </div> -->
                             </li>
-                            <li><a href="#">Collections</a>
+                            <li><a href="#" style="font-family: perpetua ; color:#4a494a;">Collections</a>
                                 <ul class="dropdown">
                                     <?php
                                         while($row = mysqli_fetch_array($collections)){
@@ -137,7 +147,7 @@ $sub_branch = mysqli_query($conn, $sql);
                                 </ul>
                             </li>
                             <!-- <li><a href="blog.html">Blog</a></li> -->
-                            <li><a href="contact.php">Contact Us</a></li>
+                            <li><a href="contact.php" style="font-family: perpetua; color:#4a494a;">Contact Us</a></li>
                             <?php if($login){ ?>
                             <li><a href=""><b><?php echo $_SESSION['first_name']; ?></b></a>
                                 <ul class="dropdown" style="margin-right: 2%; margin-left: 2%;">
@@ -253,4 +263,4 @@ $sub_branch = mysqli_query($conn, $sql);
             </div>
         </div>
     </div>
-    <!-- ##### Right Side Cart End ##### -->
+<!-- ##### Right Side Cart End ##### -->

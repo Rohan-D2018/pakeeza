@@ -12,13 +12,13 @@
     }
 ?>
     <!-- ##### Welcome Area Start ##### -->
-    <section class="welcome_area bg-img background-overlay" style="background-image: url('<?php echo 'admin/uploads/collections/'.$collection['collection_picture_url']; ?>');">
+    <section class="welcome_area bg-img background-overlay" style=" opacity: 0.8; background-image: url('<?php echo 'admin/uploads/collections/'.$collection['collection_picture_url']; ?>'), linear-gradient(black, white);">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12">
-                    <div class="hero-content">
-                        <h2 style="color: black"><?php echo $collection['collection_name']; ?></h2>
-                        <h6 style="color: black"><?php echo $collection['collection_description']; ?></h6>
+                    <div class="hero-content text-center" style="margin-top: 10%;">
+                        <h2><?php echo $collection['collection_name']; ?></h2>
+                        <!-- <h6 style="color: white"><?php echo $collection['collection_description']; ?></h6> -->
                     </div>
                 </div>
             </div>
@@ -26,14 +26,22 @@
     </section>
     <!-- ##### Welcome Area End ##### -->
 
+    <div class="row">
+        <div class="col-12 text-center jumbotron">
+            <p style="font-size: 18px;"><?php echo $collection['collection_description']; ?></p>
+        </div>
+    </div>
+
     <!-- ##### New Arrivals Area Start ##### -->
     <section class="new_arrivals_area section-padding-80 clearfix">
         <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="section-heading text-center">
-                        <h2>Popular Products</h2>
-                    </div>
+            <div class="row" style="padding-bottom: 80px;">
+                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                    <!-- <img src="img/Emblem.png"> -->
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-center">
+                    <img class="img-fluid" src="img/Emblem.png" style="height: 100px;">
                 </div>
             </div>
         </div>

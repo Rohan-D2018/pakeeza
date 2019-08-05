@@ -8,10 +8,37 @@ include('header.php');
 }
 </style>
 
+<style>
+@font-face {
+  font-family: 'perpetua';
+  src: url('perpetua.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */, 
+}  
+
+#heading {
+  color: #4a494a;
+  font-family: 'perpetua';
+}
+
+h2 {
+  font-family: 'perpetua';
+}
+
+@font-face {
+  font-family: 'goudy';
+  src: url('goudos.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */, 
+}  
+
+#body1 {
+  color: #707071;
+  font-family: 'goudy';
+  font-size: 18px;
+}
+</style>
+
 <script src="js/typed.js" type="text/javascript"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
  
-<div class="contact-area d-flex align-items-center" style="margin-top: 2%;">
+<div class="contact-area d-flex align-items-center body1" id="body1" style="margin-top: 2%;">
 		
     <div class="google-map">
         <iframe width='100%' height='450' id='mapcanvas' src='https://maps.google.com/maps?q=pakeeza%20lucknowi%20chikan%20studio%20manisha%20cooperative%20housing%20society%20laxmibai%20tole%20road%20kothrud%20pune&amp;output=embed' frameborder='0' scrolling='no' marginheight='0' marginwidth='0'></iframe>
@@ -19,7 +46,7 @@ include('header.php');
 
     <div class="contact-info" style="text-align: justify;    text-justify: inter-word;">
         <div class="namaste" style="margin-bottom: 2%; margin-left:0%">
-				<h2>Drop in to say, <span id="typed" style="font-size: 25px; font-style: bold;"></span></h2>
+				<h2 style="font-family: perpetua ; color:#4a494a;">Drop in to say, <span id="typed" style="font-size: 25px; font-style: bold; font-family:perpetua; color:#4a494a;"></span></h2>
 	</div>
         <div class="contact-address mt-10">
             <p><strong><i class="glyphicon glyphicon-home"></i>:</strong> Pakeeza - Lucknowi Chikan Studio, 
@@ -49,11 +76,11 @@ include('header.php');
 		<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
 		</div>
 	</div>
-	<div class="root_row text-justify">
+	<div class="root_row text-justify body1" id="body1">
 		<div class="col-md-2 col-sm-2">
 		</div>
 		<div class="col-md-8 col-sm-8  ">	
-			<h2 style="text-align: center;">Our Roots</h2><br>
+			<h2 style="text-align: center; font-family: perpetua; color:#4a494a;">Our Roots</h2><br>
 			<div style="text-align: center;">
 			<strong>Bliss and blessing,
 			<br> 

@@ -1,5 +1,31 @@
-<?php
+<style>
+@font-face {
+  font-family: 'perpetua';
+  src: url('perpetua.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */, 
+}  
 
+#heading {
+  color: #4a494a;
+  font-family: 'Perpetua';
+}
+
+h2 {
+  font-family: 'perpetua';
+}
+
+@font-face {
+  font-family: 'goudy';
+  src: url('goudos.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */, 
+}  
+
+#body1 {
+  color: #707071;
+  font-family: 'goudy';
+}
+</style>
+
+
+<?php
 include('header.php');
 if(isset($_POST["search"]))
 {
@@ -59,13 +85,10 @@ else
 	$sql ="SELECT * FROM tbl_products WHERE delete_status=0";
 	$products = mysqli_query($conn, $sql);
 }
-
 $sql ="SELECT * FROM tbl_collections WHERE delete_status=0 ORDER BY collection_name";
 $collections = mysqli_query($conn, $sql);
-
 $sql = "SELECT DISTINCT material FROM tbl_products";
 $materials = mysqli_query($conn, $sql);
-
 $sql = "SELECT DISTINCT size FROM tbl_product_size";
 $size = mysqli_query($conn, $sql);
 ?>
@@ -75,7 +98,7 @@ $size = mysqli_query($conn, $sql);
             <div class="row align-items-center">
                 <div class="col-12">
                     <div class="page-title text-center">
-                        <h2 class="breadcrumb_title">All Products</h2>
+                        <h2 class="breadcrumb_title" style="font-family:perpetua; color:#4a494a;">All Products</h2>
                     </div>
                 </div>
             </div>
@@ -85,7 +108,7 @@ $size = mysqli_query($conn, $sql);
 
     <!-- ##### Shop Grid Area Start ##### -->
     <section class="shop_grid_area" style="margin-left: 3%; margin-right: 1%;">
-        <div class="container-fluid">
+        <div class="container-fluid" class="heading" id="heading">
             <div class="row">
                 <div class="col-md-4 col-lg-2">
                     <div class="shop_sidebar_area">
@@ -93,7 +116,7 @@ $size = mysqli_query($conn, $sql);
                         <!-- ##### Single Widget ##### -->
                         <div class="widget catagory" style="margin-bottom: 30px;">
                             <!-- Widget Title -->
-                            <h6 class="widget-title mb-30">Categories</h6>
+                            <h6 class="widget-title mb-30" style="font-family:perpetua; color:#4a494a;">Categories</h6>
 
                             <!--  Catagories  -->
                             <div class="catagories-menu">
@@ -116,7 +139,7 @@ $size = mysqli_query($conn, $sql);
                         <!-- ##### Single Widget ##### -->
                         <div class="widget mb-50">
                             <!-- Widget Title -->
-                            <h6 class="widget-title mb-30">Filter by</h6>
+                            <h6 class="widget-title mb-30" style="font-family:perpetua; color:#4a494a;">Filter by</h6>
                             <!-- Widget Title 2 -->
                             <ul id="menu-content2" class="menu-content" style="margin-bottom: 5%">
                                 <!-- Single Item -->
@@ -200,7 +223,7 @@ $size = mysqli_query($conn, $sql);
 
                     <div class="widget" syle>
                         <!-- Widget Title -->
-                        <h6 class="widget-title mb-30">Sort</h6>
+                        <h6 class="widget-title mb-30" style="font-family:perpetua; color:#4a494a;">Sort</h6>
                         <!-- Widget Title 2 -->
                         <ul id="menu-content2" class="menu-content" style="margin-bottom: 5%">
                             <!-- Single Item -->
@@ -259,10 +282,9 @@ $size = mysqli_query($conn, $sql);
                                                 array_push($image_array, $row_image['picture_url']);
                                             }
                                             echo '<div class="product-img">
-                                                    <img class="lozad" data-src="admin/uploads/'.$image_array[0].'" alt="">
+                                                    <img class="lozad" src="admin/uploads/'.$image_array[0].'" alt="">
                                                     <!-- Hover Thumb -->
-                                                    <img class="hover-img lozad"  data-src="admin/uploads/'.$image_array[1].'" alt="">
-
+                                                    <img class="hover-img lozad"  src="admin/uploads/'.$image_array[1].'" alt="">
                                                     <!-- Product Badge -->
                                                     <!-- <div class="product-badge offer-badge">
                                                         <span>-30%</span>
@@ -275,11 +297,11 @@ $size = mysqli_query($conn, $sql);
                                         ?>
 
                                         <!-- Product Description -->
-                                        <div class="product-description">
+                                        <div class="product-description heading" id="heading">
                                             <a href="<?php echo 'product_details.php?id='.$row["product_id"]; ?>">
-                                                <h6><?php echo $row["product_name"] ?></h6>
+                                                <h6 style="font-family:perpetua; color:#4a494a;"><?php echo $row["product_name"] ?></h6>
                                             </a>
-                                            <p class="product-price"><!-- <span class="old-price"></span> --><?php echo "₹" . $row["price"]; ?></p>
+                                            <p class="product-price" style="font-family: perpetua; color:#4a494a;"><?php echo "₹" . $row["price"]; ?></p>
 
                                             <!-- Hover Content -->
                                             <div class="hover-content">
@@ -333,7 +355,6 @@ $size = mysqli_query($conn, $sql);
             }
         });
     });
-
     $(".color_filter").click(function(){
         var id = $(this).attr("id");
         action = 'fetch_data';
@@ -351,7 +372,6 @@ $size = mysqli_query($conn, $sql);
             }
         });
     });
-
     $(".material_filter").click(function(){
         var id = $(this).attr("material");
         action = 'fetch_data';
@@ -369,7 +389,6 @@ $size = mysqli_query($conn, $sql);
             }
         });
     });
-
     $(".size_filter").click(function(){
         var id = $(this).attr("size");
         action = 'fetch_data';
@@ -403,7 +422,6 @@ $size = mysqli_query($conn, $sql);
     $( "#amount" ).val( "Rs. " + $( "#slider-range" ).slider( "values", 0 ) +
       " - Rs. " + $( "#slider-range" ).slider( "values", 1 ) );
   } );
-
     $( ".price" ).on( "click", function() {
         var values = [$(this).attr("low"), $(this).attr("high")];
         action = 'fetch_data';
@@ -423,3 +441,4 @@ $size = mysqli_query($conn, $sql);
         });
     } );
   </script>
+

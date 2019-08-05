@@ -1,6 +1,6 @@
 
     <!-- ##### Footer Area Start ##### -->
-    <footer class="footer_area clearfix" style="border: 1px solid #D3D3D3;">
+    <footer class="footer_area clearfix" style="border: 1px solid #D3D3D3; padding-bottom: 0px;">
         <div class="container">
             <div class="row">
                 <!-- Single Widget Area -->
@@ -30,7 +30,7 @@
 		                    <a href="https://www.facebook.com/pakeeza.lucknowi/" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
 		                    <a href="https://instagram.com/pakeeza.lucknowi?igshid=1vdv3ijqy274i" data-toggle="tooltip" data-placement="top" title="Instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a>
 		                    <a href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-		                    <a href="#" data-toggle="tooltip" data-placement="top" title="Pinterest"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+		                    <a href="https://wa.me/917755915311" data-toggle="tooltip" data-placement="top" title="Whatsapp"><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
 		                    <a href="#" data-toggle="tooltip" data-placement="top" title="Youtube"><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
 		                </div>
 		            </div>
@@ -84,7 +84,7 @@
                 </div>
            <!-- </div>-->
 
-    <img src="img/skyline.png" style="width: 100%;">
+    <img src="img/skyline_footer.png" style="width: 100%;">
     </footer>
     <!-- ##### Footer Area End ##### -->
 

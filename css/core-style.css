@@ -1062,7 +1062,7 @@ img {
   z-index: 1;
   background-color: white;
   padding: 70px 0 60px; }
-  .footer_area .single_widget_area .footer_menu ul {
+  .footer_area .single_widget_area .footer_menu li {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex; }
@@ -1075,7 +1075,7 @@ img {
       padding: 0 10px;
       text-transform: capitalize; }
       .footer_area .single_widget_area .footer_menu ul li a:hover, .footer_area .single_widget_area .footer_menu ul li a:focus {
-        color: #ffffff; }
+        color: #252525; }
   .footer_area .single_widget_area .footer_widget_menu {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -1084,9 +1084,9 @@ img {
     flex-wrap: wrap; }
     .footer_area .single_widget_area .footer_widget_menu li {
       -webkit-box-flex: 0;
-      -ms-flex: 0 0 50%;
-      flex: 0 0 50%;
-      width: 50%; }
+      -ms-flex: 0 0 100%;
+      flex: 0 0 100%;
+      width: 100%; }
       .footer_area .single_widget_area .footer_widget_menu li a {
         display: block;
         font-size: 12px;
@@ -1095,7 +1095,7 @@ img {
         font-weight: 400;
         margin-bottom: 10px; }
         .footer_area .single_widget_area .footer_widget_menu li a:hover, .footer_area .single_widget_area .footer_widget_menu li a:focus {
-          color: #ffffff; }
+          color: #252525; }
   .footer_area .single_widget_area .footer_heading h6 {
     color: #ffffff;
     font-size: 12px;
