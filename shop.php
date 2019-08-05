@@ -1,30 +1,3 @@
-<style>
-@font-face {
-  font-family: 'perpetua';
-  src: url('perpetua.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */, 
-}  
-
-#heading {
-  color: #4a494a;
-  font-family: 'Perpetua';
-}
-
-h2 {
-  font-family: 'perpetua';
-}
-
-@font-face {
-  font-family: 'goudy';
-  src: url('goudos.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */, 
-}  
-
-#body1 {
-  color: #707071;
-  font-family: 'goudy';
-}
-</style>
-
-
 <?php
 include('header.php');
 if(isset($_POST["search"]))
@@ -92,6 +65,31 @@ $materials = mysqli_query($conn, $sql);
 $sql = "SELECT DISTINCT size FROM tbl_product_size";
 $size = mysqli_query($conn, $sql);
 ?>
+<style>
+@font-face {
+  font-family: 'perpetua';
+  src: url('perpetua.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */, 
+}  
+
+#heading {
+  color: #4a494a;
+  font-family: 'Perpetua';
+}
+
+h2 {
+  font-family: 'perpetua';
+}
+
+@font-face {
+  font-family: 'goudy';
+  src: url('goudos.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */, 
+}  
+
+#body1 {
+  color: #707071;
+  font-family: 'goudy';
+}
+</style>
     <!-- ##### Breadcumb Area Start ##### -->
     <div class="breadcumb_area bg-img" style="background-image: url(img/skyline.png);">
         <div class="container">
