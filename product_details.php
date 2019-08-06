@@ -1,11 +1,50 @@
 <?php
+    $page = 'product_details';
     include('header.php');
     $product_id   = $_GET['id'];
     $sql          = "SELECT * FROM tbl_products WHERE product_id=".$product_id;
     $product_info = mysqli_query($conn, $sql);
     $product_info = mysqli_fetch_assoc($product_info);
+    $sql = "SELECT * FROM tbl_pictures WHERE product_id=".$product_id." LIMIT 1";        
+    $image = mysqli_query($conn, $sql);
+    $image = mysqli_fetch_assoc($image);
     // print_r($product_info);
 ?>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5, shrink-to-fit=no">
+
+    <!-- SEO -->
+    <meta name="description" content="<?php echo $product_info['product_description'];?>">
+    <meta name="keywords" content="keywords">
+
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Pakeeza">
+    <meta name="apple-mobile-web-app-title" content="Pakeeza">
+    <meta name="theme-color" content="#7a7cec">
+    <meta name="msapplication-navbutton-color" content="#7a7cec">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="msapplication-starturl" content="/">
+
+    <!-- Facebook Cards -->
+    <meta property="og:description" content="<?php echo $product_info['product_description']; ?>"/>
+    <meta property="og:url" content="http://pakeezachikankari.com/product_details.php?id=<?php echo $product_id; ?>"/>
+    <meta property="og:image" content="<?php echo $image['picture_url']; ?>"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:site_name" content="Pakeeza"/>
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@pakeeza">
+    <meta name="twitter:creator" content="Pakeeza">
+    <meta name="twitter:title" content= "Pakeeza">
+    <meta name="twitter:description" content="<?php echo $product_info['product_description']; ?>">
+    <meta name="twitter:creator" content="Pakeeza">
+    <meta name="twitter:image:src" content="<?php echo $image['picture_url']; ?>"/>
+    <meta name="twitter:domain" content="http://pakeezachikankari.com/product_details.php?id=<?php echo $product_id; ?>">
 <style>
 @font-face {
   font-family: 'perpetua';
@@ -63,8 +102,7 @@ input[type=text]
         <div class="single_product_thumb clearfix">
             <div class="product_thumbnail_slides owl-carousel">
                 <?php
-                    $sql = "SELECT * FROM tbl_pictures WHERE product_id=".$product_id;
-                                                
+                    $sql = "SELECT * FROM tbl_pictures WHERE product_id=".$product_id;        
                     $images = mysqli_query($conn, $sql);
                     while($row_image = mysqli_fetch_array($images))
                     {

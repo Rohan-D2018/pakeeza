@@ -43,12 +43,43 @@ h2 {
 </style>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="description" content="">
+    <?php if(!$page){?>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5, shrink-to-fit=no">
+
+    <!-- SEO -->
+    <meta name="description" content="Pakeeza strives to revive this Lucknowi elegance of exquisite workmanship, a timeless art form and works closely with various karagirs that create sheer beauty out of a piece of cloth and make it possible for us to bring you the intricate art at your doorstep. ">
+    <meta name="keywords" content="keywords">
+
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Pakeeza">
+    <meta name="apple-mobile-web-app-title" content="Pakeeza">
+    <meta name="theme-color" content="#7a7cec">
+    <meta name="msapplication-navbutton-color" content="#7a7cec">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="msapplication-starturl" content="/">
+
+    <!-- Facebook Cards -->
+    <meta property="og:description" content="Pakeeza strives to revive this Lucknowi elegance of exquisite workmanship, a timeless art form and works closely with various karagirs that create sheer beauty out of a piece of cloth and make it possible for us to bring you the intricate art at your doorstep. "/>
+    <meta property="og:url" content="http://pakeezachikankari.com"/>
+    <meta property="og:image" content="http://pakeezachikankari.com/img/logo.png"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:site_name" content="Pakeeza"/>
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@pakeeza">
+    <meta name="twitter:creator" content="Pakeeza">
+    <meta name="twitter:title" content= "Pakeeza">
+    <meta name="twitter:description" content="Pakeeza strives to revive this Lucknowi elegance of exquisite workmanship, a timeless art form and works closely with various karagirs that create sheer beauty out of a piece of cloth and make it possible for us to bring you the intricate art at your doorstep. ">
+    <meta name="twitter:creator" content="Pakeeza">
+    <meta name="twitter:image:src" content="http://pakeezachikankari.com/img/logo.png"/>
+    <meta name="twitter:domain" content="http://pakeezachikankari.com">
+    <?php }?>
     <!-- Title  -->
     <title>Pakeeza</title>
 
