@@ -1,21 +1,23 @@
 
     <!-- ##### Footer Area Start ##### -->
     <footer class="footer_area clearfix" style="border: 1px solid #D3D3D3; padding-bottom: 0px;">
-        <div class="container">
-            <div class="row">
+        <!-- <div class="container"> -->
+            <div class="row" style="margin-left: 5%;">
                 <!-- Single Widget Area -->
-                <div class="col-12 col-md-1">
-		</div>
-                <div class="col-12 col-md-4">
+                <div class="col-12 col-md-2">
+                    <div class="logo-box">
+                        <img src="img/logo.png" alt="" class="center">
+                    </div>
+                    <h5>मुस्कुराइए आप लखनऊ में है</h5>
+
+		        </div>
+
+                <div class="col-12 col-md-3">
                     <div class="single_widget_area d-flex mb-30">
-                        <!-- Logo 
-                        <div class="footer-logo mr-50">
-                            <a href="#"><img src="img/core-img/logo2.png" alt=""></a>
-                        </div> -->
                         <!-- Footer Menu -->
                         <div class="footer_menu">
                             <ul>
-				<li><h5>Quick Links</h5></li>
+				                <li><h5>Quick Links</h5></li>
                                 <li><a href="shop.php">Shop</a></li>
                                 <li><a href="index.php#collections">Collections</a></li>
                                 <li><a href="contact.php">Contact Us</a></li>
@@ -24,56 +26,37 @@
                             </ul>
                         </div>
                     </div>
-		    <div class="row">
-			<div class="single_widget_area ">
-		                <div class="footer_social_area">
-		                    <a href="https://www.facebook.com/pakeeza.lucknowi/" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-		                    <a href="https://instagram.com/pakeeza.lucknowi?igshid=1vdv3ijqy274i" data-toggle="tooltip" data-placement="top" title="Instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-		                    <a href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-		                    <a href="https://wa.me/917755915311" data-toggle="tooltip" data-placement="top" title="Whatsapp"><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
-		                    <a href="#" data-toggle="tooltip" data-placement="top" title="Youtube"><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
+	                <div class="row">
+			            <div class="single_widget_area ">
+    		                <div class="footer_social_area">
+    		                    <a href="https://www.facebook.com/pakeeza.lucknowi/" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+    		                    <a href="https://instagram.com/pakeeza.lucknowi?igshid=1vdv3ijqy274i" data-toggle="tooltip" data-placement="top" title="Instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+    		                    <a href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+    		                    <a href="https://wa.me/917755915311" data-toggle="tooltip" data-placement="top" title="Whatsapp"><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
+    		                    <a href="#" data-toggle="tooltip" data-placement="top" title="Youtube"><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
+    		                </div>
 		                </div>
 		            </div>
 		        </div>
-		</div>
-		<div class="col-12 col-md-4">
-		</div>
+        		<div class="col-12 col-md-4">
+        		</div>
                 <!-- Single Widget Area -->
                 <div class="col-12 col-md-3">
                     <div class="single_widget_area mb-30 align-items-end">
                         <ul class="footer_widget_menu">
-			    <li><h5>Customer Service</h5></li>
+			                <li><h5>Customer Service</h5></li>
                             <li><a href="footer_credits/terms_and_conditions.php" class="terms_link" id="terms_link">Terms and Conditions</a></li>
                             <li><a href="footer_credits/shipping_and_delivery.php" class="shipping_link" id="shipping_link">Shipping and Delivery Policy</a></li>
                             <li><a href="footer_credits/privacy.php" class="privacy_link" id="privacy_link">Privacy Policy</a></li>
                             <li><a href="footer_credits/disclaimer.php" class="disclaimer_link" id="disclaimer_link">Disclaimer Policy</a></li>
                             <li><a href="footer_credits/cancellation.php" class="refund_link" id="refund_link">Cancellation and Refund policy</a></li>
-			    <li><a href="footer_credits/faqs.php" class="faqs_link" id="faqs_link">Frequently Asked Questions</a></li>
+			                <li><a href="footer_credits/faqs.php" class="faqs_link" id="faqs_link">Frequently Asked Questions</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
-
-            <!-- <div class="row align-items-end">
-                <!-- Single Widget Area 
-
-                <div class="col-12 col-md-4">
-                    <div class="single_widget_area ">
-                        <div class="footer_social_area" align="center">
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="Instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="Pinterest"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="Youtube"><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
-                        </div>
-                    </div>
-                </div>
-		<div class="col-12 col-md-4">
-		</div>
-                <div class="col-12 col-md-4">
-		</div>
-            </div> -->
-
+		<!-- </div> -->
+            
             <!--<div class="row mt-5">-->
                 <div class="col-md-12 text-center">
                   <!--  <p>-->
@@ -84,7 +67,7 @@
                 </div>
            <!-- </div>-->
 
-    <img src="img/skyline_footer.png" style="width: 100%;">
+        <img src="img/skyline_footer.png" style="width: 100%;">
     </footer>
     <!-- ##### Footer Area End ##### -->
 

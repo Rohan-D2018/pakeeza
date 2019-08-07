@@ -1,7 +1,7 @@
 <?php
     include('header.php');
 
-    $sql = "SELECT * FROM tbl_collections WHERE show_on_landing_page = 1 AND delete_status=0 LIMIT 6";           
+    $sql = "SELECT * FROM tbl_collections WHERE show_on_landing_page = 1 AND delete_status=0 LIMIT 9";           
     $collections = mysqli_query($conn, $sql);
 
     $sql = "SELECT * FROM tbl_collections WHERE show_on_landing_page = 0 AND delete_status=0";           
@@ -13,12 +13,9 @@
 
 
     <style type="text/css">
-        
-    .more_products {
-      display: none;
-    }
-
-
+        .more_products {
+          display: none;
+        }
     </style>
 
 
@@ -185,6 +182,18 @@
                 <img class="img-fluid" src="img/Emblem.png" height="200">
             </div>
         </div>
+
+        <div style="text-align: center;">
+            <h5><strong>Rediscover Lucknow</strong></h5>
+
+            <br><br>
+
+            <p>In 1528, the Mughal Sultanate conquered and formally incorporated Awadh as one of its constituent provinces. In due course, with the decline of Mughal power, the nawab-wazirs of Awadh began to assert their independence. After the East India Company appropriated half of Awadh as indemnity, the then nawab, Asafud Daulah, moved his capital to the city of Lucknow in 1775. This move resulted in the blossoming of the city and its distinctive culture - known as Lucknowi (or Lakhnavi) Tehzeeb.</p>
+            <br><br>
+
+            <p>Even today, we hear legendary tales of the life and beauty of this plush, vibrant city that was known for its sprawling gardens, enticing orchards and magnificent palaces. The rich and flamboyant 'Pehle Aap' culture, the havelis and their once-grandiose occupants, the city’s chequered history of distinct Awadhi cuisine, the delicate artistry of chikankari, the legendary courtesans and the defiant voice of the rekhti – it’s time to rediscover the magic of Lucknow!</p>
+        </div>
+
     </div>
     <!-- ##### New Arrivals Area End ##### -->
 
@@ -228,12 +237,8 @@ function myFunction() {
         {
             x[i].style.display = "block";
             btnText.style.display = "none";    
-        }
-        
-    }
-    
-    
-  
+        }   
+    }  
 }
 </script>
 
