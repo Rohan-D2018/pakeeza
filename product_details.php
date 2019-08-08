@@ -130,7 +130,7 @@ input[type=text]
 	    </div>
             <p class="product-price" style="font-family: perpetua"> ₹ <?php echo $product_info['price']; ?></p>
 	    <div class="body1" id="body1">
-            <p class="product-desc"><?php echo $product_info['product_description']; ?></p>
+            <p class="product-desc justify-content"><?php echo nl2br($product_info['product_description']); ?></p>
 
             <!-- Form -->
             <form class="cart-form clearfix" method="post" action="add_to_cart.php">

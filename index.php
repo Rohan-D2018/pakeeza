@@ -26,11 +26,11 @@
     <div id="carousals" class="carousel slide carousel-fade" data-ride="carousel">
 
         <!-- Indicators -->
-        <ul class="carousel-indicators">
+        <!-- <ul class="carousel-indicators">
             <?php $count = 0; while($row = mysqli_fetch_assoc($banners)){?>
                 <li data-target="#carousals" data-slide-to="<?php echo $count; ?>" class="<?php if($count == 0){ echo "active"; } ?>"></li>
             <?php $count++; } ?>
-        </ul>
+        </ul> -->
 
         <!-- The slideshow -->
         <div class="carousel-inner">
