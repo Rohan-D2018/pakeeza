@@ -8,10 +8,10 @@
         $collection = mysqli_query($conn, $sql);
         $collection = mysqli_fetch_assoc($collection);
 
-        $sql = "SELECT * FROM tbl_products WHERE collection_id=".$collection_id." AND delete_status=0 LIMIT 0,9";
+        $sql = "SELECT * FROM tbl_products WHERE collection_id=".$collection_id." AND delete_status=0 LIMIT 0,12";
         $products = mysqli_query($conn, $sql);
 
-        $sql = "SELECT * FROM tbl_products WHERE collection_id=".$collection_id." AND delete_status=0 LIMIT 9,18446744073709551615";
+        $sql = "SELECT * FROM tbl_products WHERE collection_id=".$collection_id." AND delete_status=0 LIMIT 12,18446744073709551615";
         $remaining_products = mysqli_query($conn, $sql);
         $num_rows = mysqli_num_rows($remaining_products);   
        
@@ -22,6 +22,52 @@
         .more_products {
           display: none;
         }
+        
+        .bottom-align-text {
+            position: absolute;
+            right: 0;
+            /* margin-right: 5%; */
+        }
+
+        .hero-content{
+            margin-top: 30%;
+        }
+
+        @media (max-width: 576px) { 
+            .hero-content{
+                margin-top: 60%;
+            }
+
+            .bottom-align-text{
+                margin-right: 5%;
+            }
+
+            .essence-btn{
+                min-width: auto;
+                padding: 0;
+                padding-left: 10px;
+                padding-right: 10px;
+                font-size: 10px;
+            }
+        }
+
+        @media (max-width: 768px) { 
+            .hero-content{
+                margin-top: 60%;
+            }
+
+            .bottom-align-text{
+                margin-right: 5%;
+            }
+
+            .essence-btn{
+                min-width: auto;
+                padding: 0;
+                padding-left: 10px;
+                padding-right: 10px;
+                font-size: 10px;
+            }
+        }
     </style>
     
     <!-- ##### Welcome Area Start ##### -->
@@ -29,8 +75,8 @@
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12">
-                    <div class="hero-content text-center" style="margin-top: 10%;">
-                        <h2><?php echo $collection['collection_name']; ?></h2>
+                    <div class="hero-content">
+                        <h2 class="bottom-align-text"><?php echo $collection['collection_name']; ?></h2>
                         <!-- <h6 style="color: white"><?php echo $collection['collection_description']; ?></h6> -->
                     </div>
                 </div>
@@ -39,9 +85,11 @@
     </section>
     <!-- ##### Welcome Area End ##### -->
 
-    <div class="row">
-        <div class="col-12 text-center jumbotron">
-            <p style="font-size: 18px;"><?php echo $collection['collection_description']; ?></p>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 text-center jumbotron" style="background-color: white">
+                <p style="font-size: 18px;"><?php echo nl2br($collection['collection_description']); ?></p>
+            </div>
         </div>
     </div>
 
@@ -73,7 +121,7 @@
             <div class="row">
                 <?php while($row = $products->fetch_assoc()){?>
                     <!-- Single Product -->
-                    <div class="col-12 col-sm-6 col-lg-4">
+                    <div class="col-lg-4 col-md-4 col-6">
                         <div class="single-product-wrapper">
                             <!-- Product Image -->
                             <?php
@@ -111,9 +159,6 @@
                     </div>
                 <?php } ?>
 
-                <div class="col-12 col-sm-6 col-lg-4">
-                </div>
-
                 <?php
                     if($num_rows >= 1)
                     {
@@ -123,12 +168,9 @@
                     }
                 ?>
 
-                <div class="col-12 col-sm-6 col-lg-4">
-                </div>
-
                 <?php while($row = $remaining_products->fetch_assoc()){?>
                     <!-- Single Product -->
-                    <div class="col-12 col-sm-6 col-lg-4 more_products">
+                    <div class="col-lg-4 col-md-4 col-6 more_products">
                         <div class="single-product-wrapper">
                             <!-- Product Image -->
                             <?php

@@ -7,8 +7,11 @@
     $sql = "SELECT * FROM tbl_collections WHERE show_on_landing_page = 0 AND delete_status=0";           
     $other_collections = mysqli_query($conn, $sql);
 
-    $sql ="SELECT * FROM tbl_products WHERE delete_status=0";
+    $sql = "SELECT * FROM tbl_products WHERE delete_status=0";
     $products = mysqli_query($conn, $sql);
+
+    $sql = "SELECT * FROM tbl_banners ORDER BY banner_order";
+    $banners = mysqli_query($conn, $sql);
 ?>
 
 
@@ -20,19 +23,43 @@
 
 
     <!-- ##### Welcome Area Start ##### -->
-    <section class="welcome_area bg-img background-overlay" style="background-image: url(img/cover_photos/main2.jpeg);">
-        <div class="container h-100">
-            <div class="row h-100 align-items-center">
-                <div class="col-12">
-                    <div class="hero-content">
-                        <!-- <h6>asoss</h6> -->
-                        <h2>New Collection</h2>
-                        <a href="#" class="btn essence-btn">view collection</a>
+    <div id="carousals" class="carousel slide carousel-fade" data-ride="carousel">
+
+        <!-- Indicators -->
+        <ul class="carousel-indicators">
+            <?php $count = 0; while($row = mysqli_fetch_assoc($banners)){?>
+                <li data-target="#carousals" data-slide-to="<?php echo $count; ?>" class="<?php if($count == 0){ echo "active"; } ?>"></li>
+            <?php $count++; } ?>
+        </ul>
+
+        <!-- The slideshow -->
+        <div class="carousel-inner">
+            <?php 
+            $sql = "SELECT * FROM tbl_banners ORDER BY banner_order";
+            $banners = mysqli_query($conn, $sql);
+            $count = 0; 
+            while($row = mysqli_fetch_assoc($banners))
+            {
+            ?>
+                <div class="carousel-item <?php if($count == 0){?> active <?php }?>">
+                    <img class="d-block w-100" src="admin/uploads/banners/<?php echo $row['banner_picture_url']; ?>" alt="<?php echo $row['banner_title']; ?>">
+                    <div class="carousel-caption d-md-block">
+                        <!-- <h3 style="color: white"><?php echo $row['banner_title']; ?></h3> -->
+                        <a href="<?php echo $row['banner_link']; ?>" class="btn essence-btn">view collection</a>
                     </div>
                 </div>
-            </div>
+            <?php $count++; } ?>
         </div>
-    </section>
+
+        <!-- Left and right controls -->
+        <a class="carousel-control-prev" href="#carousals" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#carousals" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </a>
+
+    </div>
     <!-- ##### Welcome Area End ##### -->
 
     <!-- ##### Top Catagory Area Start ##### -->
