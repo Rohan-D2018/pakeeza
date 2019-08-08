@@ -29,10 +29,10 @@ if(isset($_GET['id']))
                     <input type="text" class="form-control clearfix" name="banner_id2" id="banner_id2" readonly="true">
 
                     <b class="clearfix float-left">Banner Title:</b>
-                    <input type="text" class="form-control clearfix" name="banner_link2" id="banner_link2" required>
+                    <input type="text" class="form-control clearfix" name="banner_title2" id="banner_title2" required>
 
                     <b class="clearfix float-left">Banner URL:</b>
-                    <textarea class="form-control clearfix" cols=10 rows=5 name="banner_title2" id="banner_title2" required></textarea>
+                    <textarea class="form-control clearfix" cols=10 rows=5 name="banner_link2" id="banner_link2" required></textarea>
 
                     <b class="clearfix float-left">Banner Order:</b>
                     <input type="text" class="form-control clearfix" name="banner_orders2" id="banner_orders2" required>
